@@ -52,7 +52,7 @@ def post_create(request):
       print('form is not valid')
   else:
     print('request method is not post')
-    form=PostForm()
+    form = PostForm()
   context = {'form': form}
   return render(request, 'dailyphoto/upload_page.html', context)
 
