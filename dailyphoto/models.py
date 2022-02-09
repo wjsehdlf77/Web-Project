@@ -2,15 +2,13 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
-# from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    # subject = models.CharField(max_length = 200)
     title = models.CharField(max_length = 200)
-    # author = models.ForeignKey(User, on_delete=models.CASCADE)
-    photo=models.ImageField(upload_to=None,null=True,blank=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
+    photo = models.ImageField(upload_to="pic/",blank=True)
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
 

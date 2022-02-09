@@ -5,9 +5,9 @@ from dailyphoto.models import Post
 class PostForm(forms.ModelForm):
   class Meta:
     model=Post
-    fields=['title',    'photo',    'content']
+    fields=['title','photo','content']
     widgets = { 'title': forms.TextInput(attrs={'class': 'form-control'}), 
-    # 'photo': forms.ImageField(),
+    # 'photo': forms.ImageField(attrs={'class': 'form-control-file'}),
     'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),}
     labels = {
     'title': '제목',
