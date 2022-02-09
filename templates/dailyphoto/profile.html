@@ -1,16 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
 
 
-
-
-
-<div class="row">
-    <div class="col-4">
-        <img src={% if person.profile.image %}
-            "{{ person.profile.image.url }}"
-        {% else %}
-            "https://i.stack.imgur.com/34AD2.jpg"
-        {% endif %} 
-        width="300rem" style="border-radius: 50%;" alt="">
-        <h1>{{ person.username }}</h1>
+<div class = 'models'>
+    <div class="row">
+            <img src={% if person.profile.image %}
+                "{{ person.profile.image.url }}"
+            {% else %}
+                "https://i.stack.imgur.com/34AD2.jpg"
+            {% endif %} 
+            width="200rem" style="border-radius: 50%;" alt="">
+        </div>
+            <div class = 'zinzza'>{{ person.profile.nickname  }}
+                {% if person.username == user.username %}
+                    <a href="{% url 'dailyphoto:profile_modify' %}"><button class="btn btn-success">프로필 편집</button></a>
+                    {% endif %}
+            </div>
+                </h2>
+                <h1>{{ user.username }}</h1>
+                <p>{{ person.profile.description }}</p>
+        </div>
     </div>
 </div>
+
+{% endblock %}
