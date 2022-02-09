@@ -15,12 +15,14 @@
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
   </head>
-
-  <body>
+ 
+  <body >
     <div class="container">
 
     {% include 'nav.html' %}
       <div class="my-3">{% block content %}{% endblock %}</div>
+
+      </div>
 
     <!-- jQuery JS -->
     <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
