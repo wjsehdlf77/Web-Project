@@ -42,10 +42,11 @@ def post_create(request):
     form = PostForm(request.POST)
     if form.is_valid():
       post = form.save(commit=False)
-      print('post made')
-      print(request.user)
-      print(request)
+      # print('post made')
+      # print(request.user)
+      # print(request)
       # print(form)
+      post.photo=request.FILES['photo']
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
@@ -54,7 +55,7 @@ def post_create(request):
     else:
       print('form is not valid')
   else:
-    print('request method is not post')
+    print('request method is not post its get')
     form=PostForm()
   context = {'form': form}
   return render(request, 'dailyphoto/upload_page.html', context)
