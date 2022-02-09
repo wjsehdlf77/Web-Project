@@ -25,10 +25,11 @@
   display: flex;
   justify-content: center;
   padding-top: 50px;
+  background-color: #FAFAFA; /* 배경 약간 회색 */
 }
 
 .left_body {
-  background-color: skyblue;
+  /* background-color: skyblue; */
   margin-right: 100px;
   width: 500px;
   height: 2000px;
@@ -37,7 +38,7 @@
 }
 
 .right_body {
-  background-color: yellow;
+  /* background-color: yellow; */
   width: 300px;
   height: 1000px;
   left: 72%;
@@ -52,6 +53,7 @@
   margin: 10px;
   min-height: auto;
 }
+
 
 .feed_img{
   width: 100%;
@@ -88,6 +90,85 @@
 
 .avata-sm {
   width : 20px;
+}
+
+.feed_name{
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+/* 피드 프로필 박스 css*/
+.feed_name_txt{
+  font-size: 14px;
+  padding: 0px 10px;
+  font-weight: bold;
+}
+
+.profile_box {
+  width: 40px;
+  height: 40px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+.profile_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+/**/
+.name_content{
+  display: flex;
+  flex-direction: column;
+}
+
+.name_content_txt{
+  font-size: 12px;
+  padding: 0px 10px;
+  font-weight: bold;
+  color: lightgray;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 190px;
+}
+
+.big_profile_box {
+  width: 60px;
+  height: 60px;
+  border-radius: 70%;
+  overflow: hidden;
+}
+
+.link_txt{
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.recommend_box {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  align-items: center;
+}
+
+.comment_box{
+  margin: 40px 0 0 5px;
+  font-size: 12px;
+  font-weight: bold;
+  color: lightgray;
+  display: flex;
+  flex-direction: column;
 }
 
 
