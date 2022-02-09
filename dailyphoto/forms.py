@@ -8,7 +8,6 @@ class PostForm(forms.ModelForm):
     fields=['title',    'photo',    'content']
     widgets = { 'title': forms.TextInput(attrs={'class': 'form-control'}), 
     # 'photo': forms.ImageField(),
-    # "Number" : forms.NumberInput(),
     'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),}
     labels = {
     'title': '제목',
