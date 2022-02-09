@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block content %}
+<div class="box">
+  <form method="post" class="post-form">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="content">글 제목</label>
+      <input
+        type="text"
+        class="form-control"
+        name="post_title"
+        placeholder="글 제목을 입력하세요."
+        id="post_title"
+        value="{{ form.title.value|default_if_none:'' }}"
+      />
+    </div>
+    <div class="form-group">
+      <label for="content">글 내용 </label>
+      <textarea class="form-control" name="content" id="content" rows="10" placeholder="글 내용을 입력하세요.">
+{{ form.content.value|default_if_none:'' }}</textarea
+      >
+    </div>
+    <!-- <a href="javascript:history.back()" class="btn btn-primary"> <i class="fas fa-undo"></i> 사진업로드</a> -->
+    <input type="file" class="" value="{{form.photo.value|default_if_none:''}}" />
+
+    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> 저장하기</button>
+  </form>
+</div>
+
+{% endblock %}

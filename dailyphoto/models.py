@@ -1,27 +1,26 @@
 
-
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
+# from django.contrib.auth.models import User
 
-# Bulletin : 게시글
+
 class Post(models.Model):
-    subject = models.CharField(max_length = 200)    #varchar(200)이란뜻
+    subject = models.CharField(max_length = 200)
+    # author = models.ForeignKey(User, on_delete=models.CASCADE)
+    photo=models.ImageField(upload_to=None,null=True,blank=True)
     content = models.TextField()
     create_date = models.DateTimeField()
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
-    modify_date = models.DateTimeField(null = True, blank = True)
+    modify_date = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
         return self.subject
 
 
-# 댓글 
-class Answer(models.Model):
-    bulletin = models.ForeignKey(Post, on_delete=models.CASCADE)    #pk는 디폴트값으로 id Auto_increment  로 사용중 Question의 참조클라스가 id
-    content = models.TextField()
-    create_date = models.DateTimeField()
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
-    modify_date = models.DateTimeField(null = True, blank = True)
 
-    def __str__(self):
-        return self.content
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    # User모델과 Profile을 1:1로 연결
+    description = models.TextField(blank=True)
+    nickname = models.CharField(max_length=40, blank=True)
+    image = models.ImageField(blank=True)   #Pillow설치
+
