@@ -28,3 +28,9 @@ forms.py에서 PostForm 작성 ()
            path('<str:username>/', views.dailyphoto_preview, name="dailyphoto_preview"), 
         -> 순서 변경(upload/ 먼저 확인하고 없을 시 <str:username>/ 확인)
 
+-문제점 : <a class="nav-link" href="{% url 'dailyphoto:dailyphoto_preview'%}"> 로 사용자 계정 페이지 이동 시
+   NoReverseMatch: Reverse for 'dailyphoto_preview' with arguments '('',)' not found. 1 pattern(s) tried: ['dailyphoto/(?P<username>[^/]+)/\\Z']
+      오류가 발생
+문제이유: ....
+해결방안 : 우리는 'dailyphoto/사용자이름' 으로 이동했을 때 계정 페이지가 보여지길 원하니
+   <a class="nav-link" href="{{user.username}}">로 수정하면 되지않을까 하고 시도했는데 성공...
