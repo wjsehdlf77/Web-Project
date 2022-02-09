@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -19,8 +20,8 @@
   <body >
     
 
-    {% include 'nav.html' %}
-      <div class="my-3">{% block content %}{% endblock %}</div>
+        {% include 'nav.html' %}
+      {% block content %}{% endblock %}
 
     
 
