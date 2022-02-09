@@ -6,9 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
 from dailyphoto.models import Profile
 from django.contrib.auth import get_user_model
-from .forms import PostForm
+from .forms import PostForm, CustomUserChangeForm, ProfileForm
 from .models import Post
 from django.utils import timezone
+
 # from PIL import Image
 
 # 주소 index 
@@ -57,8 +58,30 @@ def post_create(request):
   return render(request, 'dailyphoto/upload_page.html', context)
 
 #프로필화
-def dailyphoto_preview(request, username): # 프로필
+def profile(request, username): # 프로필
     person = get_object_or_404(get_user_model(), username=username)
 
     return render(request, 'dailyphoto/profile.html', {'person': person})
+
+
+
+def modify_profile(request):
+    if request.method == 'POST':
+      user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
+      profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+      if user_change_form.is_valid() and profile_form.is_valid():
+          user = user_change_form.save()
+          profile_form.save()
+          return redirect('dailyphoto:profile', user.username)
+      return redirect('dailyphoto:profile')
+    else:
+        user_change_form = CustomUserChangeForm(instance=request.user)
+        profile, create = Profile.objects.get_or_create(user=request.user)
+        profile_form = ProfileForm(instance=profile)
+        return render(request, 'dailyphoto/profile_form.html', {
+            'user_change_form': user_change_form,
+            'profile_form': profile_form
+        })
+
+
 
