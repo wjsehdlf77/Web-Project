@@ -19,6 +19,7 @@
 
 
 
+
 /* 메인 화면에 들어갈 css */
 .main_body {
   display: flex;
@@ -82,6 +83,11 @@
   justify-content: space-between;
 }span{
    padding-right: 5px;
+  }
+
+
+.avata-sm {
+  width : 20px;
 }
 
 
