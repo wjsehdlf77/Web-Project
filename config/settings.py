@@ -86,7 +86,7 @@ DATABASES = {
     }
 }
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'dailyphoto/'
 
 
 # Password validation

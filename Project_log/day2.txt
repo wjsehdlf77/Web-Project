@@ -1,0 +1,30 @@
+#2 일차 (22.02.09)
+
+
+사전 역할분담-
+ 
+김경희 : navbar html
+
+김규배 : home 페이지 html
+
+전도일 : 개인 프로필 페이지 html
+
+정희정 :  글 작성 페이지 html
+
+ 
+활동 내용 :
+
+각 페이지 작성
+url 연동 
+models.py에서 Post model 작성 ()
+forms.py에서 PostForm 작성 ()
+
+
+
+
+문제점 : url 설정 과정에서 upload url 연동이 안됨.
+문제이유: urlpatterns에서 <str:username>이 먼저 로드되었기 때문에 'upload/'라는 url이 str의 일부로 처리되어서 username으로 넘어감.
+해결방안 : path('upload/', views.post_create),    
+           path('<str:username>/', views.dailyphoto_preview, name="dailyphoto_preview"), 
+        -> 순서 변경(upload/ 먼저 확인하고 없을 시 <str:username>/ 확인)
+
