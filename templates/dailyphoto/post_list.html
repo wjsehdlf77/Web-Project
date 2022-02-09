@@ -1,44 +1,49 @@
 {% extends 'base.html' %} 
 {% block content %}
-<table class="table table-striped table-hover">
-  <thead>
-    <tr class="thead-dark">
-      <th style="width: 60px">번호</th>
-      <th>제목</th>
-      <th style="width: 80px">글쓴이</th>
-      <th style="width: 120px">작성일시</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    {% if post_list %} 
-      {% for post in post_list %}
-        <tr>
-          <td>{{post.id}}</td>
-          <td>
-            <a href="#"> {{ post.subject }}</a>
-            {% if  post.answer_set.count > 0 %}
-              <span class="badge badge-pill badge-primary"> {{post.answer_set.count}} </span>
-            {% endif %}
-          </td>
-          <td>{{post.author.username}}</td>
-          <td>{{ post.create_date | date:'Y-m-d' }}</td>
-        </tr>
-      {% endfor %} 
-    {% else %}
-    <tr>
-      <td colspan="3">질문이 없습니다.</td>
-    </tr>
-    {% endif %}
-  </tbody>
-</table>
-
-
-
-<div class="clearfix">
-  <div class="float-left">
-    <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i> 질문 등록하기</a>
+<!-- flex는 좌우 정령을 위해서-->
+<div class="main_body">
+  <div class="left_body">
+    <div class="border feed_box">
+      <img class="feed_img "
+           src="https://mblogthumb-phinf.pstatic.net/MjAxNzA2MTFfMjc1/MDAxNDk3MTcyMDgyNzEw.ID5RyHWKvsVEW2NS9EQGyRYX7vUaXr7znQeuTrRRmdIg.gK7MD7VhNJPkV4_dueiWer2y-oH7NAAmEklF-6bbYyQg.JPEG.jejubyeol/%EC%97%AC%EB%A6%84%EC%97%90_%EC%A0%9C%EC%A3%BC%EB%8F%84_%EC%82%AC%EC%A7%84%EC%B0%8D%EA%B8%B0_%EC%A2%8B%EC%9D%80%EA%B3%B3.jpg?type=w800">
+      <div class="feed_icon">
+        <div>
+          <span class="material-icons-outlined">
+            favorite_border
+          </span>
+          <span class="material-icons-outlined">
+            mode_comment
+          </span>
+          <span class="material-icons-outlined">
+            send
+          </span>
+        </div>
+        <div>
+          <span class="material-icons-outlined">
+            turned_in_not
+          </span>
+        </div>
+      </div>
+      <div class="feed_like">
+        <p class="feed_txt"> <b>좋아요 10개</b></p>
+      </div>
+      <div class="feed_content">
+        <p class="feed_txt"> <b> jin.99 </b> 코로나라서 해외여행을 못가니 최근 제주도 가는사람이 늘고있습니다~ 제주도도 조심해야되는건 마찬가지~!</p>
+      </div>
+      <div class="feed_reply">
+        <span class="feed_txt"> <b> mychew </b> 제주도 가고 싶어요 ㅠㅠ</span>
+        <span class="feed_txt"> <b> cho </b> 제주도  ㄱ ㄱ </span>
+      </div>
+    </div>
   </div>
-  <div class="text-right float-right">(총: {{post_list.paginator.count}}건)</div>
+    
+
+  <div class="right_body">
+    친구 목록
+  </div >
 </div>
+
+
+
+
 {% endblock content %}

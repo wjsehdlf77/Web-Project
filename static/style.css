@@ -13,3 +13,75 @@
   justify-content: center;
   margin: 0 auto;
 }
+
+
+
+
+
+
+/* 메인 화면에 들어갈 css */
+.main_body {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+}
+
+.left_body {
+  background-color: skyblue;
+  margin-right: 100px;
+  width: 500px;
+  height: 2000px;
+  display: flex;
+  flex-direction: column;
+}
+
+.right_body {
+  background-color: yellow;
+  width: 300px;
+  height: 1000px;
+  left: 72%;
+  position: fixed
+}
+
+
+/* 피드 */
+.feed_box {
+  background-color: white;
+  width: 480px;
+  margin: 10px;
+  min-height: auto;
+}
+
+.feed_img{
+  width: 100%;
+  object-fit: contain;
+}
+
+.feed_content{
+  padding: 0px 10px;
+}
+
+.feed_like{
+  padding: 0px 10px;
+}
+
+.feed_reply{
+  padding: 0px 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.feed_txt{
+  font-size: 14px;
+}
+
+.feed_icon{
+  padding: 5px 5px 0px 5px;
+  display: flex;
+  justify-content: space-between;
+}span{
+   padding-right: 5px;
+}
+
+
