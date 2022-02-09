@@ -3,6 +3,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+class Post(models.Model):
+    title=models.CharField(max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    photo=models.ImageField(upload_to=None,null=True,blank=True)
+    content = models.TextField()
+    create_date = models.DateTimeField()
+    modify_date = models.DateTimeField(null=True, blank=True)
+
 
 class Question(models.Model):
     subject = models.CharField(max_length = 200)    #varchar(200)이란뜻
