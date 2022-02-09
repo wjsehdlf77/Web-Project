@@ -13,3 +13,8 @@
   justify-content: center;
   margin: 0 auto;
 }
+
+.models {
+  column-count: 3;
+  column-width: 100px;
+}
