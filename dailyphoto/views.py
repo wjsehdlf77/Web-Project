@@ -1,6 +1,10 @@
+
 from time import timezone
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
+from dailyphoto.models import Profile
+
+from django.contrib.auth import get_user_model
 from .forms import PostForm
 
 from PIL import Image
@@ -34,3 +38,9 @@ def post_create(request):
     form=PostForm()
   context = {'form': form}
   return render(request, 'dailyphoto/upload_page.html', context)
+
+def dailyphoto_preview(request, username):
+    person = get_object_or_404(get_user_model(), username=username)
+
+    return render(request, 'dailyphoto/profile.html', {'person': person})
+
