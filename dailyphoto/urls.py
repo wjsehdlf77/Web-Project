@@ -10,8 +10,8 @@ app_name = 'dailyphoto'
 
 urlpatterns = [
     
-    path('', views.index),
-    path('<int:pots_id>/', views.detail), # <int:pots_id>/   <- 상세보기 주소
+    path('dailyphoto/', views.index),
+    path('<int:post_id>/', views.detail), # <int:post_id>/   <- 상세보기 주소
     path('<str:username>/', views.dailyphoto_preview, name="dailyphoto_preview"),
     path('upload/', views.post_create, name="post_create"),
     
