@@ -11,6 +11,9 @@ class Post(models.Model):
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
 
+    def __str__(self):
+        return self.subject
+
 
 class Question(models.Model):
     subject = models.CharField(max_length = 200)    #varchar(200)이란뜻
