@@ -1,0 +1,16 @@
+
+
+
+
+
+<div class="row">
+    <div class="col-4">
+        <img src={% if person.profile.image %}
+            "{{ person.profile.image.url }}"
+        {% else %}
+            "https://i.stack.imgur.com/34AD2.jpg"
+        {% endif %} 
+        width="300rem" style="border-radius: 50%;" alt="">
+        <h1>{{ person.username }}</h1>
+    </div>
+</div>
