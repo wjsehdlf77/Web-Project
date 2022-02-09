@@ -5,12 +5,10 @@ from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
 from dailyphoto.models import Profile
-
 from django.contrib.auth import get_user_model
 from .forms import PostForm
 from .models import Post
 from django.utils import timezone
-
 # from PIL import Image
 
 # 주소 index 
@@ -42,12 +40,7 @@ def post_create(request):
     form = PostForm(request.POST)
     if form.is_valid():
       post = form.save(commit=False)
-      # print('post made')
-      # print(request.user)
-      # print(request)
-      # print(form)
       post.photo=request.FILES['photo']
-      # post.photo.write()
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
