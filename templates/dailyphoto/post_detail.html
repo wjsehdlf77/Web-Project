@@ -9,27 +9,27 @@
 </div>
 {% endif %}
 
-<h2 class="border-bottom py-2">{{ question.subject }}</h2>
+<h2 class="border-bottom py-2">{{ post.subject }}</h2>
 <div class="card my-3">
   <div class="card-body">
-    <div class="card-text" style="white-space: pre-line"><i class="far fa-question-circle"></i> {{ question.content }}</div>
+    <div class="card-text" style="white-space: pre-line"> {{ post.content }}</div>
     <div class="d-flex justify-content-end">
-      {% if question.modify_date %}
+      {% if post.modify_date %}
       <div class="badge badge-light p-2 text-left mx-3">
           <div class="mb-2">modified at</div>
-          <div><i class="fas fa-clock"></i> {{ question.modify_date | date:'Y-m-d H:i:s'}}</div>
+          <div><i class="fas fa-clock"></i> {{ post.modify_date | date:'Y-m-d H:i:s'}}</div>
       </div>
       {% endif %}
       <div class="badge badge-light p-2">
-        <div class="mb-2">{{ question.author.username }}</div>
-        <div><i class="fas fa-clock"></i> {{ question.create_date  | date:'Y-m-d H:i:s'}}</div>
+        <div class="mb-2">{{ post.author.username }}</div>
+        <div><i class="fas fa-clock"></i> {{ post.create_date  | date:'Y-m-d H:i:s'}}</div>
       </div>
     </div>  
-    {% if request.user == question.author %}
-      <a href="{% url 'pybo:question_modify' question.id  %}" 
+    {% if request.user == post.author %}
+      <a href="{% url 'pybo:post_modify' post.id  %}" 
           class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i> 수정</a>
       <a href="#" class="delete btn btn-sm btn-outline-danger"
-        data-uri="{% url 'pybo:question_delete' question.id  %}"><i class="fas fa-trash-alt"></i> 삭제</a>
+        data-uri="{% url 'pybo:post_delete' post.id  %}"><i class="fas fa-trash-alt"></i> 삭제</a>
     {% endif %}
 
     {% include 'pybo/comment_list.html' %}
