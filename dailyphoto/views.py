@@ -47,6 +47,7 @@ def post_create(request):
       # print(request)
       # print(form)
       post.photo=request.FILES['photo']
+      # post.photo.write()
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
