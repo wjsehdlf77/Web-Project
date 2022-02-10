@@ -1,11 +1,11 @@
 {% extends 'base.html' %} {% block content %}
 <!-- flex는 좌우 정렬을 위해서-->
 
-<div class="home_main_body">
-  {% for post in post_list %}
-  <div class="left_body">
+<div class="home_main_body" style="padding-top: 80px;"> 
+  
+  <div class="left_body" >
     {% comment %} 하나 피드 {% endcomment %}
-
+    {% for post in post_list %}
     <div class="border feed_box">
       {% comment %} 피드 이름 {% endcomment %}
       <div class="feed_name">
@@ -37,23 +37,23 @@
         <span class="feed_txt"> <b> mychew </b> 제주도 가고 싶어요 ㅠㅠ</span>
         <span class="feed_txt"> <b> cho </b> 제주도 ㄱ ㄱ </span>
       </div>
+      
     </div>
     {% endfor %}
   </div>
-
   <div class="right_body">
     <div class="feed_name" style="justify-content: space-between">
       <div style="display: flex; align-items: center">
-        <div class="big_profile_box">
+        <div class="feed_profile_box">
           <img class="feed_profile_img" src="/media/{{user.profile.image}}" />
         </div>
         <div class="name_content">
           <span class="feed_name_txt"> jin.99 </span>
           <span class="name_content_txt"> Moon Kyujin</span>
         </div>
+        
       </div>
-
-      <a class="link_txt"> 전환 </a>
+      <a class="link_txt " >전환</a>
     </div>
 
     <div class="recommend_box">
