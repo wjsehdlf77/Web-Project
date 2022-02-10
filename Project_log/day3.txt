@@ -1,18 +1,81 @@
 3 일차 (22.02.10)
 
 
-공동 저술
+To do list (개인별)
 
-  프로필 데이터베이스에 저장된 프로필 사진을 페이지에 로드하기 
-  로그인 사용자의 프로필을 profile.html외의 다른 html창에서도 띄우기  
-
-
-역할분담
-
-  김경희 : 회원가입 리다이렉트
+  김경희 : 회원가입 리다이렉트,post_detail.html(개인 계정에서 게시물 클릭하면 상세보기할 때 뜨는 페이지)
 
   김규배 : 포스트 읽어들이는 for문 작성 
 
   정희정 : 업로드페이지를 모달창으로 교체 
  
   전도일 : 마이프로필에 피드 포스트 로드  
+
+
+활동 내용
+  모두가 함께:
+
+    프로필 데이터베이스에 저장된 프로필 사진을 페이지에 로드하기 
+    로그인 사용자의 프로필을 profile.html외의 다른 html창에서도 띄우기
+
+  각자 한 것:
+
+    김경희: nav.html에서 login유저의 프로필 사진 출력. 회원가입 완료 시 로그인 창 연결.
+  
+    김규배: upload한 게시물 데이터들을 피드 게시물(post)과 연동하고 {% for in %}을 통해 게시물들이 출력 될 수 있게 구현.
+    
+
+    정희정: upload.html에서 내용을 modal에 담는것으로 수정. 업로드창에 닫기 버튼 추가. 모달창 js파일추가(실패함). db.sqlite3을 python으로 커넥트해서 파일정리(버려짐-필요없는코드였음) model.py에서 좋아요 카운트 default값 추가 
+  
+    전도일:프로필 페이지 내비게이션바에 상단이 가려지는 오류수정, 상단 프로필화면 수정
+
+
+
+문제점:
+
+1. 절대경로와 상대경로 문제
+
+  똑같은 사진 파일이 어떤 페이지에서는 media/로 로드되고 어떤 페이지에서는 ../media 경로로만 로드되는 문제점을 겪음
+
+    해결:
+ 
+  from django.conf import settings
+  from django.conf.urls.static import static
+  urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+  urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+
+  이부분이 dailyphoto/urls.py에 추가되어 있었기 때문에 현재페이지의 url가 변동되면 미디어 파일 경로도 자꾸 흔들리는 것이었다.
+  <상대 경로>
+  (ex : 현재 있던 페이지/media/~)
+
+  config/urls.py에 해당 부분이 있었어야 루트 url에 바로 미디어 url이 붙어서 연결되는 것.
+  <절대 경로>
+  (ex : /media/~)
+  
+  
+
+2. profile 페이지에 사진이 출력이 안되는 문제
+
+   person = get_object_or_404(get_user_model(), username=username)
+   post_list = Post.objects.order_by('-create_date')
+   context = {'post_list': post_list , 'person': person}
+   return render(request, 'dailyphoto/profile.html', context)
+   
+   context 변수에 post_list를 추가하여 Post 테이블의 데이터를 profile.html에 전달 할 수 있도록
+   구현 하였음.
+
+
+
+
+
+오늘 알게 된 것:
+  1. django에서 render함수가 context가 넘겨주는 내용은 html에서 {{}}로 불러올 수 있다. 세번째 인자에 context 딕셔너리 파일로 넣으면 딕셔너리 키 이름이 html에서 불러오는 이름 
+
+  2. 위와 같은 과정을 거치지 않고서도 html에서 장고가 제공하는 user, author 모델을 바로 불러서 사용할수 있음.  {{user}} {{author}}
+  
+  3. 각 데이터 테이블간의 연계: models.ForeignKey()로 연결된 테이블과, models.OneToOneField()로 연결된 테이블을 사용해봄. 
+
+  4. post_list = Post.objects.order_by('-create_date') <- 포스트 데이터 테이블에 있는 데이터를 생성날짜 내림차순으로 정렬해서 반환한다. 
+
+
+  
