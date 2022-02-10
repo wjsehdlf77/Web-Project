@@ -1,6 +1,5 @@
 
 from django.urls import path
-
 from . import views
 
 
@@ -15,10 +14,5 @@ urlpatterns = [
     path('<str:username>/', views.profile, name="profile"),
     path('modify', views.modify_profile, name="modify_profile"),
 ]
-
-
-
-
-
 
 
