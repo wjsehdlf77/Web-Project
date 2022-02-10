@@ -17,7 +17,6 @@ def index(request):
     """
     dailyphoto 게시물 출력
     """
-    # post_list = Post.objects.all()
     post_list = Post.objects.order_by('-create_date')
 
     context = {'post_list': post_list}
@@ -61,8 +60,11 @@ def post_create(request):
 #프로필화
 def profile(request, username): # 프로필
     person = get_object_or_404(get_user_model(), username=username)
+    post_list = Post.objects.order_by('-create_date')
 
-    return render(request, 'dailyphoto/profile.html', {'person': person})
+    context = {'post_list': post_list , 'person': person}
+
+    return render(request, 'dailyphoto/profile.html', context)
 
 
 
