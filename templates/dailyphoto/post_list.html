@@ -1,12 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 <!-- flex는 좌우 정렬을 위해서-->
 
-
-
 <div class="home_main_body">
   {% for post in post_list %}
   <div class="left_body">
-    
     {% comment %} 하나 피드 {% endcomment %}
 
     <div class="border feed_box">
@@ -14,16 +11,12 @@
       <div class="feed_name">
         {% comment %} 게시물 사진 위 프로필 박스 {% endcomment %}
         <div class="feed_profile_box">
-
-
-          <img class="feed_profile_img" src = "/media/{{post.author.profile.image}}"> 
-
-
+          <img class="feed_profile_img" src="/media/{{post.author.profile.image}}" />
         </div>
 
         <span class="feed_name_txt">{{ post.author.username}}</span>
       </div>
-      <img class="feed_img"src="/media/{{post.photo}}"/>
+      <img class="feed_img" src="/media/{{post.photo}}" />
       <div class="feed_icon">
         <div>
           <span class="material-icons"> cloud_queue </span>
@@ -35,7 +28,7 @@
         </div>
       </div>
       <div class="feed_like">
-        <p class="feed_txt"><b>좋아요 5K개</b></p>
+        <p class="feed_txt"><b>{{post.like_count}}</b></p>
       </div>
       <div class="feed_content">
         <p class="feed_txt"><b> {{post.author.username}} </b> {{ post.content }}</p>
@@ -47,18 +40,12 @@
     </div>
     {% endfor %}
   </div>
- 
-  
-
 
   <div class="right_body">
     <div class="feed_name" style="justify-content: space-between">
       <div style="display: flex; align-items: center">
         <div class="big_profile_box">
-
-          <img class="feed_profile_img"
-               src="/media/{{user.profile.image}}">
-
+          <img class="feed_profile_img" src="/media/{{user.profile.image}}" />
         </div>
         <div class="name_content">
           <span class="feed_name_txt"> jin.99 </span>
