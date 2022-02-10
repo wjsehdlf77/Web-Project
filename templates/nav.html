@@ -1,50 +1,61 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
 
     <!-- 요기에 구글 머티리얼 아이콘 -->
-  <link
-  href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-  rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
 
-  <title>dailyphoto</title>
-</head>
-<body>{%load static %}{% static "" as baseUrl %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="width: 100%; position: fixed;" >
+    <title>dailyphoto</title>
+  </head>
+  <body>
+    {%load static %}{% static "" as baseUrl %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="width: 100%; position: fixed">
       {% comment %} 상단 고정 sticky-top {% endcomment %}
-        <div class="container">
-          <img style="height: 50px; object-fit: contain"
-               src="{{baseUrl}}images/DailyphotoLogo.png">
-          <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search">
-          <div>
-            <ul class="navbar-nav ml-auto">
+      <div class="container">
+        <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
+        <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search" />
+        <div>
+          <ul class="navbar-nav ml-auto">
             <a class="nav-link" href="{% url 'dailyphoto:index' %}"><span class="material-icons">home</span></a>
             <a class="nav-link" href="{% url 'dailyphoto:post_create' %}"><span class="material-icons-outlined">add_box</span></a>
             <a class="nav-link" href="{{user.username}}">
+
             <img src="media/{{user.profile.image}}" class="avata-sm rounded-circle"/></a>
             </ul>
           </div>
+
+
         </div>
-      </nav>
-      
-<!-- Optional JavaScript; choose one of the two! -->
+      </div>
+    </nav>
 
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-        crossorigin="anonymous"></script>
+    <!-- Optional JavaScript; choose one of the two! -->
 
-<!-- Option 2: Separate Popper and Bootstrap JS -->
-<!--
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 -->
-</body>
+  </body>
 </html>

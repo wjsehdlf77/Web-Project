@@ -46,7 +46,7 @@ def post_create(request):
       post.create_date=timezone.now()
       post.save()
       print('save made?')
-      return redirect('dailyphoto:post_create')
+      return redirect('dailyphoto:index')
     else:
       print('form is not valid')
   else:
@@ -55,7 +55,7 @@ def post_create(request):
     form=PostForm()
 
   context = {'form': form}
-  return render(request, 'dailyphoto/upload_page.html', {'context':context} )
+  return render(request, 'dailyphoto/upload_page.html', context )
 
 #프로필화
 def profile(request, username): # 프로필
@@ -82,6 +82,8 @@ def modify_profile(request):
             'user_change_form': user_change_form,
             'profile_form': profile_form
         })
+
+  
 
 
 
