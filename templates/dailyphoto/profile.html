@@ -38,19 +38,20 @@
 
 <div class = 'feed_body'>
     <div class = 'feed_sub_body'>
-        
+        {%for post in post_list%}
         <div style="display: flex; flex-direction:column;">
-            {%for post in post_list%}
+            
             <div class="feed_photo">
                 <img class="profile_img" src = "/media/{{post.photo}}">
                 
             </div>
-            {%endfor%}
+            
             
 
         </div>
-
+        {%endfor%}
     </div>
 </div>
 
 
+{% endblock content %}
