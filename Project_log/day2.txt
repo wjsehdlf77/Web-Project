@@ -47,6 +47,27 @@ forms.py에서 PostForm 작성 ()
            4.
            5. <div class="container"> 하나를 삭제
               
+              
+              
+              
+              
+
+upload.html 중간완성후 기능추가 - 어려웠던점 
+
+Media url 연결 문제
+-해결! : +static(~)가 아니라  +=static(~)으로 해봤더니 됐다 
+
+ImageField 데이터의 form widget  예상치못한 attr 요소가 들어갔다고 뜨면서 오류가난다. {'class': 'form-control'},{'class': 'form-control-file'} 둘다 적용되는 attr가 아닌듯하다.
+-보류 : widget사용을 하지않는다 
+ 
+ImageField 데이터의 database저장 문제. 데이터베이스 photo varchar에 파일 경로가 들어오지 않는다.
+-해결! : request.FILES[]로 할당
+
+ImageField 데이터가 로컬파일로 저장되지 않음
+-해결! : media url 경로의 문제였음. '/media/' 대신 'media/'로 했더니 됐다. 
+
+Form Validation에서 어려움을 겪음 
+-중간해결 - {{forms.as_p}}로 대체
 
 -문제점 : <a class="nav-link" href="{% url 'dailyphoto:dailyphoto_preview'%}"> 로 사용자 계정 페이지 이동 시
    NoReverseMatch: Reverse for 'dailyphoto_preview' with arguments '('',)' not found. 1 pattern(s) tried: ['dailyphoto/(?P<username>[^/]+)/\\Z']

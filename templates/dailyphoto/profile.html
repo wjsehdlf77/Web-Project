@@ -2,10 +2,15 @@
 
 {% block content %}
 
+
+
 <div class="main_body">
     <div class="sub_body">
         <div style="display: flex; flex-direction: row">
-            <img class="profile_photo" src = "{{person.profile.image.url}}">
+            <div class="profile_photo">
+                <img class="profile_img" src = "../media/{{person.profile.image}}">
+            </div>
+
          
             <div style="display: flex; flex-direction: column; margin: 40px 60px">
                 <div class="mb-3" style="display: flex; flex-direction: row;">
