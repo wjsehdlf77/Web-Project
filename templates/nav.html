@@ -33,9 +33,12 @@
             <a class="nav-link" href="{% url 'dailyphoto:index' %}"><span class="material-icons">home</span></a>
             <a class="nav-link" href="{% url 'dailyphoto:post_create' %}"><span class="material-icons-outlined">add_box</span></a>
             <a class="nav-link" href="{{user.username}}">
-              <img src="{{MEDIA_URL}}/{{user.profile.image}}" class="avata-sm rounded-circle"
-            /></a>
-          </ul>
+
+            <img src="media/{{user.profile.image}}" class="avata-sm rounded-circle"/></a>
+            </ul>
+          </div>
+
+
         </div>
       </div>
     </nav>
