@@ -1,6 +1,13 @@
 {% extends 'base.html' %} {% block content %}
 <!-- flex는 좌우 정렬을 위해서-->
+
+
+
 <div class="home_main_body">
+  
+  
+  {% if question_list %} 
+  {% for question in question_list %}
   <div class="left_body">
     {% comment %} 하나 피드 {% endcomment %}
     <div class="border feed_box">
@@ -41,6 +48,10 @@
       </div>
     </div>
   </div>
+  {%endfor%}
+  {%endif%}
+  
+
 
   <div class="right_body">
     <div class="feed_name" style="justify-content: space-between">
