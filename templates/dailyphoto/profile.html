@@ -6,7 +6,9 @@
     <div class="sub_body">
         <div style="display: flex; flex-direction: row">
             <div class="profile_photo">
-                <img class="profile_img" src = "/media/{{user.profile.image}}">
+
+                <img class="profile_img" src = "{{person.profile.image.url}}">
+
             </div>
 
             <div style="display: flex; flex-direction:column; margin: 40px 100px">
@@ -30,6 +32,7 @@
         </div>
                         
     </div>
+
 </div>
 
 
@@ -49,8 +52,5 @@
 
     </div>
 </div>
-
-
-{% endblock %}
 
 
