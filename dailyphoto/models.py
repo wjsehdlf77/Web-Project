@@ -31,5 +31,12 @@ class Profile(models.Model):
     # User모델과 Profile을 1:1로 연결
     description = models.TextField(blank=True)
     nickname = models.CharField(max_length=40, blank=True)
-    image = models.ImageField(blank=True)   #Pillow설치
+    image = models.ImageField(upload_to= 'image/', blank=True)   #Pillow설치
+
+    def __str__(self):
+        return self.nickname
+
+
+
+
 

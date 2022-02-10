@@ -1,7 +1,7 @@
-#2 일차 (22.02.09)
+# 2 일차 (22.02.09)
 
 
-사전 역할분담-
+<사전 역할분담>
  
 김경희 : navbar html
 
@@ -22,11 +22,31 @@ forms.py에서 PostForm 작성 ()
 
 
 
-문제점 : url 설정 과정에서 upload url 연동이 안됨.
-문제이유: urlpatterns에서 <str:username>이 먼저 로드되었기 때문에 'upload/'라는 url이 str의 일부로 처리되어서 username으로 넘어감.
-해결방안 : path('upload/', views.post_create),    
-           path('<str:username>/', views.dailyphoto_preview, name="dailyphoto_preview"), 
-        -> 순서 변경(upload/ 먼저 확인하고 없을 시 <str:username>/ 확인)
+문제점 : 1. url 설정 과정에서 upload url 연동 x
+         2. 사진을 데이터에 업로드 x
+         3. navbar의 위쪽 부분에 공백이 발생
+         4. 프로필 크기 조정, navbar가 프로필 영역을 차지함
+         5. 홈 페이지의 main_body padding 왼쪽 오른쪽에 공백이 생김 
+         
+
+
+문제이유: 
+         1. urlpatterns에서 <str:username>이 먼저 로드되었기 때문에 'upload/'라는 url이 str의 일부로 처리되어서 username으로 넘어감.
+         2. 글을 데이터에 업로드 하는 구조와 차이가 있음22.02.09
+         3. navbar를 position=fiexed;를 할 경우 padding의 위쪽 부분에 공백이 발생
+         4. 
+         5. container 클래스를 두번 적용 시켰음.
+
+
+해결방안 : 1. path('upload/', views.post_create),    
+              path('<str:username>/', views.dailyphoto_preview, name="dailyphoto_preview"), 
+               -> 순서 변경(upload/ 먼저 확인하고 없을 시 <str:username>/ 확인)
+           2. 
+           3. nav 태그 class에 sticky-top을 추가하여 공백 해결
+              <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" style="width: 100%; position: fixed;" >
+           4.
+           5. <div class="container"> 하나를 삭제
+              
 
 -문제점 : <a class="nav-link" href="{% url 'dailyphoto:dailyphoto_preview'%}"> 로 사용자 계정 페이지 이동 시
    NoReverseMatch: Reverse for 'dailyphoto_preview' with arguments '('',)' not found. 1 pattern(s) tried: ['dailyphoto/(?P<username>[^/]+)/\\Z']

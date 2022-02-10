@@ -2,26 +2,35 @@
 
 {% block content %}
 
+<div class="main_body">
+    <div class="sub_body">
+        <div style="display: flex; flex-direction: row">
+            <img class="profile_photo" src = "{{person.profile.image.url}}">
+         
+            <div style="display: flex; flex-direction: column; margin: 40px 60px">
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <div style="font-size: 35px"> {{ person.profile.nickname }} </div>
+                    
+                </div>
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                <div style="font-size: 15px"> {{person.profile.description}}</div>
+                </div>
 
-<div class = 'models'>
-    <div class="row">
-            <img src={% if person.profile.image %}
-                "{{ person.profile.image.url }}"
-            {% else %}
-                "https://i.stack.imgur.com/34AD2.jpg"
-            {% endif %} 
-            width="200rem" style="border-radius: 50%;" alt="">
-        </div>
-            <div class = 'zinzza'>{{ person.profile.nickname  }}
-                {% if person.username == user.username %}
-                    <a href="{% url 'dailyphoto:profile_modify' %}"><button class="btn btn-success">프로필 편집</button></a>
-                    {% endif %}
+                <div class="mb-3" style="display: flex; flex-direction: row;">
+                    <div style="font-size: 15px"> {{user.email}}</div>
+                    </div>
             </div>
-                </h2>
-                <h1>{{ user.username }}</h1>
-                <p>{{ person.profile.description }}</p>
+            <div style = 'display: flex; flex-direction: column; margin: 50px 0px 30px 120px;'>
+                <a href="{% url 'dailyphoto:modify_profile' %}"><button id="button_write_feed" type="button" 
+                    style="margin-left: 10px;font-size: 14px;width: 150px; height: 50px; border: 1px solid silver; background-color: transparent" onclick="ajaxFileUpload() ">
+                    프로필변경</button>
+            </div>
         </div>
+                        
     </div>
 </div>
 
+
 {% endblock %}
+
+

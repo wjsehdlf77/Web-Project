@@ -28,7 +28,7 @@ class CustomUserChangeForm(UserChangeForm):
   password = None
   class Meta:
         model = get_user_model()
-        fields = ['email', 'first_name', 'last_name',]
+        fields = ['email']
         
 class ProfileForm(forms.ModelForm):
     nickname = forms.CharField(label="별명", required=False)

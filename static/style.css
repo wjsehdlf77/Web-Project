@@ -2,6 +2,8 @@
   background-image: url("cloud_background.jfif");
 }
 
+/* upload page*/
+
 .box {
   background-color: white;
   width: 500px;
@@ -15,20 +17,11 @@
 }
 
 
-.models {
-  column-count: 3;
-  column-width: 100px;
-}
-
-.zinzza {
-  font-size: 50px;
-}
-
 
 
 
 /* 메인 화면에 들어갈 css */
-.main_body {
+.home_main_body {
   display: flex;
   justify-content: center;
   padding-top: 50px;
@@ -115,13 +108,13 @@
   font-weight: bold;
 }
 
-.profile_box {
+.feed_profile_box {
   width: 40px;
   height: 40px;
   border-radius: 70%;
   overflow: hidden;
 }
-.profile_img {
+.feed_profile_img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -146,7 +139,7 @@
   width: 190px;
 }
 
-.big_profile_box {
+.feed_big_profile_box {
   width: 60px;
   height: 60px;
   border-radius: 70%;
@@ -180,3 +173,43 @@
 
 
 
+/* profile_part */
+
+.profile_photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 70%;
+  overflow: hidden;
+  margin: 30px;
+}
+
+.profile_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main_body {
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  z-index: 1;
+  background-color: #FAFAFA;
+}
+.sub_body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 1000px;
+  border: 2px solid silver;
+
+}
+
+
+.profile_button{
+  text-align:right;
+}
+
+.modify{
+  margin: 30px 300px;
+}
