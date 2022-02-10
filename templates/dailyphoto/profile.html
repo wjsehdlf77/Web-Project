@@ -25,25 +25,25 @@
             <div style = 'display: flex; flex-direction: column;margin:50px 0px '>
                 <a href="{% url 'dailyphoto:modify_profile' %}"><button id="button_write_feed" type="button" 
                     style="margin-left: 10px;font-size: 14px;width: 150px; height: 50px; border: 1px solid silver; background-color: transparent" onclick="ajaxFileUpload() ">
-                    프로필변경</button>
+                    프로필변경</button></a>
             </div>
         </div>
                         
     </div>
 </div>
 
+
 <div class = 'feed_body'>
     <div class = 'feed_sub_body'>
+        
         <div style="display: flex; flex-direction:column;">
+            {%for post in post_list%}
             <div class="feed_photo">
-                <img class="profile_img" src = "#">
+                <img class="profile_img" src = "/media/{{post.photo}}">
+                
             </div>
-            <div class="feed_photo">
-                <img class="profile_img" src = "#">
-            </div>
-            <div class="feed_photo">
-                <img class="profile_img" src = "#">
-            </div>
+            {%endfor%}
+            
 
         </div>
 
