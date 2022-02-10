@@ -17,9 +17,9 @@ def index(request):
     """
     dailyphoto 게시물 출력
     """
-    post_list = Post.objects.order_by('-create_date')
+    post_list = Post.objects.all()
 
-    context = {'form': post_list}
+    context = {'post_list': post_list}
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
