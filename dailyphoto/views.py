@@ -18,8 +18,8 @@ def index(request):
     dailyphoto 게시물 출력
     """
     post_list = Post.objects.order_by('-create_date')
-    person = get_object_or_404(get_user_model(),username=request.user)
-    context = {'form': post_list , 'person': person}
+
+    context = {'form': post_list}
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
