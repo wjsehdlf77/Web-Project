@@ -192,7 +192,7 @@
 .main_body {
   display: flex;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 70px;
   z-index: 1;
   background-color: #FAFAFA;
 }
@@ -200,7 +200,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  min-width: 1000px;
+  min-width: 900px;
   border: 2px solid silver;
 
 }
@@ -212,4 +212,22 @@
 
 .modify{
   margin: 30px 300px;
+}
+
+.feed_body {
+  display: flex;
+  justify-content: center;
+  padding-top: 40px;
+  z-index: 1;
+  background-color: #FAFAFA;
+}
+
+
+.feed_sub_body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-width: 900px;
+  border: 2px solid silver;
+
 }
