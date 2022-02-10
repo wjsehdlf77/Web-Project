@@ -17,8 +17,22 @@ def index(request):
     """
     dailyphoto 게시물 출력
     """
+    # print(username)
+    # user=get_user_model()
+    # print(user)
+    # print(user.get_username())
+    # print('<int:username>')
+    # print(request.user)
+    # print(request.user_id)
+    # user.id=user.
+    # user_change_form = CustomUserChangeForm(instance=request.user)
+    # print(user_change_form)
     post_list = Post.objects.order_by('-create_date')
-    context = {'form': post_list}
+    person = get_object_or_404(get_user_model(),username=request.user)
+    # person = get_object_or_404(get_user_model(),username=username)
+    # person = get_object_or_404(get_user_model(),username='asdf')
+    context = {'form': post_list , 'person': person}
+    # context={'form':post_list}
     
     return render(request, 'dailyphoto/post_list.html', context)
 
