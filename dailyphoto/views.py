@@ -58,11 +58,17 @@ def post_create(request):
   return render(request, 'dailyphoto/upload_page.html', context )
 
 #프로필화
-def profile(request, username): # 프로필
-    person = get_object_or_404(get_user_model(), username=username)
+def profile(request, username):
+    person = get_object_or_404(get_user_model(), username = username )
     post_list = Post.objects.order_by('-create_date')
-
-    context = {'post_list': post_list , 'person': person}
+    post_photo = Post.objects.filter(author_id = request.user.id)
+    
+    
+    context = {
+      'post_list': post_list ,
+       'person': person,
+       'post_photo' : post_photo
+       }
 
     return render(request, 'dailyphoto/profile.html', context)
 
