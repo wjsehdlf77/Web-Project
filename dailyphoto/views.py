@@ -55,7 +55,7 @@ def post_create(request):
     form=PostForm()
 
   context = {'form': form}
-  return render(request, 'dailyphoto/upload_page.html', context)
+  return render(request, 'dailyphoto/upload_page.html', {'context':context} )
 
 #프로필화
 def profile(request, username): # 프로필
