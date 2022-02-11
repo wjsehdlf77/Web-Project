@@ -79,19 +79,40 @@
   display: inline-block;
 }
 
+.icon {
+  width: 1rem;
+  height: 1rem;
+  object-fit: scale-down;
+  font-size: 1rem;
+  image-rendering: 1rem;
+  width: 10px;
+  height: 10px;
+}
+
 /* 메인 화면에 들어갈 css */
 .home_main_body {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
   padding-top: 50px;
   background-color: #fafafa; /* 배경 약간 회색 */
 }
 
+.body_form {
+  margin-right: 0px;
+  width: 1000px;
+  height: 2000px;
+
+  display: flex;
+  flex-direction: column;
+}
 .left_body {
   /* background-color: skyblue; */
-  margin-right: 100px;
+  margin-right: 0px;
   width: 500px;
   height: 2000px;
+
   display: flex;
   flex-direction: column;
 }
@@ -100,8 +121,8 @@
   /* background-color: yellow; */
   width: 300px;
   height: 1000px;
-  left: 72%;
-  position: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 피드 */
@@ -146,6 +167,7 @@ span {
 
 .avata-sm {
   width: 20px;
+  height: 20px;
 }
 
 .feed_name {
@@ -288,9 +310,19 @@ span {
 
 .big_feed {
   display: flex;
+
   width: 300px;
   height: 300px;
-  margin: 10px 0px;
   align-items: center;
   justify-content: center;
+  border: 2px soild;
+}
+
+.feed_comment {
+  display: flex;
+  flex-direction: row;
+}
+
+.asd {
+  float: right;
 }
