@@ -47,11 +47,20 @@ def post_create(request):
     form = PostForm(request.POST)
     if form.is_valid():
       post = form.save(commit=False)
-      post.photo=request.FILES['photo']
+      # photo_file=request.FILES['photo']
+      # print(photo_file)
+      if 'photo' in request.FILES:
+        post.photo=request.FILES['photo']
+      else:
+        pass
+        # post.photo="/Logo/DailyphotoLog.png"
+        # post.photo="DailyphotoLog.png"
+      # post.photo=request.FILES['id_photo']
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
       print('save made?')
+      print(form.as_p)
       return redirect('dailyphoto:index')
     else:
       print('form is not valid')
@@ -59,6 +68,7 @@ def post_create(request):
 
     print('request method is not post its get')
     form=PostForm()
+  print(form.as_p)
 
   context = {'form': form ,
   'now_url':request.path
