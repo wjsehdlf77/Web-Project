@@ -1,11 +1,18 @@
-{% extends "login_base.html" %} {% block content %}
+{% block content %}
 <div class="modal_overlay">
   <div class="modal_window">
     <form method="post" class="post-form" enctype="multipart/form-data">
-      {% csrf_token %} {{form.as_p}}
+      {% csrf_token %}
+      <div></div>
+      {{form.as_p}}
+      <a href="{{now_url}}">링크</a>
+
       <a href="javascript:history.back()" class="btn btn-primary">닫기</a>
       <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> 저장하기</button>
     </form>
   </div>
 </div>
+<script>
+  console.log("script 사용 가능?");
+</script>
 {% endblock %}

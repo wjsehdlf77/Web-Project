@@ -36,6 +36,12 @@ def post_create(request):
   """
   upload
   """
+  now_url=request.get_host()
+  print('현재 페이지 주소?')
+  print(now_url)
+  print(request.get_full_path)
+  print(request.path)
+
   if request.method== "POST":
     print('request method is post')
     form = PostForm(request.POST)
@@ -54,7 +60,9 @@ def post_create(request):
     print('request method is not post its get')
     form=PostForm()
 
-  context = {'form': form}
+  context = {'form': form ,
+  'now_url':request.path
+  }
   return render(request, 'dailyphoto/upload_page.html', context )
 
 #프로필화
