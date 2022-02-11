@@ -51,23 +51,38 @@
   flex-direction: column;
   padding-top: 50px;
   background-color: #fafafa; /* 배경 약간 회색 */
+  
 }
 
 .body_form{
   margin-right: 0px;
-  width: 1000px;
-  height: 2000px;
-  
   display: flex;
   flex-direction: column;
-
 }
+.body_form .child{
+  flex : 1;
+}
+.left {
+  background-color: white;
+  width: 500px;
+  margin: 10px;
+  min-height: auto;
+  margin-bottom: 80px;
+}
+.right {
+  background-color: white;
+  width: 500px;
+  margin: 10px;
+  min-height: auto;
+  margin-bottom: 80px;
+}
+
+
 .left_body {
   /* background-color: skyblue; */
   margin-right: 0px;
   width: 500px;
   height: 2000px;
-  
   display: flex;
   flex-direction: column;
   
@@ -82,12 +97,7 @@
 }
 
 /* 피드 */
-.feed_box {
-  background-color: white;
-  width: 480px;
-  margin: 10px;
-  min-height: auto;
-}
+
 
 .feed_img {
   width: 100%;
@@ -292,5 +302,8 @@ span {
 
 .asd {
   float:right;
+}
+
+.right{
 
 }
