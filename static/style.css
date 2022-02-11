@@ -55,11 +55,22 @@
 
 .body_form{
   margin-right: 0px;
-  width: 1000px;
-  height: 2000px;
-  
   display: flex;
-  flex-direction: column;
+  flex-wrap : wrap;
+  flex-direction: row;
+
+}
+.body_form .child{
+
+    flex : 1;
+} 
+.left{
+  background-color: yellow;
+
+}
+
+.right{
+  background-color: green;
 
 }
 .left_body {
@@ -84,9 +95,10 @@
 /* 피드 */
 .feed_box {
   background-color: white;
-  width: 480px;
-  margin: 10px;
-  min-height: auto;
+  width: 700px;
+  margin: 10px 0px 100px;
+  height:750px;
+  padding-bottom: 200px;
 }
 
 .feed_img {
@@ -293,4 +305,15 @@ span {
 .asd {
   float:right;
 
+}
+
+
+
+/* diary 글 박스 */
+.dairy_post_box {
+  background-color: white;
+  width: 700px;
+  margin: 10px;
+  min-height: 750px;
+  padding-bottom: 200px;
 }

@@ -5,34 +5,41 @@
   
   <div class="body_form" >
     {% comment %} 하나 피드 {% endcomment %}
+    <div class="child left">
     {% for post in post_list %}
-    <div class="border feed_box">
-      {% comment %} 피드 이름 {% endcomment %}
-      <div class="feed_name">
-        {% comment %} 게시물 사진 위 프로필 박스 {% endcomment %}
-        <div class="feed_profile_box">
-          <img class="feed_profile_img" src="/media/{{post.author.profile.image}}" />
-        </div>
+    
+      <div class="border feed_box">
+        {% comment %} 피드 이름 {% endcomment %}
+          <div class="feed_name">
+            {% comment %} 게시물 사진 위 프로필 박스 {% endcomment %}
+              <div class="feed_profile_box">
+                <img class="feed_profile_img" src="/media/{{post.author.profile.image}}" />
+              </div>
 
-        <span class="feed_name_txt">{{ post.author.username}}</span>
+                <span class="feed_name_txt">{{ post.author.username}}</span>
+          </div>
+          <img class="feed_img" src="/media/{{post.photo}}" />
+          <div class="feed_icon">
+          
+              <span class="material-icons ml-1">  cloud_queue </span>
+              <div class = 'asd'>
+              <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
+              </div>
+          </div>
       </div>
-      <img class="feed_img" src="/media/{{post.photo}}" />
-      <div class="feed_icon">
-        
-          <span class="material-icons ml-1">  cloud_queue </span>
-          <div class = 'asd'>
-          <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
-        </div>
-      </div>
-
-      <div class="feed_content">
-        <p class="feed_txt"><b> {{post.author.username}} </b> {{ post.content }}</p>
+    {% endfor %}
+    </div>
+    <div class="child right">
+      <div class="border dairy_post_box">
       </div>
     </div>
-    
-
-    {% endfor %}
   </div>
+  
+
+   
+    
+  
+  
 
 </div>
 
