@@ -24,6 +24,10 @@
             <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
         </div>
       </div>
+
+      <div class="feed_content">
+        <p class="feed_txt"><b> {{post.author.username}} </b> {{ post.content }}</p>
+      </div>
     </div>
       <div class="child right">
           {{post.title}}
@@ -33,9 +37,8 @@
 
     {% endfor %}
   </div>
-  </div
-</div>
 
+</div>
 {% endblock content %}
 
 
