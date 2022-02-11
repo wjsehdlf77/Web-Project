@@ -18,27 +18,23 @@
       </div>
       <img class="feed_img" src="/media/{{post.photo}}" />
       <div class="feed_icon">
-        <div>
+        
           <span class="material-icons ml-1">  cloud_queue </span>
-          <span class="material-icons-outlined"> mode_comment </span>
-          <span class="material-icons-outlined"> send </span>
-        </div>
-        <div>
-          <span class="material-icons-outlined"> turned_in_not </span>
+          <div class = 'asd'>
+          <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
         </div>
       </div>
-      <div class="feed_like">
-      <p class="feed_txt"><b>좋아요 {{post.like_count}}개</b></p>
-      </div>
+
       <div class="feed_content">
         <p class="feed_txt"><b> {{post.author.username}} </b> {{ post.content }}</p>
       </div>
-  
     </div>
     
 
     {% endfor %}
   </div>
+
+</div>
 
 {% endblock content %}
 
