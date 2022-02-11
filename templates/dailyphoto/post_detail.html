@@ -1,84 +1,66 @@
-{% extends "base.html" %} {% block content %}
-<div class="modal_overlay">
-  <div class="modal_window">
+{% load static %}
 
-  </div>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Dailyphoto</title>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+      crossorigin="anonymous"
+    />
+      <!-- 요기에 구글 머티리얼 아이콘 -->
+      <link
+      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+  </head>
+  <body >
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{% comment %} {% extends 'base.html' %} {% block content %}
-<!-- 사용자오류 표시 -->
-{% if messages %}
-<div class="alert alert-danger my-3" role="alert">
-{% for message in messages %}
-    <strong>{{ message.tags }}</strong>
-    <ul><li>{{ message.message }}</li></ul>
-{% endfor %}
-</div>
-{% endif %}
-
-<h2 class="border-bottom py-2">{{ post.subject }}</h2>
-<div class="card my-3">
-  <div class="card-body">
-    <div class="card-text" style="white-space: pre-line"> {{ post.content }}</div>
-    <div class="d-flex justify-content-end">
-      {% if post.modify_date %}
-      <div class="badge badge-light p-2 text-left mx-3">
-          <div class="mb-2">modified at</div>
-          <div><i class="fas fa-clock"></i> {{ post.modify_date | date:'Y-m-d H:i:s'}}</div>
+    {% block content %}
+    <div class="postmodal_overlay">
+      <div class="postmodal_window">
+        {% comment %} 사진파트 {% endcomment %}
+        <div class="child">
+          <div class="feed_name">
+            <div class="feed_profile_box"><img class="feed_profile_img" src="/media/{{post.author.profile.image}}" /></div>
+            <span class="feed_name_txt">{{ post.author.username}}</span>
+          </div>
+          <img class="detail_photo" src = "/media/{{post.photo}}">
+          <div><span class="material-icons ml-1">  cloud_queue </span> <b>좋아요 {{post.like_count}}개</b></div>
+        </div>
+        {% comment %} 내용 파트 {% endcomment %}
+        <div class="child">
+          <h3>{{post.title}}</h3>
+          {{post.content}}
+          <form method="post" class="post-form my-3">
+            {% csrf_token %}
+            <div class="form-group">
+            <span>
+            <textarea class="form-control"name="content" id="content" 
+            rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
+            <button type="submit" class="btn btn-Light" style>게시</button>
+            </span>
+           </form> 
+        </div>
       </div>
-      {% endif %}
-      <div class="badge badge-light p-2">
-        <div class="mb-2">{{ post.author.username }}</div>
-        <div><i class="fas fa-clock"></i> {{ post.create_date  | date:'Y-m-d H:i:s'}}</div>
-      </div>
-    </div>  
-    {% if request.user == post.author %}
-      <a href="{% url 'pybo:post_modify' post.id  %}" 
-          class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i> 수정</a>
-      <a href="#" class="delete btn btn-sm btn-outline-danger"
-        data-uri="{% url 'pybo:post_delete' post.id  %}"><i class="fas fa-trash-alt"></i> 삭제</a>
-    {% endif %}
-
-    {% include 'pybo/comment_list.html' %}
-  </div>  
-</div>
-
-{% include 'pybo/answer_list.html' %}
-
-{% endblock content %}
-
-
-{% block script %}
-<script type='text/javascript'>
-$(document).ready(function(){
-  $(".delete").on('click', function() {
-    if(confirm("정말로 삭제하시겠습니까?")) {
-      location.href = $(this).data('uri');
-    }
-  });
-});
-</script>
-{% endblock %} {% endcomment %}
+    </div>
+    {% endblock %}
 
 
 
-
+    <!-- jQuery JS -->
+    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
+    <!-- Bootstrap JS -->
+    <script src="{% static 'bootstrap.min.js' %}"></script>
+    {% block script %}{% endblock %}
+  </body>
+</html>
