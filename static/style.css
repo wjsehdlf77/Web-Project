@@ -50,13 +50,16 @@
   align-items: center;
   flex-direction: column;
   padding-top: 50px;
+
   
   background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
+
 }
 
 .body_form{
   margin-right: 0px;
   display: flex;
+
   flex-wrap : wrap;
   flex-direction: row;
   
@@ -76,13 +79,32 @@
   padding-top: 50px;
   background-color: rgb(195, 213, 247); 
 
+
 }
+.body_form .child{
+  flex : 1;
+}
+.left {
+  background-color: white;
+  width: 500px;
+  margin: 10px;
+  min-height: auto;
+  margin-bottom: 80px;
+}
+.right {
+  background-color: white;
+  width: 500px;
+  margin: 10px;
+  min-height: auto;
+  margin-bottom: 80px;
+}
+
+
 .left_body {
   /* background-color: skyblue; */
   margin-right: 0px;
   width: 500px;
   height: 2000px;
-  
   display: flex;
   flex-direction: column;
   
@@ -97,6 +119,7 @@
 }
 
 /* 피드 */
+
 .feed_box {
   background-color: white;
   width: 800px;
@@ -104,6 +127,7 @@
   height:750px;
   padding-bottom: 200px;
 }
+
 
 .feed_img {
   width: 100%;
@@ -308,6 +332,9 @@ span {
 
 .asd {
   float:right;
+}
+
+.right{
 
 }
 
