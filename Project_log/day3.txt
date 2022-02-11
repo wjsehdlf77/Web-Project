@@ -37,8 +37,10 @@ To do list (개인별)
 
   똑같은 사진 파일이 어떤 페이지에서는 media/로 로드되고 어떤 페이지에서는 ../media 경로로만 로드되는 문제점을 겪음
 
-    해결:
- 
+    
+1. 해결:
+  
+  
   from django.conf import settings
   from django.conf.urls.static import static
   urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
@@ -60,10 +62,24 @@ To do list (개인별)
    post_list = Post.objects.order_by('-create_date')
    context = {'post_list': post_list , 'person': person}
    return render(request, 'dailyphoto/profile.html', context)
-   
+
+2. 해결:
+
    context 변수에 post_list를 추가하여 Post 테이블의 데이터를 profile.html에 전달 할 수 있도록
    구현 하였음.
 
+3. post_list.html 의 right-body에 <a class="link_txt " >전환</a>  이 글자가 inline이 되지 않음
+
+3. 해결 : 
+          post_list에서 <a class="link_txt " >전환</a>에 차지하는 영역을 이미지가 침범 해서
+          이미지의 박스 크기를 이루고 있는 <div class="big_profile_box"> 태그를 크기를 줄이기 위해
+          <div class="feed_profile_box">이 프로필 박스로 변경함
+
+4. navbar가 피드 영역을 침범함
+4. 해결:
+   navbar가 피드를 가려서 post_list.html의 home_main_body의 padding-top 을 조절함
+    
+   
 
 
 

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
 <div class="main_body">
     <div class="sub_body">
         <div style="display: flex; flex-direction: row">
@@ -29,29 +28,18 @@
                     style="margin-left: 10px;font-size: 14px;width: 150px; height: 50px; border: 1px solid silver; background-color: transparent" onclick="ajaxFileUpload() ">
                     프로필변경</button></a>
             </div>
-        </div>
-                        
-    </div>
-
-</div>
-
-
-<div class = 'feed_body'>
-    <div class = 'feed_sub_body'>
-        {%for post in post_list%}
-        <div style="display: flex; flex-direction:column;">
-            
-            <div class="feed_photo">
-                <img class="profile_img" src = "/media/{{post.photo}}">
-                
+         </div>
+        <div class = 'feed_body'>
+            <div class = 'sub_feed_body'> 
+                {% for post in post_photo %}
+                        <div class = 'big_feed'>
+                                <img class="row_feed" src = "/media/{{post.photo}}">
+                        </div>
+                {%endfor%}
             </div>
-            
-            
-
         </div>
-        {%endfor%}
     </div>
-</div>
-
+</div>       
+         
 
 {% endblock content %}
