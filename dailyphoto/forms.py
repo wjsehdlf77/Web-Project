@@ -1,4 +1,5 @@
 
+from dataclasses import field
 from django import forms
 from dailyphoto.models import Post
 
@@ -12,7 +13,10 @@ from django.contrib.auth import get_user_model
 class PostForm(forms.ModelForm):
   class Meta:
     model=Post
-    fields=['title','photo','content']
+    fields=['title','photo','content','icon_emotion']
+    print(fields)
+    fields.append('icon_weather')
+    print(fields)
     widgets = { 'title': forms.TextInput(attrs={'class': 'form-control'}), 
     # 'photo': forms.ImageField(attrs={'class': 'form-control-file'}),
     'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),}

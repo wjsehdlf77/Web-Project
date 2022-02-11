@@ -1,11 +1,62 @@
-{% extends "login_base.html" %} {% block content %}
-<div class="modal_overlay">
-  <div class="modal_window">
-    <form method="post" class="post-form" enctype="multipart/form-data">
-      {% csrf_token %} {{form.as_p}}
+{% include 'base.html' %} {% block content %} {% load bootstrap4 %}
+<div class="modal_overlay" id="id_modal_upload">
+  <!-- <div class="modal_window"> -->
+  <form method="post" class="post-form modal_window" enctype="multipart/form-data" id="form_upload">
+    {% csrf_token %}
+    <div class="upload_left">
+      사진
+      <!-- <img src="/static/images/DailyphotoLogo.png" alt="" class="upload_left_pic" /> -->
+    </div>
+    <div class="upload_right">
+      <!-- <div class="upload_upper"> -->
+      <!-- <div>새 글 쓰기</div>
+        <div onclick="CloseModal()"><i class="fas fa-solid fa-circle-xmark"></i>닫기</div>
+        <a href="javascript:history.back()" class="btn btn-primary">닫기1</a>
+        <a href="javascript:history.back()"><i class="fas fa-solid fa-circle-xmark"></i></a> -->
+      <!-- </div> -->
+      <div class="form-group">
+        <label for="content"></label>
+        <input
+          type="text"
+          class="form-control"
+          name="title"
+          placeholder="글 제목을 입력하세요."
+          id="id_title"
+          value="{{ form.title.value|default_if_none:'' }}"
+        />
+      </div>
+      <hr />
+      <div class="form-group">
+        <label><input type="radio" name="icon_emotion" value="happy" checked /><i class="fas fa-solid fa-sun"></i> happy</label>
+        <label><input type="radio" name="icon_emotion" value="proud" /> <i class="fas fa-solid fa-clouds"></i> proud</label>
+        <label><input type="radio" name="icon_emotion" value="mélancholie" /><i class="fas fa-solid fa-sun"></i> mélancholie </label>
+      </div>
+      <div class="form-group">
+        <label><input type="radio" name="icon_weather" value="sunny" checked /><i class="fas fa-solid fa-sun"></i> sunny</label>
+        <label><input type="radio" name="icon_weather" value="cloud" /> <i class="fas fa-solid fa-clouds"></i> cloud</label>
+        <label><input type="radio" name="icon_weather" value="rain" /> <i class="fas fa-solid fa-rain"></i> rain</label>
+      </div>
+      <div class="form-group">
+        <!-- <label for="content"></label> -->
+        <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">
+{{ form.content.value|default_if_none:'' }}</textarea
+        >
+      </div>
+      <div>
+        <input type="file" name="photo" accept="image/*" id="id_photo" />
+      </div>
+      <!-- <a href="{{now_url}}">링크</a> -->
+      <button type="submit" class="btn btn-primary" id="upload"><i class="fas fa-save"></i> 저장하기</button>
       <a href="javascript:history.back()" class="btn btn-primary">닫기</a>
-      <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> 저장하기</button>
-    </form>
-  </div>
+      <!-- <button onclick="CloseModal()" class="btn btn-primary">닫기2</button> -->
+      <!-- <button id="temp" onclick="testfunc()">콘솔</button> -->
+      <!-- <button id="upload">저장하기-ajax</button> -->
+    </div>
+  </form>
 </div>
+<!-- </div> -->
+<script>
+  console.log("upload_page 인클루드 되었습니다. ");
+</script>
+
 {% endblock %}
