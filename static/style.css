@@ -47,6 +47,7 @@
 .home_main_body {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
   padding-top: 50px;
   background-color: #fafafa; /* 배경 약간 회색 */
@@ -109,6 +110,7 @@
 
 .feed_txt {
   font-size: 14px;
+  
 }
 
 .feed_icon {
@@ -284,5 +286,11 @@ span {
 
   display: flex;
   flex-direction: row;
+
+}
+
+
+.asd {
+  float:right;
 
 }
