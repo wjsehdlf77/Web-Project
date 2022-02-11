@@ -16,6 +16,7 @@ class Post(models.Model):
     icon_weather=models.CharField(max_length=20, default='sunny')
 
 
+
     def __str__(self):
         return self.subject
 class PersonalIconSet(models.Model):
