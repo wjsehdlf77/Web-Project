@@ -51,21 +51,32 @@
   background-color: #fafafa; /* 배경 약간 회색 */
 }
 
-.left_body {
-  /* background-color: skyblue; */
-  margin-right: 100px;
-  width: 500px;
+.body_form{
+  margin-right: 0px;
+  width: 1000px;
   height: 2000px;
+  
   display: flex;
   flex-direction: column;
+
+}
+.left_body {
+  /* background-color: skyblue; */
+  margin-right: 0px;
+  width: 500px;
+  height: 2000px;
+  
+  display: flex;
+  flex-direction: column;
+  
 }
 
 .right_body {
   /* background-color: yellow; */
   width: 300px;
   height: 1000px;
-  left: 72%;
-  position: fixed;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 피드 */
