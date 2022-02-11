@@ -3,7 +3,7 @@
 
 <div class="home_main_body" style="padding-top: 80px;"> 
   
-  <div class="left_body" >
+  <div class="body_form" >
     {% comment %} 하나 피드 {% endcomment %}
     {% for post in post_list %}
     <div class="border feed_box">
@@ -18,122 +18,22 @@
       </div>
       <img class="feed_img" src="/media/{{post.photo}}" />
       <div class="feed_icon">
-        <div>
-
+        
           <span class="material-icons ml-1">  cloud_queue </span>
-          <span class="material-icons-outlined"> mode_comment </span>
-          <span class="material-icons-outlined"> send </span>
-        </div>
-        <div>
-          <span class="material-icons-outlined"> turned_in_not </span>
+          <div class = 'asd'>
+          <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
         </div>
       </div>
-      <div class="feed_like">
-      <p class="feed_txt"><b>좋아요 {{post.like_count}}개</b></p>
-      </div>
+
       <div class="feed_content">
         <p class="feed_txt"><b> {{post.author.username}} </b> {{ post.content }}</p>
       </div>
-      <div class="feed_reply">
-        <span class="feed_txt"> <b> mychew </b> 3대 3kg </span>
-        <span class="feed_txt"> <b> cho </b> ....!!! </span>
-      </div>
-      <form method="post" class="post-form my-3">
-        {% csrf_token %}
-        <div class="form-group">
-        <label for="content" style=>댓글갯수</label>
-        
-        
-        <span>
-        <textarea class="form-control"name="content" id="content" 
-        rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
-        <button type="submit" class="btn btn-Light" style>게시</button>
-        </span>
-       </form> 
     </div>
+    
+
     {% endfor %}
   </div>
-  <div class="right_body">
-    <div class="feed_name" style="justify-content: space-between">
-      <div style="display: flex; align-items: center">
-        <div class="feed_profile_box">
-          <img class="feed_profile_img" src="/media/{{user.profile.image}}" />
-        </div>
-        <div class="name_content">
-          <span class="feed_name_txt"> {{user.username}} </span>
-          <span class="name_content_txt"> Moon Kyujin</span>
-        </div>
-        
-      </div>
-      <a class="link_txt " >전환</a>
-    </div>
 
-    <div class="recommend_box">
-      <span style="color: gray"> 회원님을 위한 추천</span>
-      <span style="font-size: 12px"> 모두 보기 </span>
-    </div>
-    <div>
-      <div class="feed_name" style="justify-content: space-between">
-        <div class="feed_profile_box">
-          <img class="feed_profile_img" src="https://i.pinimg.com/736x/93/a6/8b/93a68b57a54e4bdc73d43d1d049b94b3.jpg" />
-        </div>
-        <div class="name_content">
-          <span class="feed_name_txt"> dation3388 </span>
-          <span class="name_content_txt"> Jinstargram 신규가입</span>
-        </div>
-        <a class="link_txt"> 팔로우 </a>
-      </div>
-      <div class="feed_name" style="justify-content: space-between">
-        <div class="feed_profile_box">
-          <img
-            class="feed_profile_img"
-            src="http://file3.instiz.net/data/cached_img/upload/2021/01/27/18/2ce2f41f7e9f09c0acc77faac7452dbf.jpg"
-          />
-        </div>
-        <div class="name_content">
-          <span class="feed_name_txt"> gaoudi </span>
-          <span class="name_content_txt"> IU 외 5명이 팔로우</span>
-        </div>
-        <a class="link_txt"> 팔로우 </a>
-      </div>
-      <div class="feed_name" style="justify-content: space-between">
-        <div class="feed_profile_box">
-          <img
-            class="feed_profile_img"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTiCVWdogd6Ocsm08kL8ph4sb1MN0AYEiSUQ&usqp=CAU"
-          />
-        </div>
-        <div class="name_content">
-          <span class="feed_name_txt"> CAU </span>
-          <span class="name_content_txt"> IU 외 5명이 팔로우</span>
-        </div>
-        <a class="link_txt"> 팔로우 </a>
-      </div>
-      <div class="feed_name" style="justify-content: space-between">
-        <div class="feed_profile_box">
-          <img class="feed_profile_img" src="https://pbs.twimg.com/media/EhzH0_DU4AEZ9yr.jpg" />
-        </div>
-        <div class="name_content">
-          <span class="feed_name_txt"> 123456789 </span>
-          <span class="name_content_txt"> 그냥 추천해봄 </span>
-        </div>
-        <a class="link_txt"> 팔로우 </a>
-      </div>
-      <div class="feed_name" style="justify-content: space-between">
-        <div class="feed_profile_box">
-          <img
-            class="feed_profile_img"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPNYM5RQgA2F7BtpBQ-OrNFKDXVDUpypRuw&usqp=CAU"
-          />
-        </div>
-        <div class="name_content">
-          <span class="feed_name_txt"> instiz </span>
-          <span class="name_content_txt"> 애도 유명해 </span>
-        </div>
-        <a class="link_txt"> 팔로우 </a>
-      </div>
-    </div>
-  </div>
 </div>
 
 {% endblock content %}
