@@ -6,9 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
 from dailyphoto.models import Profile
 from django.contrib.auth import get_user_model
-from .forms import PostForm, CustomUserChangeForm, ProfileForm
+from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
 from .models import Post
 from django.utils import timezone
+
 
 # from PIL import Image
 
@@ -64,6 +65,32 @@ def post_create(request):
   'now_url':request.path
   }
   return render(request, 'dailyphoto/upload_page.html', context )
+
+
+# 댓글 기능
+@login_required(login_url='common:login')
+def comment_create(request, post_id): 
+    post = get_object_or_404(Post, post_id) 
+    if request.method == "POST":
+      form = CommentForm(request.POST) 
+      if form.is_valid():
+        comment = form.save(commit=False)
+        comment.author = request.user
+        comment.create_date = timezone.now()
+        comment.post = post
+        comment.save()
+        return redirect('pybo:detail', post_id=post.id)
+    else:
+      form = CommentForm() 
+      context = {'form': form}
+    return render(request, 'pybo/comment_form.html', context)
+
+
+
+
+
+
+
 
 #프로필화
 def profile(request, username):

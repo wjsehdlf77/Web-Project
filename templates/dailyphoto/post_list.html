@@ -19,7 +19,8 @@
       <img class="feed_img" src="/media/{{post.photo}}" />
       <div class="feed_icon">
         <div>
-          <span class="material-icons"> cloud_queue </span>
+
+          <span class="material-icons ml-1">  cloud_queue </span>
           <span class="material-icons-outlined"> mode_comment </span>
           <span class="material-icons-outlined"> send </span>
         </div>
@@ -28,16 +29,27 @@
         </div>
       </div>
       <div class="feed_like">
-        <p class="feed_txt"><b>{{post.like_count}}</b></p>
+      <p class="feed_txt"><b>좋아요 {{post.like_count}}개</b></p>
       </div>
       <div class="feed_content">
         <p class="feed_txt"><b> {{post.author.username}} </b> {{ post.content }}</p>
       </div>
       <div class="feed_reply">
-        <span class="feed_txt"> <b> mychew </b> 제주도 가고 싶어요 ㅠㅠ</span>
-        <span class="feed_txt"> <b> cho </b> 제주도 ㄱ ㄱ </span>
+        <span class="feed_txt"> <b> mychew </b> 3대 3kg </span>
+        <span class="feed_txt"> <b> cho </b> ....!!! </span>
       </div>
-      
+      <form method="post" class="post-form my-3">
+        {% csrf_token %}
+        <div class="form-group">
+        <label for="content" style=>댓글갯수</label>
+        
+        
+        <span>
+        <textarea class="form-control"name="content" id="content" 
+        rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
+        <button type="submit" class="btn btn-Light" style>게시</button>
+        </span>
+       </form> 
     </div>
     {% endfor %}
   </div>
@@ -48,7 +60,7 @@
           <img class="feed_profile_img" src="/media/{{user.profile.image}}" />
         </div>
         <div class="name_content">
-          <span class="feed_name_txt"> jin.99 </span>
+          <span class="feed_name_txt"> {{user.username}} </span>
           <span class="name_content_txt"> Moon Kyujin</span>
         </div>
         
@@ -125,3 +137,5 @@
 </div>
 
 {% endblock content %}
+
+

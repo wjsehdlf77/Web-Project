@@ -3,7 +3,7 @@ from django import forms
 from dailyphoto.models import Post
 
 from django.contrib.auth.forms import UserChangeForm
-from dailyphoto.models import Profile
+from dailyphoto.models import Profile, Comment
 from django.contrib.auth import get_user_model
 
 
@@ -22,6 +22,11 @@ class PostForm(forms.ModelForm):
     'content': '내용',
     }
 
+class CommentForm(forms.ModelForm): 
+    class Meta:
+        model = Comment 
+        fields = ['content'] 
+        labels = {'content': '댓글내용', }
 
 
 class CustomUserChangeForm(UserChangeForm):
