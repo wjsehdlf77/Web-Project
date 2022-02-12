@@ -92,38 +92,31 @@
 /* 메인 화면에 들어갈 css */
 .home_main_body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   padding-top: 50px;
-
-  
   background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
 
 }
 
 .body_form {
-  margin-right: 0px;
   display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
 
-  flex-wrap : wrap;
-  flex-direction: row;
   
-
-}
-.body_form .child{
-
-    flex : 1;
 } 
+
 .left{
   padding-top: 50px;
   background-color: rgb(195, 213, 247);
+  flex-basis: 30%;
 
 }
 
 .right{
   padding-top: 50px;
   background-color: rgb(195, 213, 247); 
+  flex-basis: 30%;
+
 
 
 }
@@ -135,10 +128,8 @@
 
 .feed_box {
   background-color: white;
-  width: 800px;
-  margin: 10px 0px 100px;
-  height:750px;
-  padding-bottom: 200px;
+  width: 700px;
+  height: 700px;
 }
 
 
@@ -159,6 +150,7 @@
   padding: 0px 10px;
   display: flex;
   flex-direction: column;
+  
 }
 
 .feed_txt {
@@ -350,3 +342,65 @@ span {
   padding-bottom: 200px;
 }
 
+/* post_detail */
+.postmodal_overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+}
+
+.postmodal_window {
+  display:flex;
+  background: white;
+  backdrop-filter: blur(13.5px);
+  -webkit-backdrop-filter: blur(13.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 900px;
+  height: 600px;
+  position: relative;
+  padding: 10px;
+}
+
+.postmodal_window .child {
+  flex:1;
+}
+
+.detail_photo {
+  width: 450px;
+  height: 400px;
+  object-fit: cover;
+  margin: 0px;
+}
+
+
+
+
+.big_feed_title {
+  display: flex;
+  padding: 20px 0;
+  margin: 10px 10px 30px 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size:30px;
+  font-weight: bold ;
+  font-family: cursive;
+  justify-content: center;
+
+}
+
+.big_feed_content{
+
+  display: flex;
+  
+  
+}
