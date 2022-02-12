@@ -9,7 +9,7 @@ from django.contrib.auth import get_user_model
 from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
 from .models import Post
 from django.utils import timezone
-
+from django.http import JsonResponse
 
 # from PIL import Image
 
@@ -60,7 +60,7 @@ def post_create(request):
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
-      print('save made?')
+      print('post save made')
       print(form.as_p)
       return redirect('dailyphoto:index')
     else:
