@@ -11,44 +11,39 @@
 
 <!-- 희정님 테스트 -->
 
-<div class="home_main_body" style="padding-top: 80px;"> 
+<div class="home_main_body" style="padding-top: 80px;">
   
   <div class="body_form" >
-    {% comment %} 하나 피드 {% endcomment %}
-    <div class="child left">
     {% for post in post_list %}
+    <div class="left">
       <div class="border feed_box">
-        {% comment %} 피드 이름 {% endcomment %}
           <div class="feed_name">
-            {% comment %} 게시물 사진 위 프로필 박스 {% endcomment %}
               <div class="feed_profile_box">
                 <img class="feed_profile_img" src="/media/{{post.author.profile.image}}" />
               </div>
-
                 <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
           <img class="feed_img" src="/media/{{post.photo}}" />
           <div class="feed_icon">
-          
               <span class="material-icons ml-1">  cloud_queue </span>
               <div class = 'asd'>
               <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
               </div>
-          </div>
+            </div>
+        </div>
+    </div>
+    <div class="right">
+      <div class="border feed_box">
+        <div class = 'big_feed_title'>
+          <div>{{post.title}}</div>
+        </div>
+        <div class = 'big_feed_content'>
+        {{post.content}}
+        </div>
       </div>
+    </div>
     {% endfor %}
-    </div>
-
-    
-    <div class="child right">
-      {% for post in post_list %}
-      <div class="border dairy_post_box">
-      </div>
-      {% endfor %}
-    </div>
   </div>
-
-
 </div>
 {% endblock content %}
 
