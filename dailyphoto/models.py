@@ -14,9 +14,6 @@ class Post(models.Model):
     like_count = models.IntegerField(default=0)
     icon_emotion=models.CharField(max_length=20, default='happy')
     icon_weather=models.CharField(max_length=20, default='sunny')
-    
-    class Meta:
-        db_table = 'posts'
 
 
 
@@ -24,25 +21,33 @@ class Post(models.Model):
         return self.subject
     
 class Comment(models.Model):
-    author       = models.ForeignKey('user.User', on_delete=models.CASCADE)
+    author       = models.ForeignKey(User , on_delete=models.CASCADE)
     post       = models.ForeignKey('Post', on_delete=models.CASCADE)
     parent     = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
-    # 대댓글 구현을 위해 parent 추가
+    # 대댓글 구현을 위해
     content    = models.CharField(max_length=500)
-    create_date = models.DateTimeField(auto_now_add=True)
-    updated_date = models.DateTimeField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         db_table = 'comments'
-        
-        
-        
+
 class PersonalIconSet(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     emotion_is_setted=models.BooleanField(default=True)
     weather_is_setted=models.BooleanField(default=True)
 
+class Answer(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)    #pk는 디폴트값으로 id Auto_increment  로 사용중 Question의 참조클라스가 id
+    content = models.TextField()
+    create_date = models.DateTimeField()
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    modify_date = models.DateTimeField(null = True, blank = True)
+
+    def __str__(self):
+        return self.content
     
+
 
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
