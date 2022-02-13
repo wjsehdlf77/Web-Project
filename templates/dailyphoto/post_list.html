@@ -12,9 +12,9 @@
 <!-- 희정님 테스트 -->
 
 <div class="home_main_body" style="padding-top: 80px;">
-  
+  {% for post in post_list %}
   <div class="body_form" >
-    {% for post in post_list %}
+    
     <div class="left">
       <div class="border feed_box">
           <div class="feed_name">
@@ -42,8 +42,9 @@
         </div>
       </div>
     </div>
-    {% endfor %}
+    
   </div>
+  {% endfor %}
 </div>
 {% endblock content %}
 
