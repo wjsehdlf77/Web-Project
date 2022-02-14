@@ -27,7 +27,14 @@
       {% comment %} 상단 고정 sticky-top {% endcomment %}
       <div class="container">
         <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
-        <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search" />
+
+        {% comment %} action="{% url 'search' %} {% endcomment %}
+
+        {% comment %} <form class="d-flex" action = "{% url 'search' %}">      
+          <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit"> Search </button>
+        </form> {% endcomment %}
+
         <div>
           <ul class="navbar-nav ml-auto">
             <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons-outlined">logout</span></a>

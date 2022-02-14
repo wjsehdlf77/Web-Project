@@ -1,4 +1,6 @@
 
+
+from tkinter import CASCADE
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -54,6 +56,7 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=40, blank=True)
     image = models.ImageField(upload_to= 'image/', blank=True)   #Pillow설치
 
+
     def __str__(self):
         return self.nickname
 
@@ -61,10 +64,7 @@ class User(User):
     followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
 
 
-class OtherProfile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    description = models.TextField(blank=True)
-    nickname = models.CharField(max_length=40, blank=True)
+
 
 
 
