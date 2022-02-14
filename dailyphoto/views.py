@@ -1,14 +1,24 @@
 
 
-# from time import timezone
+# 
+import json
+from json.decoder import JSONDecodeError
+from django.http  import JsonResponse
+from django.views import View
+from time import timezone
+
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
 from dailyphoto.models import Profile
 from django.contrib.auth import get_user_model
 from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post
+from .models import Post, Comment
 from django.utils import timezone
+from django.http import JsonResponse
+
+
+
 
 
 # from PIL import Image
@@ -30,6 +40,51 @@ def detail(request, id):
     # get_object_or_404 <- 오류 화면 구성
     context = {'post': post}
     return render(request, 'dailyphoto/post_detail.html', context)
+  
+
+@login_required(login_url='common:login')
+def comment_create(self, request):
+    try :
+        data = json.loads(request.body)
+        user = request.user
+
+        content    = data.get('content', None)
+        post_id = data.get('post_id', None)
+
+        if not (content and post_id):
+            return JsonResponse({'message':'KEY_ERROR'}, status=400)
+
+        if not Post.objects.filter(id=post_id).exists():
+            return JsonResponse({'message':"POSTING_DOES_NOT_EXIST"}, status=404)
+        
+        posting = Post.objects.get(id=post_id)
+        
+        Comment.objects.create(
+            content = content,
+            user    = user,
+            posting = posting
+        )
+
+        return JsonResponse({'message':'SUCCESS'}, status=200)
+    
+    except JSONDecodeError:
+        return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
+
+
+@login_required(login_url='common:login')
+def comment_search(self, request, post_id,username):
+    if not Post.objects.filter(id=post_id).exists():
+        return JsonResponse({'message':'POSTING_DOES_NOT_EXIST'}, status=404)
+
+    comment_list = [{
+        "username"  : get_object_or_404(get_user_model(), username = username ),
+        "content"   : comment.content,
+        "create_at" : comment.created_date
+        } for comment in Comment.objects.filter(post_id=post_id)
+    ]
+
+    return JsonResponse({'data':comment_list}, status=200)
+      
 
 # 글 업로드 함수
 # @login_required(login_url='common:login')
@@ -60,7 +115,7 @@ def post_create(request):
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
-      print('save made?')
+      print('post save made')
       print(form.as_p)
       return redirect('dailyphoto:index')
     else:
@@ -75,28 +130,6 @@ def post_create(request):
   'now_url':request.path
   }
   return render(request, 'dailyphoto/upload_page.html', context )
-
-
-# 댓글 기능
-@login_required(login_url='common:login')
-def comment_create(request, post_id): 
-    post = get_object_or_404(Post, post_id) 
-    if request.method == "POST":
-      form = CommentForm(request.POST) 
-      if form.is_valid():
-        comment = form.save(commit=False)
-        comment.author = request.user
-        comment.create_date = timezone.now()
-        comment.post = post
-        comment.save()
-        return redirect('pybo:detail', post_id=post.id)
-    else:
-      form = CommentForm() 
-      context = {'form': form}
-    return render(request, 'pybo/comment_form.html', context)
-
-
-
 
 
 
@@ -137,7 +170,6 @@ def modify_profile(request):
             'profile_form': profile_form
         })
 
-  
 
 
 

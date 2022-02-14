@@ -92,38 +92,36 @@
 /* 메인 화면에 들어갈 css */
 .home_main_body {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   padding-top: 50px;
-
-  
   background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
+  justify-content: center;
+
 
 }
 
 .body_form {
-  margin-right: 0px;
   display: flex;
-
-  flex-wrap : wrap;
+  flex-flow: column wrap;
+ 
+} 
+.sub_body_form {
+  display: flex;
   flex-direction: row;
   
-
 }
-.body_form .child{
 
-    flex : 1;
-} 
 .left{
   padding-top: 50px;
   background-color: rgb(195, 213, 247);
+  flex-basis: 0%;
 
 }
 
 .right{
   padding-top: 50px;
   background-color: rgb(195, 213, 247); 
+  flex-basis: 0%;
+
 
 
 }
@@ -135,10 +133,8 @@
 
 .feed_box {
   background-color: white;
-  width: 800px;
-  margin: 10px 0px 100px;
-  height:750px;
-  padding-bottom: 200px;
+  width: 700px;
+  height: 700px;
 }
 
 
@@ -159,6 +155,7 @@
   padding: 0px 10px;
   display: flex;
   flex-direction: column;
+  
 }
 
 .feed_txt {
@@ -292,7 +289,7 @@ span {
 }
 
 .modify {
-  margin: 30px 300px;
+  margin: 0 200px;
 }
 
 .row_feed {
@@ -388,4 +385,56 @@ span {
   height: 400px;
   object-fit: cover;
   margin: 0px;
+}
+
+
+
+
+.big_feed_title {
+  display: flex;
+  padding: 20px 0;
+  margin: 10px 10px 30px 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  font-size:30px;
+  font-weight: bold ;
+  font-family: cursive;
+  justify-content: center;
+
+}
+
+.big_feed_content{
+
+  display: flex;
+  
+  
+}
+
+/* Comment */
+.post-box .comment-input {
+  height: 56px;
+  border: 1px solid #dbdbdb;   
+}
+.post-box .comment-input form {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.post-box .comment-input form textarea {
+  height: 100%;
+  width: 90%;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 5%;
+  margin: 5px;
+}
+.post-box .comment-input form input {
+  height: 50%;
+  box-sizing: border-box;
+  border: none;
+  margin-right: 10px;
+  background: rgba(255,255,255,0.5);
+  color: #0095f6;
+  font-weight: bolder;
 }
