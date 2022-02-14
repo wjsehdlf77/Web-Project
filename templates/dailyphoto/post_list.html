@@ -29,7 +29,28 @@
             <div>{{post.title}}</div>
           </div>
           <div class = 'big_feed_content'>
-          {{post.content}}{{coments.}}
+            
+            <!-- comment -->
+             <div class="comment">
+              {% for comment in post.comment_post %}
+                <div id="comment-{{comment.id}}"
+                <b>{{comment.author.username}}</b>
+                {{comment.contents}}
+                </div>
+            {%endfor%}
+            </div>
+
+            <!-- comment input -->
+            <div class="comment-input">
+              <form action="{% url 'posts:comment_create' post.id %}" method="post">
+                {% csrf_token %}
+                {{ comment_form }}
+                <input type="submit" value="Post">
+              </form>
+            </div>
+        
+            
+            </div>
           </div>
         </div>
       </div>

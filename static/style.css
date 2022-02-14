@@ -157,6 +157,12 @@
   flex-direction: column;
   
 }
+.feed_reply_write{
+  margin-top: 10px;
+  border-top: 1px solid silver;
+  display: flex;
+  align-items: center;
+}
 
 .feed_txt {
   font-size: 14px;
@@ -411,17 +417,17 @@ span {
 }
 
 /* Comment */
-.post-box .comment-input {
+.comment-input {
   height: 56px;
   border: 1px solid #dbdbdb;   
 }
-.post-box .comment-input form {
+.comment-input form {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.post-box .comment-input form textarea {
+.comment-input form textarea {
   height: 100%;
   width: 90%;
   box-sizing: border-box;
@@ -429,7 +435,7 @@ span {
   border-radius: 5%;
   margin: 5px;
 }
-.post-box .comment-input form input {
+.comment-input form input {
   height: 50%;
   box-sizing: border-box;
   border: none;
