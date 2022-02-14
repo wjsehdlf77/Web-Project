@@ -92,63 +92,43 @@ def post_create(request):
   """
   upload
   """
-  # now_url=request.get_host()
-  # print('현재 페이지 주소?')
-  # print(now_url)
-  # print(request.get_full_path)
-  # print(request.path)
 
   if request.method== "POST":
     print('request method is post')
     print(request.POST)
     form = PostForm(request.POST)
-    # icons = request.POST.getlist('icons[]')
-    # title = request.POST.get('title')
-    # print(title)
-    # print(icons)
-    # if len(icons)!=0:
-    #   print('    if len(icons)!=0:')
-    #   form.icons=''.join(icons)
-    # print(form)
-    # print(request.POST.getall())
-    # form_serialized = serializers.serialize('json', form)
-    # print(form_serialized)
-    # form_data = form.cleaned_data/
-    # form_data = JsonResponse(form)
-    # print(form_data)
-    # print(request.POST.get('icon_happy'))
-    # print(request.POST.get('icon_proud'))
     if form.is_valid():
-      # print(form.get_initial_for_field('icon_emotion'))
       post = form.save(commit=False)  
+
+      # title이 입력되지 않으면 현재날짜를 title로 넣어줌
       if post.title == None:
         post.title=timezone.localdate()
+
+      # photo가 입력되었는지 확인하고 넣어줌
       if 'photo' in request.FILES:
         post.photo=request.FILES['photo']
       else:
         pass
+
+      # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
       icons = request.POST.getlist('icons[]')
       post.icons='&'.join(icons)
+
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
       print('post save made')
-      # print(form.as_p)
       return redirect('dailyphoto:index')
+
     else:
       print('form is not valid')
-  else:
 
+  else:
     print('request method is get')
     form=PostForm()
-  print(form.as_p)
-
-  context = {'form': form ,
-  'now_url':request.path
-  }
+    
+  context = {'form': form }
   return render(request, 'dailyphoto/upload_page.html', context )
-
-
 
 
 
