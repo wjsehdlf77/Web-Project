@@ -7,5 +7,6 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post,PostAdmin)
 admin.site.register(Answer)
+
 # Register your models here.
 

@@ -1,4 +1,5 @@
 
+
 import json
 from json.decoder import JSONDecodeError
 from django.http  import JsonResponse
@@ -134,17 +135,18 @@ def post_create(request):
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
-    post_list = Post.objects.order_by('-create_date')
-    post_photo = Post.objects.filter(author_id = request.user.id)
-    
-    
+    post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
     context = {
-      'post_list': post_list ,
-       'person': person,
-       'post_photo' : post_photo
-       }
-
+          'person': person,
+          'post_photo' : post_photo
+          }
     return render(request, 'dailyphoto/profile.html', context)
+    # else:
+    #   context = {
+    #       'person': person,
+    #       'post_photo' : post_photo
+    #       }
+    #   return render(request,'dailyphoto/other_profile.html', context )
 
 
 
@@ -166,6 +168,25 @@ def modify_profile(request):
             'profile_form': profile_form
         })
 
+
+
+
+def follow(request, user_id):
+  if request.user.is_authenicated:
+    follow_user = get_object_or_404(get_user_model(), pk = user_id)
+    if follow_user != request.user:
+      if follow_user.followers.filter(pk = request.user.id).exists():
+        follow_user.followers.remove(request.user)
+      else:
+        follow_user.followers.add(request.user)
+      return redirect('dailyphoto:profile', follow_user.username)
+    return redirect('dailyphoto:login')
+
+
+
+
+
+  
 
 
 
