@@ -18,7 +18,9 @@
             {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
             <div class="asd">
               <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
-              <label class="like" id="like_{{forloop.counter}}"><input type="checkbox" />like</label>
+              <label class="like" id="like_{{forloop.counter}}"
+                ><input type="checkbox" /> <span><img src="/static/images/cloud_empty.png" class="like_icon" alt="" /></span
+              ></label>
               <script>
                 display_like("{{forloop.counter}}");
               </script>

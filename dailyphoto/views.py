@@ -1,12 +1,10 @@
 
-
 import json
 from json.decoder import JSONDecodeError
 from django.http  import JsonResponse
 from django.views import View
 
 from time import time, timezone
-
 
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
@@ -21,11 +19,6 @@ from . import models
 from django.utils import timezone
 from django.http import JsonResponse
 from django.urls import reverse
-
-
-
-
-
 
 
 # from PIL import Image
@@ -70,9 +63,7 @@ def comment_create(request, post_id):
 
             else:
                   return render(request, 'dailyphoto/post_list.html')
-    
-
-
+                  
 
 def comment_delete(request, comment_id):
     if request.user.is_authenticated:

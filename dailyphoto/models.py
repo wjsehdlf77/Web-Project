@@ -37,8 +37,8 @@ class Comment(models.Model):
 
 
 class Like(models.Model):
-    author       = models.ForeignKey(User , on_delete=models.CASCADE)
-    post       = models.ForeignKey('Post', on_delete=models.CASCADE)
+    author = models.ForeignKey(User , on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
 
 
 class PersonalIconSet(models.Model):
