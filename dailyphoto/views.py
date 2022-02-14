@@ -55,20 +55,20 @@ def detail(request, id):
 @login_required(login_url='common:login')
 def comment_create(request, post_id):
       if request.user.is_authenticated:
-            post = get_object_or_404(models.Post, pk=post_id)
+        post = get_object_or_404(models.Post, pk=post_id)
 
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                  comment = form.save(commit=False)
-                  comment.author = request.user
-                  comment.posts = post
-                  comment.save()
-                  
-                  return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
+        form = CommentForm(request.POST)
+        if form.is_valid():
+          comment = form.save(commit=False)
+          comment.author = request.user
+          comment.posts = post
+          comment.save()
+          
+          return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
 
-            else:
-                  return render(request, 'dailyphoto/post_list.html')
-    
+      else:
+        return render(request, 'dailyphoto/post_list.html')
+
 
 
 @login_required(login_url='common:login')
