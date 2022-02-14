@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 
+
 class Post(models.Model):
     title = models.CharField(max_length = 200)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -57,6 +58,15 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.nickname
+
+class User(User):
+    followings = models.ManyToManyField('self', symmetrical=False, related_name='followers')
+
+
+class OtherProfile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    description = models.TextField(blank=True)
+    nickname = models.CharField(max_length=40, blank=True)
 
 
 
