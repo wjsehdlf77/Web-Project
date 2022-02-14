@@ -28,28 +28,32 @@
           </div>
           <div class = 'big_feed_content'>
             
+
+            
             <!-- comment -->
              <div class="comment">
-              {% for comment in post.comment_post %}
-                <div id="comment-{{comment.id}}"
+              {% for comment in post.comment_set.all %}
+                <div id="comment-{{comment.id}}">
                 <b>{{comment.author.username}}</b>
-                {{comment.contents}}
+                {{comment.content}}
                 </div>
             {%endfor%}
             </div>
-
+          
+            
+          
             <!-- comment input -->
             <div class="comment-input">
-              <form action="{% url 'posts:comment_create' post.id %}" method="post">
+              <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
                 {% csrf_token %}
                 {{ comment_form }}
-                <input type="submit" value="Post">
+                <input type="submit" value="post">
               </form>
-            </div>
+            </div> 
         
             
-            </div>
-          </div>
+            
+          </div>  
         </div>
       </div>
     </div>

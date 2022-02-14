@@ -11,13 +11,12 @@ from time import time, timezone
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
-from dailyphoto.models import Profile
 from django.contrib.auth import get_user_model
 
 
 
 from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, Profile
 from . import models
 from django.utils import timezone
 from django.http import JsonResponse
@@ -36,9 +35,11 @@ def index(request):
     """
     dailyphoto 게시물 출력
     """
-    comment_form = CommentForm
+    
  
     post_list = Post.objects.order_by('-create_date')
+    comment_form = CommentForm
+    
 
     context = {'post_list': post_list,  "comment_form" : comment_form }
     return render(request, 'dailyphoto/post_list.html', context)
@@ -61,7 +62,7 @@ def comment_create(request, post_id):
             if form.is_valid():
                   comment = form.save(commit=False)
                   comment.author = request.user
-                  comment.posts = post
+                  comment.post = post
                   comment.save()
                   
                   return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
@@ -71,19 +72,16 @@ def comment_create(request, post_id):
     
 
 
-@login_required(login_url='common:login')
-def comment_search(self, request, post_id,username):
-    if not Post.objects.filter(id=post_id).exists():
-        return JsonResponse({'message':'POSTING_DOES_NOT_EXIST'}, status=404)
+def comment_delete(request, comment_id):
+    if request.user.is_authenticated:
+        comment = get_object_or_404(models.Comment, pk=comment_id)
+        if request.user == comment.author:
+            comment.delete()
 
-    comment_list = [{
-        "username"  : get_object_or_404(get_user_model(), username = username ),
-        "content"   : comment.content,
-        "create_at" : comment.created_date
-        } for comment in Comment.objects.filter(post_id=post_id)
-    ]
+        return redirect(reverse('posts:index'))
 
-    return JsonResponse({'data':comment_list}, status=200)
+    else:
+        return render(request, 'dailyphoto/post_list.html')
       
 
 # 글 업로드 함수
