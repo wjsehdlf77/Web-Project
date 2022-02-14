@@ -32,6 +32,27 @@ class CommentForm(forms.ModelForm):
         fields = ['content'] 
         labels = {'content': '댓글내용', }
 
+class PostSerializer(serializers.ModelSerializer):
+      comment_post = CommentSerializer(many=True)
+      author = FeedAuthorserializer()
+      
+      class Meta:
+            model = Post
+            fields = (
+              "id",
+              "image",
+              "caption",
+              "comment_post",
+              "author"
+            )
+      
+
+
+
+
+
+
+
 
 class CustomUserChangeForm(UserChangeForm):
   password = None
