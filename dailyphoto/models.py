@@ -15,10 +15,9 @@ class Post(models.Model):
     icon_emotion=models.CharField(max_length=20, default='happy')
     icon_weather=models.CharField(max_length=20, default='sunny')
 
-
-
     def __str__(self):
         return self.subject
+
     
 class Comment(models.Model):
     author       = models.ForeignKey(User , on_delete=models.CASCADE)
