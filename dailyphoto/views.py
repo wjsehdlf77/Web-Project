@@ -56,6 +56,7 @@ def detail(request, id):
 @login_required(login_url='common:login')
 def comment_create(request, post_id):
       if request.user.is_authenticated:
+
             post = get_object_or_404(models.Post, pk=post_id)
 
             form = CommentForm(request.POST)
@@ -70,6 +71,7 @@ def comment_create(request, post_id):
             else:
                   return render(request, 'dailyphoto/post_list.html')
     
+
 
 
 def comment_delete(request, comment_id):

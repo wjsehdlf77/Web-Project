@@ -1,9 +1,8 @@
-<div id="icons">
-  {% if {{post.icon_weather}}=='sunny' %}
-
-  <img src="/static/images/icons/weather/sun-solid.svg" class="icon" alt="" />
-
-  {% else %}
-  <span>else문</span>
-  {% endif%}
+<div id="icons{{forloop.counter}}">
+  <!-- 아이콘 {{post.icons}} -->
+  <script>
+    // helloworld();
+    var icons = "{{post.icons}}";
+    display_icon(icons, "{{forloop.counter}}");
+  </script>
 </div>

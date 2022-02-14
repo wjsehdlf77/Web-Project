@@ -1,63 +1,62 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="main_body">
-    <div class="sub_body">
-        <div style="display: flex; flex-direction: row">
-            <div class="profile_photo">
+  <div class="sub_body">
+    <div style="display: flex; flex-direction: row">
+      <div class="profile_photo">
+        <img class="profile_img" src="{{person.profile.image.url}}" />
+      </div>
 
-                <img class="profile_img" src = "{{person.profile.image.url}}">
-
-            </div>
-
-            <div style="display: flex; flex-direction:column; margin: 40px 100px">
-                <div class="mb-3" style="display: flex; flex-direction: row; ">
-                    <div style="font-size: 35px"> {{ person.profile.nickname }} </div>
-                    
-                </div>
-                <div class="mb-3" style="display: flex; flex-direction: row; ">
-                <div style="font-size: 15px"> {{person.profile.description}}</div>
-                </div>
-
-                <div class="mb-3" style="display: flex; flex-direction: row; margin : 30px 0px">
-                    <div style="font-size: 15px"> {{user.email}}</div>
-                    </div>
-            </div>
-            <div style = 'display: flex; flex-direction: column;margin:50px 0px '>
-                <a href="{% url 'dailyphoto:modify_profile' %}"><button id="button_write_feed" type="button" 
-                    style="margin-left: 10px;font-size: 14px;width: 150px; height: 50px; border: 1px solid silver; background-color: transparent" onclick="ajaxFileUpload() ">
-                    프로필변경</button></a>
-                    <div>
-                        <div>
-                          팔로잉 : {{ follow_user.followings.all|length }} / 팔로워 : {{ follow_user.followers.all|length }}
-                        </div>
-                      
-                        {% if user != follow_user %}
-                          <div>
-                            {% comment %} <form action="{% url 'dailyphoto:follow' follow_user.id %}" method='POST'> {% endcomment %}
-                              {% csrf_token %}
-                              {% if user in follow_user.followers.all %}
-                                <input type="submit" value='팔로우 취소'>
-                              {% else %}
-                                <input type="submit" value='팔로우'>
-                              {% endif %}
-                            </form>
-                          </div>  
-                        {% endif %}
-                      </div>
-            </div>
-         </div>
-        <div class = 'feed_body'>
-            <div class = 'sub_feed_body'> 
-                {% for post in post_photo %}
-                        <div class = 'big_feed'>
-                                <img class="row_feed" onclick="location.href='{% url 'dailyphoto:detail' id=post.id %}'" src = "/media/{{post.photo}}">
-                        </div>
-                {%endfor%}
-            </div>
+      <div style="display: flex; flex-direction: column; margin: 40px 100px">
+        <div class="mb-3" style="display: flex; flex-direction: row">
+          <div style="font-size: 35px">{{ person.profile.nickname }}</div>
         </div>
+        <div class="mb-3" style="display: flex; flex-direction: row">
+          <div style="font-size: 15px">{{person.profile.description}}</div>
+        </div>
+
+        <div class="mb-3" style="display: flex; flex-direction: row; margin: 30px 0px">
+          <div style="font-size: 15px">{{user.email}}</div>
+        </div>
+      </div>
+      <div style="display: flex; flex-direction: column; margin: 50px 0px">
+        <a href="{% url 'dailyphoto:modify_profile' %}"
+          ><button
+            id="button_write_feed"
+            type="button"
+            style="margin-left: 10px; font-size: 14px; width: 150px; height: 50px; border: 1px solid silver; background-color: transparent"
+            onclick="ajaxFileUpload() "
+          >
+            프로필변경
+          </button></a
+        >
+        <div>
+          <div>팔로잉 : {{ follow_user.followings.all|length }} / 팔로워 : {{ follow_user.followers.all|length }}</div>
+
+          {% if user != follow_user %}
+          <div>
+            {% comment %}
+            <form action="{% url 'dailyphoto:follow' follow_user.id %}" method="POST">
+              {% endcomment %} {% csrf_token %} {% if user in follow_user.followers.all %}
+              <input type="submit" value="팔로우 취소" />
+              {% else %}
+              <input type="submit" value="팔로우" />
+              {% endif %}
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </div>
     </div>
-</div>       
-         
+    <div class="feed_body">
+      <div class="sub_feed_body">
+        {% for post in post_photo %}
+        <div class="big_feed">
+          <!-- <img class="row_feed" onclick="location.href='{% url 'dailyphoto:detail.html' id=post.id %}'" src="/media/{{post.photo}}" /> -->
+        </div>
+        {%endfor%}
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock content %}
