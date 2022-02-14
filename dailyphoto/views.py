@@ -19,6 +19,8 @@ from django.http import JsonResponse
 
 
 
+
+
 # from PIL import Image
 
 # 주소 index 
