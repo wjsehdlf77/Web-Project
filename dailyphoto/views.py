@@ -34,11 +34,11 @@ def index(request):
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
-def detail(request, post_id):
+def detail(request, id):
     
-    post  = get_object_or_404(Post, pk=post_id) # 예외일때 404에러 발생
+    post  = get_object_or_404(Post, pk=id) # 예외일때 404에러 발생
     # get_object_or_404 <- 오류 화면 구성
-    context = { 'post': post}
+    context = {'post': post}
     return render(request, 'dailyphoto/post_detail.html', context)
   
 
@@ -70,8 +70,8 @@ def comment_create(self, request):
     except JSONDecodeError:
         return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
 
-@login_required(login_url='common:login')
 
+@login_required(login_url='common:login')
 def comment_search(self, request, post_id,username):
     if not Post.objects.filter(id=post_id).exists():
         return JsonResponse({'message':'POSTING_DOES_NOT_EXIST'}, status=404)
@@ -169,12 +169,6 @@ def modify_profile(request):
             'profile_form': profile_form
         })
 
-def detail(request):
-  pass
-
-  
-
-  
 
 
 

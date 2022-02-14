@@ -1,9 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="home_main_body" style="padding-top: 80px">
-  <div class="body_form">
-    {% for post in post_list %}
-    <div class="sub_body_form">
+<div class="home_main_body" style="padding-top: 80px;">
+  <div class="body_form" >
+      {% for post in post_list %}
+      <div class = "sub_body_form">
       <div class="left">
         <div class="border feed_box">
           <div class="feed_name">
@@ -26,7 +26,9 @@
           <div class="big_feed_title">
             <div>{{post.title}}</div>
           </div>
-          <div class="big_feed_content">{{post.content}}</div>
+          <div class = 'big_feed_content'>
+          {{post.content}}{{coments.}}
+          </div>
         </div>
       </div>
     </div>
