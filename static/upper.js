@@ -17,17 +17,17 @@ function display_icon(icons,counter){
 
     for (i = 0; i < icons_list.length; i++) {
       if (icons_list[i] == "happy") {
-        div_icons.insertAdjacentHTML("beforeend","<span><i class='fas fa-regular fa-face-smile-beam'></i>happy</span>");
+        div_icons.insertAdjacentHTML("beforeend",`<span><img src="/static/images/icons/emotion/face-smile-regular.svg" class="icon" alt="" /><i class='fas fa-regular fa-face-smile-beam'></i>happy</span>`);
       } else if (icons_list[i] == "hearts") {
-        div_icons.insertAdjacentHTML("beforeend","<span><i class='fas fa-regular fa-face-smile-hearts'></i> hearts</span>");
+        div_icons.insertAdjacentHTML("beforeend",`<span><img src="/static/images/icons/emotion/hand-holding-heart-solid.svg" class="icon" alt="" /><i class='fas fa-regular fa-face-smile-hearts'></i> hearts</span>`);
       } else if (icons_list[i] == "meh") {
-        div_icons.insertAdjacentHTML("beforeend","<i class='fas fa-regular fa-face-meh'></i>meh ");
+        div_icons.insertAdjacentHTML("beforeend",`<img src="/static/images/icons/emotion/face-meh-solid.svg" class="icon" alt="" /><i class='fas fa-regular fa-face-meh'></i>meh `);
       } else if (icons_list[i] == "sunny") {
-        div_icons.insertAdjacentHTML("beforeend","<i class='fas fa-sun'></i>sunny ");
+        div_icons.insertAdjacentHTML("beforeend",`<img src="/static/images/icons/weather/sun-solid.svg" class="icon" alt="" /><i class='fas fa-sun'></i>sunny `);
       } else if (icons_list[i] == "cloud") {
-        div_icons.insertAdjacentHTML("beforeend","<i class='fas fa-solid fa-clouds'></i>cloud ");
+        div_icons.insertAdjacentHTML("beforeend",`<img src="/static/images/icons/weather/cloud-solid.svg" class="icon" alt="" /><i class='fas fa-solid fa-clouds'></i>cloud `);
       } else if (icons_list[i] == "rain") {
-        div_icons.insertAdjacentHTML("beforeend","<i class='fas fa-cloud-showers-heavy'></i> rain ");
+        div_icons.insertAdjacentHTML("beforeend",`<img src="/static/images/icons/weather/cloud-showers-heavy-solid.svg" class="icon" alt="" /> rain `);
       } else if (icons_list[i] == "-1") {
         div_icons.insertAdjacentHTML("beforeend"," ");
       } else {
