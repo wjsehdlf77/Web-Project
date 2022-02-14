@@ -1,24 +1,9 @@
-{% extends 'base.html' %} {% block content %}
-<!-- flex는 좌우 정렬을 위해서-->
+{% extends 'base.html' %} 
+{% block content %}
 
-<div class="home_main_body" style="padding-top: 80px">
-  <div class="body_form">
-    {% comment %} 하나 피드 {% endcomment %}
-    <div class="child left">
-      {% for post in post_list %}
-
-      <!-- 희정님 테스트 -->
-      <div>
-        <!-- if문으로 하면 좋을텐데 왜 오류가 뜰가요.. -->
-        {{post.icon_weather}}
-        <img src="/static/images/icons/weather/sun-solid.svg" class="icon" alt="" />
-      </div>
-
-      <!-- 희정님 테스트 -->
 
 
 <div class="home_main_body" style="padding-top: 80px;">
-
   <div class="body_form" >
       {% for post in post_list %}
       <div class = "sub_body_form">
@@ -50,9 +35,9 @@
           </div>
         </div>
       </div>
-
     </div>  
     {% endfor %}
     </div>
-
 </div>
+
+{% endblock %}
