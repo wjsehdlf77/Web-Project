@@ -131,22 +131,25 @@ def post_create(request):
   return render(request, 'dailyphoto/upload_page.html', context )
 
 
-
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
+    post_list = Post.objects.order_by('-create_date')
     post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
+    # post_photo.order_by('-create_date')
+    # post_list.filter(author_id = person.id)
+    # post_photo = Post.objects.filter(author_id = request.user.id)
+    
     context = {
-          'person': person,
-          'post_photo' : post_photo
-          }
-    return render(request, 'dailyphoto/profile.html', context)
-    # else:
-    #   context = {
-    #       'person': person,
-    #       'post_photo' : post_photo
-    #       }
-    #   return render(request,'dailyphoto/other_profile.html', context )
+      'post_list': post_list ,
+       'person': person,
+       'post_photo' : post_photo
+       }
+    # url='dailyphoto/profile/'+username+'.html'
+    url='dailyphoto/profile.html'
+    print(url)
+
+    return render(request, url, context)
 
 
 
