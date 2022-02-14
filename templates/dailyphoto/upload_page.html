@@ -1,6 +1,6 @@
 {% include 'base.html' %} {% block content %} {% load bootstrap4 %}
 <div class="modal_overlay" id="id_modal_upload">
-  <form method="post" class="post-form modal_window" enctype="multipart/form-data" id="form_upload">
+  <form method="post" class="post-form modal_window" enctype="multipart/form-data" id="form_upload" onsubmit="">
     {% csrf_token %}
     <div class="upload_left">사진</div>
     <div class="upload_right">
@@ -17,9 +17,9 @@
       </div>
       <hr />
       <div class="form-group">
-        <label><input type="checkbox" name="icon_emotion" value="happy" checked /><i class="fas fa-solid fa-sun"></i> happy</label>
-        <label><input type="checkbox" name="icon_emotion" value="proud" /> <i class="fas fa-solid fa-clouds"></i> proud</label>
-        <label><input type="checkbox" name="icon_emotion" value="mélancholie" /><i class="fas fa-solid fa-sun"></i> mélancholie </label>
+        <label><input type="checkbox" name="icons[]" value="happy" /><i class="fas fa-solid fa-sun"></i> happy</label>
+        <label><input type="checkbox" name="icons[]" value="proud" /> <i class="fas fa-solid fa-clouds"></i> proud</label>
+        <label><input type="checkbox" name="icons[]" value="mélancholie" /><i class="fas fa-solid fa-sun"></i> mélancholie </label>
       </div>
       <div class="form-group">
         <label><input type="radio" name="icon_weather" value="sunny" checked /><i class="fas fa-solid fa-sun"></i> sunny</label>
@@ -27,14 +27,15 @@
         <label><input type="radio" name="icon_weather" value="rain" /> <i class="fas fa-solid fa-rain"></i> rain</label>
       </div>
       <div class="form-group">
-        <!-- <label for="content"></label> -->
-        <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">{{ form.content.value|default_if_none:'' }}</textarea>
+        <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">
+{{ form.content.value|default_if_none:'' }}</textarea
+        >
       </div>
       <div>
         <input type="file" name="photo" accept="image/*" id="id_photo" />
       </div>
       <button type="submit" class="btn btn-primary" id="upload"><i class="fas fa-save"></i> 저장하기</button>
-      <a href="javascript:history.back()" class="btn btn-primary">닫기</a>
+      <a href=" {% url 'dailyphoto:index' %}" class="btn btn-primary">닫기</a>
     </div>
   </form>
 </div>

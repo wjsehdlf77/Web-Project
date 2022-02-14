@@ -5,20 +5,26 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    title = models.CharField(max_length = 200)
+    title = models.CharField(max_length = 200,blank=True,null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    content = models.TextField()
+    content = models.TextField(null=True, blank=True)
     photo = models.ImageField(upload_to="pic/",blank=True,null=True)
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
     like_count = models.IntegerField(default=0)
-    icon_emotion=models.CharField(max_length=20, default='happy')
+    icons=models.CharField(max_length=1000,default='',blank=True)
+    # icon_emotion=models.CharField(max_length=20, default='happy')
     icon_weather=models.CharField(max_length=20, default='sunny')
 
 
 
     def __str__(self):
         return self.subject
+
+    # def time_string(self):
+    #     now=timezone.now()
+    #     return now
+        
     
 class Comment(models.Model):
     author       = models.ForeignKey(User , on_delete=models.CASCADE)

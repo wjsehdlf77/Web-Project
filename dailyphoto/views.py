@@ -5,7 +5,7 @@ import json
 from json.decoder import JSONDecodeError
 from django.http  import JsonResponse
 from django.views import View
-from time import timezone
+from time import time, timezone
 
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
@@ -92,37 +92,54 @@ def post_create(request):
   """
   upload
   """
-  now_url=request.get_host()
-  print('현재 페이지 주소?')
-  print(now_url)
-  print(request.get_full_path)
-  print(request.path)
+  # now_url=request.get_host()
+  # print('현재 페이지 주소?')
+  # print(now_url)
+  # print(request.get_full_path)
+  # print(request.path)
 
   if request.method== "POST":
     print('request method is post')
+    print(request.POST)
     form = PostForm(request.POST)
+    # icons = request.POST.getlist('icons[]')
+    # title = request.POST.get('title')
+    # print(title)
+    # print(icons)
+    # if len(icons)!=0:
+    #   print('    if len(icons)!=0:')
+    #   form.icons=''.join(icons)
+    # print(form)
+    # print(request.POST.getall())
+    # form_serialized = serializers.serialize('json', form)
+    # print(form_serialized)
+    # form_data = form.cleaned_data/
+    # form_data = JsonResponse(form)
+    # print(form_data)
+    # print(request.POST.get('icon_happy'))
+    # print(request.POST.get('icon_proud'))
     if form.is_valid():
-      post = form.save(commit=False)
-      # photo_file=request.FILES['photo']
-      # print(photo_file)
+      # print(form.get_initial_for_field('icon_emotion'))
+      post = form.save(commit=False)  
+      if post.title == None:
+        post.title=timezone.localdate()
       if 'photo' in request.FILES:
         post.photo=request.FILES['photo']
       else:
         pass
-        # post.photo="/Logo/DailyphotoLog.png"
-        # post.photo="DailyphotoLog.png"
-      # post.photo=request.FILES['id_photo']
+      icons = request.POST.getlist('icons[]')
+      post.icons='&'.join(icons)
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
       print('post save made')
-      print(form.as_p)
+      # print(form.as_p)
       return redirect('dailyphoto:index')
     else:
       print('form is not valid')
   else:
 
-    print('request method is not post its get')
+    print('request method is get')
     form=PostForm()
   print(form.as_p)
 
