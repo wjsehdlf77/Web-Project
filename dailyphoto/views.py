@@ -5,7 +5,7 @@ import json
 from json.decoder import JSONDecodeError
 from django.http  import JsonResponse
 from django.views import View
-from time import timezone
+from time import time, timezone
 
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
@@ -92,46 +92,43 @@ def post_create(request):
   """
   upload
   """
-  now_url=request.get_host()
-  print('현재 페이지 주소?')
-  print(now_url)
-  print(request.get_full_path)
-  print(request.path)
 
   if request.method== "POST":
     print('request method is post')
+    print(request.POST)
     form = PostForm(request.POST)
     if form.is_valid():
-      post = form.save(commit=False)
-      # photo_file=request.FILES['photo']
-      # print(photo_file)
+      post = form.save(commit=False)  
+
+      # title이 입력되지 않으면 현재날짜를 title로 넣어줌
+      if post.title == None:
+        post.title=timezone.localdate()
+
+      # photo가 입력되었는지 확인하고 넣어줌
       if 'photo' in request.FILES:
         post.photo=request.FILES['photo']
       else:
         pass
-        # post.photo="/Logo/DailyphotoLog.png"
-        # post.photo="DailyphotoLog.png"
-      # post.photo=request.FILES['id_photo']
+
+      # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
+      icons = request.POST.getlist('icons[]')
+      post.icons='&'.join(icons)
+
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
       print('post save made')
-      print(form.as_p)
       return redirect('dailyphoto:index')
+
     else:
       print('form is not valid')
+
   else:
-
-    print('request method is not post its get')
+    print('request method is get')
     form=PostForm()
-  print(form.as_p)
-
-  context = {'form': form ,
-  'now_url':request.path
-  }
+    
+  context = {'form': form }
   return render(request, 'dailyphoto/upload_page.html', context )
-
-
 
 
 
