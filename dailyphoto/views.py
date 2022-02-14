@@ -70,8 +70,8 @@ def comment_create(self, request):
     except JSONDecodeError:
         return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
 
-@login_required(login_url='common:login')
 
+@login_required(login_url='common:login')
 def comment_search(self, request, post_id,username):
     if not Post.objects.filter(id=post_id).exists():
         return JsonResponse({'message':'POSTING_DOES_NOT_EXIST'}, status=404)
@@ -170,12 +170,6 @@ def modify_profile(request):
             'profile_form': profile_form
         })
 
-def detail(request):
-  pass
-
-  
-
-  
 
 
 

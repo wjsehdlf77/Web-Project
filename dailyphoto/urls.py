@@ -14,8 +14,8 @@ urlpatterns = [
     path('upload/', views.post_create, name="post_create"),
     path('<str:username>/', views.profile, name="profile"),
     path('modify', views.modify_profile, name="modify_profile"),
-    path('/comment', views.comment_create, name="comment_create"),
-    path('/comment/search/<int:posting_id>', views.comment_search, name="comment_search"),
+    path('comment', views.comment_create, name="comment_create"),
+    path('comment/search/<int:posting_id>', views.comment_search, name="comment_search"),
 ]
 
 
