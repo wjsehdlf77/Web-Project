@@ -1,4 +1,4 @@
-// console.log("upload.js 가 로드되었습니다.")
+// console.log("upper.js 가 로드되었습니다.")
 function helloworld(){
   console.log("helloworld")
 }
@@ -33,5 +33,27 @@ function display_icon(icons,counter){
       } else {
       }
     }  
+
+}
+
+
+
+function display_like(counter){
+  console.log(counter)
+  id_str = 'like_' + counter.toString
+  let checkbox_label =  document.getElementById(id_str)
+  console.log(checkbox_label)
+  let checkbox = checkbox_label.getElementsByTagName('input')[0];
+  console.log(checkbox)
+ checkbox.addEventListener('change', function(e) {
+  console.log(checkbox.checked, checkbox.value);
+  if (checkbox.checked){
+    checkbox_label.insertAdjacentHTML("beforeend",`<img src="/static/images/cloud_full" class="like_icon" alt="" />`)
+  }
+  else{
+    checkbox_label.insertAdjacentHTML("beforeend",`<img src="/static/images/cloud_empty" class="like_icon" alt="" />`)
+  }
+
+});
 
 }

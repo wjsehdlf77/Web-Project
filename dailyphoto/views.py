@@ -134,14 +134,9 @@ def post_create(request):
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
-    post_list = Post.objects.order_by('-create_date')
     post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
-    # post_photo.order_by('-create_date')
-    # post_list.filter(author_id = person.id)
-    # post_photo = Post.objects.filter(author_id = request.user.id)
-    
+
     context = {
-      'post_list': post_list ,
        'person': person,
        'post_photo' : post_photo
        }
