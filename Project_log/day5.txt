@@ -19,7 +19,7 @@ To to list(개인별)
 
    김경희 :
 
-   김규배 :
+   김규배 : comment_create를 dailyphoto/views에 추가하여 댓글 기능 구현
 
    전도일 :
 
@@ -29,10 +29,15 @@ To to list(개인별)
 
 
 문제점
+- post_list.html에서 댓글 입력 받고 출력하는 과정에서 comment가 save되지 않아 테이블에 데이터가 저장되지 않았음.
 
+
+해결방안
+- {% for comment in post.comment_set.all %} 여기에서 in에 알맞지 않은 데이터 이름을 지정 그래서 comment의 전체적인 레코드를 사용하기
+위하여 post.comment_set.all 사용해서 comments 테이블의 데이터를 이용할 수 있게 되었음. 
 
 
 
 알게된것
-
+- 
 
