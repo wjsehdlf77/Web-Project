@@ -51,7 +51,7 @@
             <div class = 'sub_feed_body'> 
                 {% for post in post_photo %}
                         <div class = 'big_feed'>
-                                <img class="row_feed" onclick="location.href='/'" src = "/media/{{post.photo}}">
+                                <img class="row_feed" onclick="location.href='{% url 'dailyphoto:detail' id=post.id %}'" src = "/media/{{post.photo}}">
                         </div>
                 {%endfor%}
             </div>

@@ -13,12 +13,8 @@ from django.contrib.auth import get_user_model
 class PostForm(forms.ModelForm):
   class Meta:
     model=Post
-    fields=['title','photo','content','icon_emotion']
-    print(fields)
-    fields.append('icon_weather')
-    print(fields)
+    fields=['title','photo','content','icons']
     widgets = { 'title': forms.TextInput(attrs={'class': 'form-control'}), 
-    # 'photo': forms.ImageField(attrs={'class': 'form-control-file'}),
     'content': forms.Textarea(attrs={'class': 'form-control', 'rows': 10}),}
     labels = {
     'title': '제목',
@@ -31,6 +27,27 @@ class CommentForm(forms.ModelForm):
         model = Comment 
         fields = ['content'] 
         labels = {'content': '댓글내용', }
+
+# class PostSerializer(serializers.ModelSerializer):
+#       comment_post = CommentSerializer(many=True)
+#       author = FeedAuthorserializer()
+      
+#       class Meta:
+#             model = Post
+#             fields = (
+#               "id",
+#               "image",
+#               "caption",
+#               "comment_post",
+#               "author"
+#             )
+      
+
+
+
+
+
+
 
 
 class CustomUserChangeForm(UserChangeForm):
