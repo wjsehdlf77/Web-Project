@@ -17,13 +17,10 @@
             <span class="material-icons ml-1"> cloud_queue </span>
             {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
             <div class="asd">
-              <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
+              <span class="feed_txt" id="like_count_{{forloop.counter}}"><b>좋아요 {{post.like_count}}개</b></span>
               <label class="like" id="like_{{forloop.counter}}"
                 ><input type="checkbox" /> <span><img src="/static/images/cloud_empty.png" class="like_icon" alt="" /></span
               ></label>
-              <script>
-                display_like("{{forloop.counter}}");
-              </script>
             </div>
           </div>
         </div>

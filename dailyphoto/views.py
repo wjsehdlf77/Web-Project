@@ -121,6 +121,17 @@ def post_create(request):
   context = {'form': form }
   return render(request, 'dailyphoto/upload_page.html', context )
 
+#like
+
+def like(request):
+  if request.method=="POST":
+    pass
+  elif request.method=="DELETE":
+    pass
+  else:
+    pass
+
+  return False
 
 #프로필화
 def profile(request, username):

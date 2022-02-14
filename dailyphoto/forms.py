@@ -22,6 +22,10 @@ class PostForm(forms.ModelForm):
     'content': '내용',
     }
 
+# class LikeForm(forms.ModelForm):
+#   class Meta:
+#     model=Post
+
 class CommentForm(forms.ModelForm): 
     class Meta:
         model = Comment 
