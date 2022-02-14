@@ -94,17 +94,20 @@
   display: flex;
   padding-top: 50px;
   background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
-  flex-direction: column;
+  justify-content: center;
+
 
 }
 
 .body_form {
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
-
-  
+  flex-flow: column wrap;
+ 
 } 
+.sub_body_form {
+  display: flex;
+  
+}
 
 .left{
   padding-top: 50px;
@@ -285,7 +288,7 @@ span {
 }
 
 .modify {
-  margin: 30px 300px;
+  margin: 0 200px;
 }
 
 .row_feed {
