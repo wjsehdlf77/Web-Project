@@ -20,7 +20,7 @@ urlpatterns = [
   # COMMENT
     
     path('<int:post_id>/comment_create' , views.comment_create, name="comment_create"),
-    path('comment/search/<int:posting_id>', views.comment_search, name="comment_search"),
+    
 
 
 ]

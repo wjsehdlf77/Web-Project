@@ -318,7 +318,7 @@ span {
 
 .feed_comment {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .asd {
@@ -388,12 +388,14 @@ span {
 
 .big_feed_content {
   display: flex;
+  flex-direction: column;
 }
 
 /* Comment */
 .comment-input {
   height: 56px;
   border: 1px solid #dbdbdb;
+  width: auto; 
 }
 .comment-input form {
   height: 100%;
@@ -418,3 +420,10 @@ span {
   color: #0095f6;
   font-weight: bolder;
 }
+
+.desc-box {
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 22px;
+}
+
