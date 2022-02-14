@@ -1,21 +1,29 @@
 
 
-# 
 import json
 from json.decoder import JSONDecodeError
 from django.http  import JsonResponse
 from django.views import View
+
 from time import time, timezone
+
 
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
 from dailyphoto.models import Profile
 from django.contrib.auth import get_user_model
+
+
+
 from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
 from .models import Post, Comment
+from . import models
 from django.utils import timezone
 from django.http import JsonResponse
+from django.urls import reverse
+
+
 
 
 
@@ -28,9 +36,11 @@ def index(request):
     """
     dailyphoto 게시물 출력
     """
+    comment_form = CommentForm
+ 
     post_list = Post.objects.order_by('-create_date')
 
-    context = {'post_list': post_list}
+    context = {'post_list': post_list,  "comment_form" : comment_form }
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
@@ -43,32 +53,22 @@ def detail(request, id):
   
 
 @login_required(login_url='common:login')
-def comment_create(self, request):
-    try :
-        data = json.loads(request.body)
-        user = request.user
+def comment_create(request, post_id):
+      if request.user.is_authenticated:
+            post = get_object_or_404(models.Post, pk=post_id)
 
-        content    = data.get('content', None)
-        post_id = data.get('post_id', None)
+            form = CommentForm(request.POST)
+            if form.is_valid():
+                  comment = form.save(commit=False)
+                  comment.author = request.user
+                  comment.posts = post
+                  comment.save()
+                  
+                  return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
 
-        if not (content and post_id):
-            return JsonResponse({'message':'KEY_ERROR'}, status=400)
-
-        if not Post.objects.filter(id=post_id).exists():
-            return JsonResponse({'message':"POSTING_DOES_NOT_EXIST"}, status=404)
-        
-        posting = Post.objects.get(id=post_id)
-        
-        Comment.objects.create(
-            content = content,
-            user    = user,
-            posting = posting
-        )
-
-        return JsonResponse({'message':'SUCCESS'}, status=200)
+            else:
+                  return render(request, 'dailyphoto/post_list.html')
     
-    except JSONDecodeError:
-        return JsonResponse({'message':'JSON_DECODE_ERROR'}, status=400)
 
 
 @login_required(login_url='common:login')
@@ -171,6 +171,25 @@ def modify_profile(request):
             'profile_form': profile_form
         })
 
+
+
+
+def follow(request, user_id):
+  if request.user.is_authenicated:
+    follow_user = get_object_or_404(get_user_model(), pk = user_id)
+    if follow_user != request.user:
+      if follow_user.followers.filter(pk = request.user.id).exists():
+        follow_user.followers.remove(request.user)
+      else:
+        follow_user.followers.add(request.user)
+      return redirect('dailyphoto:profile', follow_user.username)
+    return redirect('dailyphoto:login')
+
+
+
+
+
+  
 
 
 
