@@ -12,6 +12,7 @@
 <!-- 희정님 테스트 -->
 
 <div class="home_main_body" style="padding-top: 80px;">
+
   <div class="body_form" >
       {% for post in post_list %}
       <div class = "sub_body_form">
@@ -29,6 +30,7 @@
                 <div class = 'asd'>
                 <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
                 </div>
+
               </div>
           </div>
       </div>
@@ -42,9 +44,10 @@
           </div>
         </div>
       </div>
+
     </div>  
     {% endfor %}
-  </div>
+    </div>
 </div>
 {% endblock content %}
 
