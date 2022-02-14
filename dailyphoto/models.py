@@ -19,6 +19,19 @@ class Post(models.Model):
 
     def __str__(self):
         return self.subject
+    
+class Comment(models.Model):
+    author       = models.ForeignKey(User , on_delete=models.CASCADE)
+    post       = models.ForeignKey('Post', on_delete=models.CASCADE)
+    parent     = models.ForeignKey('self', on_delete=models.CASCADE, null=True)
+    # 대댓글 구현을 위해
+    content    = models.CharField(max_length=500)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'comments'
+
 class PersonalIconSet(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     emotion_is_setted=models.BooleanField(default=True)
@@ -34,15 +47,6 @@ class Answer(models.Model):
     def __str__(self):
         return self.content
     
-class Comment(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE) 
-    content = models.TextField()
-    create_date = models.DateTimeField()
-    modify_date = models.DateTimeField(null=True, blank=True) 
-    question = models.ForeignKey(Post, null=True, blank=True, 
-    on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answer, null=True, blank=True, 
-    on_delete=models.CASCADE)
 
 
 class Profile(models.Model):
