@@ -24,11 +24,11 @@ def index(request):
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
-def detail(request, post_id):
+def detail(request, id):
     
-    post  = get_object_or_404(Post, pk=post_id) # 예외일때 404에러 발생
+    post  = get_object_or_404(Post, pk=id) # 예외일때 404에러 발생
     # get_object_or_404 <- 오류 화면 구성
-    context = { 'post': post}
+    context = {'post': post}
     return render(request, 'dailyphoto/post_detail.html', context)
 
 # 글 업로드 함수
@@ -136,11 +136,6 @@ def modify_profile(request):
             'user_change_form': user_change_form,
             'profile_form': profile_form
         })
-
-def detail(request):
-  pass
-
-  
 
   
 
