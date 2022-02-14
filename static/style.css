@@ -89,10 +89,14 @@
 
 /* 메인 화면에 들어갈 css */
 .home_main_body {
+  
+  height: 100vh;
+  width: 100vw;
   display: flex;
   padding-top: 50px;
   background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
   justify-content: center;
+  
 }
 
 .body_form {
