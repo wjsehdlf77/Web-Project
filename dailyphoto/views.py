@@ -14,7 +14,7 @@ from django.contrib.auth import get_user_model
 
 
 from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment, Profile
+from .models import Post, Comment, Profile, Like
 from . import models
 from django.utils import timezone
 from django.http import JsonResponse
@@ -124,6 +124,15 @@ def post_create(request):
 #like
 
 def like(request):
+
+  def liking(post, like,like_count):
+    like.post=post
+    post.like_count = like_count +1
+    print(like)
+    like.save()
+    post.save()
+    print('liked')
+
   if request.method=="POST":
     print('post')
     print(request)
@@ -136,7 +145,9 @@ def like(request):
     # data = json.loads(request.body)
     print(request.body)
     # print(form)
-    if form.is_valid():    
+    if form.is_valid():
+      
+
       like=form.save(commit=False)
       print(like)
       like.author= request.user
@@ -149,10 +160,24 @@ def like(request):
       print(data_post)
       post = get_object_or_404(models.Post, pk=data_post)
       print(post)
-      like.post=post
-      print(like)
-      like.save()
-      print('liked')
+      post_filtered = Like.objects.filter(post_id = data_post)
+      if post_filtered:
+        print(post_filtered)
+        user_filtered = post_filtered.filter(author_id=request.user)
+        print(user_filtered)
+        if user_filtered :
+          print(user_filtered)
+          print('user filter yes')
+          print('double liking error')
+        else:
+          print('user filter no')
+          print(user_filtered)
+          like_count=post_filtered.count()
+          liking(post,like,like_count)
+      else:
+        print('post filter else')
+        like_count=post_filtered.count()
+        liking(post,like,like_count)
     else:
       print('form is not valid')
     
@@ -163,8 +188,8 @@ def like(request):
   else:
     print('else')
     print(request)
-
   return HttpResponse()
+
 
 #프로필화
 def profile(request, username):
