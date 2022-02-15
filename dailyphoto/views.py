@@ -1,4 +1,5 @@
 
+from gc import get_objects
 import json
 from json.decoder import JSONDecodeError
 from django.http  import JsonResponse , HttpResponse
@@ -14,10 +15,11 @@ from django.contrib.auth import get_user_model
 
 
 from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment, Profile, Like
+from .models import Post, Comment, Profile, Like, User
 from . import models
 from django.utils import timezone
 from django.urls import reverse
+from django.db.models import Q
 
 
 # from PIL import Image
@@ -28,12 +30,16 @@ def index(request):
     dailyphoto 게시물 출력
     """
 
- 
+    
     # 본인의 post, 팔로우하는 사람들의 post
-
-    post_list = Post.objects.order_by('-create_date')
+    user = get_user_model()
+    follower = get_object_or_404(user, followers=request.user)
+    
+    post_list = Post.objects.order_by('-create_date').filter(Q(author=request.user)|Q(author=follower)) 
+    
+    
     comment_form = CommentForm
-
+    
     like_list = []
     like_my = Like.objects.filter(author=request.user)
     
