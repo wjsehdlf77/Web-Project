@@ -16,6 +16,7 @@ urlpatterns = [
     path('modify/', views.modify_profile, name="modify_profile"),
     path('<int:user_id>/follow/', views.follow, name = 'follow'),
     path('like/',views.like, name='like'),
+    path('unlike/',views.unlike, name='unlike'),
   
   # COMMENT
     

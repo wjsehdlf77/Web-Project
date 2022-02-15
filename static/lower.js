@@ -56,6 +56,37 @@ post_id=parseInt(post_id.textContent)
     }
     else{
       checkbox_in.innerHTML=`<img src="/static/images/cloud_empty.png" class="like_icon" alt="" />`
+      
+let csrf_token = $('[name=csrfmiddlewaretoken]').val();
+// console.log(csrf_token)
+let post_id = checkbox_label.getElementsByTagName('postid')[0];
+// console.log(post_id)
+post_id=parseInt(post_id.textContent)
+// console.log(post_id)
+      $.ajax({
+        type:'post',
+        url:'unlike/',
+        dataType:'json',
+        data:{
+          // 'liked':true,
+          // author:'request.user',
+          'post':post_id,
+          csrfmiddlewaretoken:csrf_token
+          // 'author':request.user,
+          // 'post':request.post
+        },
+        headers: { "X-CSRFToken": "{{ csrf_token }}" },
+        success : function(response){
+          console.log(response)
+          alert('success??!!')
+        },
+        error:function(){
+        console.log('error')},
+        complete:function(){
+          // console.log('complete')
+        }
+
+      })
     }
     });
     checkbox_label.addEventListener('click',function(){
