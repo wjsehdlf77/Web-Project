@@ -92,7 +92,7 @@
   
   display: flex;
   padding-top: 50px;
-  background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
+  
   justify-content: center;
   
 }
@@ -100,35 +100,46 @@
 .body_form {
   display: flex;
   flex-flow: column wrap;
+  
 }
 .sub_body_form {
   display: flex;
-
+  padding: 100px;
+  justify-content: space-between;
+  background-image: url("1644906582236.jpg");
+  background-repeat : no-repeat;
+  background-size : cover;
 }
 
 .left {
-  padding-top: 50px;
-  background-color: rgb(195, 213, 247);
-  flex-basis: 0%;
+  margin-right: 25px;
 }
 
 .right {
-  padding-top: 50px;
-  background-color: rgb(195, 213, 247);
-  flex-basis: 0%;
+  margin-left: 25px;
 }
 
 /* 피드 */
 
 .feed_box {
-  background-color: white;
-  width: 700px;
-  height: 700px;
+  width: 600px;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+}
+
+.big_feed_img {
+  display: flex;
+  justify-content: center;
 }
 
 .feed_img {
-  width: 100%;
-  object-fit: contain;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+ 
+  width: 500px;
+  height: 500px;
 }
 
 .feed_content {

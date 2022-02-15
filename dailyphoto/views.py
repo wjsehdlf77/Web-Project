@@ -36,6 +36,7 @@ def index(request):
     dailyphoto 게시물 출력
     """
  
+    # 본인의 post, 팔로우하는 사람들의 post
     post_list = Post.objects.order_by('-create_date')
     comment_form = CommentForm
     

@@ -7,14 +7,16 @@
       {% for post in post_list %}
       <div class = "sub_body_form">
       <div class="left">
-        <div class="border feed_box">
+        <div class="feed_box">
           <div class="feed_name">
             <div class="feed_profile_box">
               <img class="feed_profile_img" src="/media/{{post.author.profile.image}}" />
             </div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
-          <img class="feed_img" src="/media/{{post.photo}}" />
+          <div class = 'big_feed_img'>
+          <img class="feed_img" src="/media/{{post.photo}}">
+          </div>
           <div class="feed_icon">
             <span class="material-icons ml-1"> cloud_queue </span>
           {% block icons %}
@@ -27,7 +29,7 @@
         </div>
       </div>
       <div class="right">
-        <div class="border feed_box overflow">
+        <div class="feed_box overflow">
           <div class="big_feed_title">
             <div>{{post.title}}</div>
           </div>
