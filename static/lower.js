@@ -5,6 +5,7 @@ function helloworld() {
 }
 
 function display_like() {
+  console.log('function display_like 실행')
   let posts = document.getElementsByClassName("sub_body_form");
   for (i = 1; i < posts.length + 1; i++) {
     id_str = "like_" + i.toString();
