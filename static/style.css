@@ -246,6 +246,12 @@ span {
   flex-direction: column;
 }
 
+.comment_overflow{
+width : 400px;
+height : 100px;
+overflow : scroll;
+}
+
 /* profile_part */
 
 .profile_photo {
