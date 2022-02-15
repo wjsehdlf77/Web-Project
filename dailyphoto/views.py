@@ -121,121 +121,82 @@ def post_create(request):
   context = {'form': form }
   return render(request, 'dailyphoto/upload_page.html', context )
 
-#like
 
+#like
+@login_required(login_url='common:login')
 def like(request):
 
   def liking(post, like,like_count):
     like.post=post
-    post.like_count = like_count -1
+    post.like_count = like_count + 1
     print(like)
     like.save()
     post.save()
     print('liked')
 
   if request.method=="POST":
-    # print('post')
-    # print(request)
     form = LikeForm(request.POST)
     
     print(request.body)
     if form.is_valid():
       like=form.save(commit=False)
-      # print(like)
       like.author= request.user
-      # print(form.post)
-      # print(type(request.body))
       data=request.body.decode()
-      # print(data)
       data = data.split('&')
       data_post=data[0].split('=')[1]
-      # print(data_post)
       post = get_object_or_404(models.Post, pk=data_post)
-      # print(post)
       post_filtered = Like.objects.filter(post_id = data_post)
       if post_filtered:
-        # print(post_filtered)
         user_filtered = post_filtered.filter(author_id=request.user)
-        # print(user_filtered)
         if user_filtered :
-          # print(user_filtered)
-          # print('user filter yes')
           print('double liking error')
         else:
-          # print('user filter no')
-          # print(user_filtered)
           like_count=post_filtered.count()
           liking(post,like,like_count)
       else:
-        # print('post filter else')
         like_count=post_filtered.count()
         liking(post,like,like_count)
     else:
       print('form is not valid')
-    
   else:
     print('else')
     print(request)
+
   return HttpResponse()
 
+# like 취소
+@login_required(login_url='common:login')
 def unlike(request):
 
   if request.method=="POST":
-    # print('post')
-    # print(request)
-    # print(request.id)//없음
-    # print(request.post_id)//없음
-    # print(request.post)//없음
-    # print(request.data)
     form = LikeForm(request.POST)
     
-    # data = json.loads(request.body)
     print(request.body)
-    # print(form)
     if form.is_valid():
-      # like=form.save(commit=False)
-      # print(like)
-      # like.author= request.user
-      # print(form.post)
-      # print(type(request.body))
       data=request.body.decode()
-      # print(data)
       data = data.split('&')
       data_post=data[0].split('=')[1]
-      # print(data_post)
       post = get_object_or_404(models.Post, pk=data_post)
-      # print(post)
       post_filtered = Like.objects.filter(post_id = data_post)
       if post_filtered:
-        # print(post_filtered)
         user_filtered = post_filtered.filter(author_id=request.user)
-        # print(user_filtered)
         if user_filtered :
           print('like data exist')
           like = user_filtered.first()
           print(like)
           like.delete()
-          post.like_count = post_filtered.count()
+          post.like_count = post_filtered.count() -1
           post.save()
-          # print(user_filtered)
-          # print('user filter yes')
-          # print('double liking error')
         else:
           pass
-          # print('user filter no')
-          # print(user_filtered)
-          # like_count=post_filtered.count()
-          # liking(post,like,like_count)
-      else:pass
-        # print('post filter else')
-        # like_count=post_filtered.count()
-        # liking(post,like,like_count)
+      else:
+        pass
     else:
       print('form is not valid')
-    
   else:
     print('else')
     print(request)
+
   return HttpResponse()
 
 

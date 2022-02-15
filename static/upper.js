@@ -37,33 +37,3 @@ function display_icon(icons,num){
     }  
 
 }
-
-
-
-// function display_like(counter){
-//   id_str = 'like_' + counter.toString()
-//   // console.log(id_str)
-//   let checkbox_label =  document.getElementById(id_str)
-//   // console.log(checkbox_label)
-//   let checkbox = checkbox_label.getElementsByTagName('input')[0];
-//   let checkbox_in = checkbox_label.getElementsByTagName('span')[0];
-//   // console.log(checkbox)
-//   checkbox.addEventListener('change', function(e) {
-//   console.log(checkbox.checked, checkbox.value);
-//   if (checkbox.checked){
-//     checkbox_in.innerHTML=`<img src="/static/images/cloud_full.png" class="like_icon" alt="" />`
-//   }
-//   else{
-//     checkbox_in.innerHTML=`<img src="/static/images/cloud_empty.png" class="like_icon" alt="" />`
-//   }
-
-//   });
-//   checkbox_label.addEventListener('click',function(){
-//     document.readyState
-
-//     window.location.reload()
-
-//   // $(".asd").load(currentLocation+ ".asd");
-// })
-
-// }

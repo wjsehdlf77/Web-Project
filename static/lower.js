@@ -10,7 +10,6 @@ function display_like(){
   for (i = 1; i<posts.length+1;i++){
 
     id_str = 'like_' + i.toString()
-    // console.log(id_str)
     let checkbox_label =  document.getElementById(id_str)
     // console.log(checkbox_label)
     let checkbox = checkbox_label.getElementsByTagName('input')[0];
@@ -68,12 +67,8 @@ post_id=parseInt(post_id.textContent)
         url:'unlike/',
         dataType:'json',
         data:{
-          // 'liked':true,
-          // author:'request.user',
           'post':post_id,
           csrfmiddlewaretoken:csrf_token
-          // 'author':request.user,
-          // 'post':request.post
         },
         headers: { "X-CSRFToken": "{{ csrf_token }}" },
         success : function(response){
@@ -90,7 +85,6 @@ post_id=parseInt(post_id.textContent)
     }
     });
     checkbox_label.addEventListener('click',function(){
-      // document.readyState
       like_count = 'like_count'+i.toString()
   
       // window.location.reload()
@@ -99,6 +93,11 @@ post_id=parseInt(post_id.textContent)
   
 
   }
+
+}
+
+function search_like(i,){
+
 
 }
 // var token= '{{csrf_token}}'
