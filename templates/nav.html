@@ -28,12 +28,12 @@
       <div class="container">
         <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
 
-        {% comment %} action="{% url 'search' %} {% endcomment %}
 
-         <form class="d-flex"">   
-          <input class="form-control me-2" type="search" placeholder="Search" name="searched" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit"> Search </button>
-        </form>
+
+        <form class="form-inline my-2 my-md-0" method="get" action="">
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="b" value="{{b}}">
+        </form> 
+
 
         <div>
           <ul class="navbar-nav ml-auto">
@@ -44,8 +44,6 @@
             <img src="/media/{{user.profile.image}}" class="avata-sm rounded-circle"/></a>
             </ul>
           </div>
-
-
         </div>
       </div>
     </nav>

@@ -1,3 +1,8 @@
+* {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 1rem;
+}
+
 .background_set {
   background-image: url("cloud_background.jfif");
 }
@@ -87,14 +92,26 @@
   background-color: beige;
 }
 
+.like > input {
+  display: none;
+  /* visibility: hidden; */
+}
+.like > postid {
+  display: none;
+}
+
+.like_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1rem;
+}
+
 /* 메인 화면에 들어갈 css */
 .home_main_body {
-  
   display: flex;
   padding-top: 50px;
   
   justify-content: center;
-  
 }
 
 .body_form {
@@ -104,11 +121,15 @@
 }
 .sub_body_form {
   display: flex;
+
   padding: 100px;
   justify-content: space-between;
-  background-image: url("1644906582236.jpg");
+/*   background-image: url("1644906582236.jpg"); */
   background-repeat : no-repeat;
   background-size : cover;
+
+  flex-direction: row;
+
 }
 
 .left {
@@ -116,12 +137,15 @@
 }
 
 .right {
+
   margin-left: 25px;
+
 }
 
 /* 피드 */
 
 .feed_box {
+
   width: 600px;
   height: 800px;
   display: flex;
@@ -131,6 +155,12 @@
 .big_feed_img {
   display: flex;
   justify-content: center;
+
+  
+}
+.overflow{
+  overflow : auto;
+
 }
 
 .feed_img {
@@ -254,11 +284,6 @@ span {
   flex-direction: column;
 }
 
-.comment_overflow{
-width : 400px;
-height : 100px;
-overflow : scroll;
-}
 
 /* profile_part */
 
@@ -381,6 +406,15 @@ overflow : scroll;
   padding: 10px;
 }
 
+.detail_title {
+  margin: 25px 10px 25px 10px;
+  border: 5px double #DCDCDC; 
+  padding: 0.4em;
+}
+.detail_content {
+  margin: 10px 10px 30px 10px;
+
+}
 .postmodal_window .child {
   flex: 1;
 }
@@ -392,28 +426,40 @@ overflow : scroll;
   margin: 0px;
 }
 
+
+div.over {
+  overflow: auto;
+}
+
+
 .big_feed_title {
   display: flex;
   padding: 20px 0;
   margin: 10px 10px 30px 10px;
   border: 1px solid;
   border-radius: 10px;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   font-family: cursive;
   justify-content: center;
+  height : 72px;  
 }
 
 .big_feed_content {
   display: flex;
   flex-direction: column;
+  height : 470px; 
+ 
 }
 
+.comment{
+  height:50px;
+}
 /* Comment */
 .comment-input {
   height: 56px;
   border: 1px solid #dbdbdb;
-  width: auto; 
+  width: auto;
 }
 .comment-input form {
   height: 100%;
@@ -444,4 +490,3 @@ overflow : scroll;
   margin-left: 16px;
   margin-bottom: 22px;
 }
-
