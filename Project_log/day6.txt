@@ -8,7 +8,7 @@ To do list
 
   전도일: 팔로잉 기능
 
-  정희정: like 기능
+  정희정: like 기능, 글 수정 기능
 
 
   
@@ -22,24 +22,26 @@ To do list
 
   각자 한 것:
 
-   김경희 : 
+   김경희 : 디테일 페이지 작업, 디테일 페이지 닫기 버튼, 서치 기능
 
-   김규배 : 
+   김규배 : 메인피드 css, 댓글 삭제 기능, 메인 피드 포스트 내 글과 팔로우한 사람의 글만 뜨게 하기 
 
-   전도일 :
+   전도일 : 팔로잉 기능이 추가된 모델로 유저 모델 재설정
 
-   정희정 : ajax로 프론트단 체크박스와 백엔드의 views.like views.unlike 함수 연결. post_list.html에서 
+   정희정 : like 이미지 추가. like 모델 추가. ajax로 프론트단 체크박스와 백엔드의 views.like views.unlike 함수 연결. 장고템플릿 이용해서 post_list.html에서 좋아요 했는지 안했는지에 따라 html이 다르게 뜨게 함. 
 
 
 문제점:
 
-  1. 
+  1. 다대다 필드?로 연결된 팔로우 모델 사용 문제 
   
   2. 상세페이지에 감정 아이콘이 등록되지 않는 문제
 
   3. 에러 : The QuerySet value for an exact lookup must be limited to one result using slicing. 
 
   4. 댓글삭제 버튼이 정렬되지 않음
+
+  5. 
 
 
 해결방안 :
@@ -56,7 +58,7 @@ To do list
 
 알게 된 것:
 
-  1.
+  1. ajax도 서버단 함수 호출에 url을 사용한다 
 
   2. AJAX 요청에 CSRF 토큰 담아서 보내기 (https://nachwon.github.io/how-to-send-csrf-token-ajax/)
 
