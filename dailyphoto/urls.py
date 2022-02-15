@@ -17,8 +17,11 @@ urlpatterns = [
     path('profile/<str:username>/', views.profile, name="profile"),
     path('modify/', views.modify_profile, name="modify_profile"),
     # path('profile/<str:searched>/', views.search, name="search"),
+  
   # COMMENT
-    path('<int:post_id>/comment_create' , views.comment_create, name="comment_create"),
+    path('<int:post_id>/comment_create/' , views.comment_create, name="comment_create"),
+    path('<int:comment_id>/comment_delete/', views.comment_delete, name="comment_delete"),
+
     
 
 
