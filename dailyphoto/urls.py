@@ -1,8 +1,7 @@
 
 from django.urls import path
 
-from . import views
-
+from . import views, apps
 
 app_name = 'dailyphoto'
 
@@ -16,6 +15,9 @@ urlpatterns = [
 
     path('modify/', views.modify_profile, name="modify_profile"),
     path('<int:user_id>/follow/', views.follow, name = 'follow'),
+    path('like/',views.like, name='like'),
+    path('unlike/',views.unlike, name='unlike'),
+    # path('show_like/',views.show_like,name='show_like'),
   
   # COMMENT
     

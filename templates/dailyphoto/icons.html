@@ -1,8 +1,5 @@
-<div id="icons{{forloop.counter}}">
-  <!-- 아이콘 {{post.icons}} -->
+<div id="icons{{post.id}}">
   <script>
-    // helloworld();
-    var icons = "{{post.icons}}";
-    display_icon(icons, "{{forloop.counter}}");
+    display_icon("{{post.icons}}", "{{post.id}}");
   </script>
 </div>

@@ -1,12 +1,10 @@
 
-
 import json
 from json.decoder import JSONDecodeError
-from django.http  import JsonResponse
+from django.http  import JsonResponse , HttpResponse
 from django.views import View
 
 from time import time, timezone
-
 
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
@@ -15,17 +13,12 @@ from django.contrib.auth import get_user_model
 
 
 
-from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment, Profile
+from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
+from .models import Post, Comment, Profile, Like
 from . import models
 from django.utils import timezone
 from django.http import JsonResponse
 from django.urls import reverse
-
-
-
-
-
 
 
 # from PIL import Image
@@ -39,9 +32,22 @@ def index(request):
  
     post_list = Post.objects.order_by('-create_date')
     comment_form = CommentForm
-    
 
-    context = {'post_list': post_list,  "comment_form" : comment_form }
+    like_list = []
+    like_my = Like.objects.filter(author=request.user)
+    
+    for a_post in post_list:
+      # print(a_post)
+      is_liked = like_my.filter(post = a_post)
+      # print(is_liked)
+      # print(is_liked.count())
+      if(is_liked.count()):
+        like_list.append(1)
+      else:
+        like_list.append(0)
+    # print(like_list)
+
+    context = {'post_list': post_list,  "comment_form" : comment_form ,'like_list':like_list}
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
@@ -70,9 +76,7 @@ def comment_create(request, post_id):
 
             else:
                   return render(request, 'dailyphoto/post_list.html')
-    
-
-
+                  
 
 def comment_delete(request, comment_id):
     if request.user.is_authenticated:
@@ -131,17 +135,119 @@ def post_create(request):
   return render(request, 'dailyphoto/upload_page.html', context )
 
 
+#like
+@login_required(login_url='common:login')
+def like(request):
+
+  def liking(post, like,like_count):
+    like.post=post
+    post.like_count = like_count + 1
+    print(like)
+    like.save()
+    post.save()
+    print('liked')
+
+  if request.method=="POST":
+    form = LikeForm(request.POST)
+    
+    print(request.body)
+    if form.is_valid():
+      like=form.save(commit=False)
+      like.author= request.user
+      data=request.body.decode()
+      data = data.split('&')
+      data_post=data[0].split('=')[1]
+      post = get_object_or_404(models.Post, pk=data_post)
+      post_filtered = Like.objects.filter(post_id = data_post)
+      if post_filtered:
+        user_filtered = post_filtered.filter(author_id=request.user)
+        if user_filtered :
+          print('double liking error')
+        else:
+          like_count=post_filtered.count()
+          liking(post,like,like_count)
+      else:
+        like_count=post_filtered.count()
+        liking(post,like,like_count)
+    else:
+      print('form is not valid')
+  else:
+    print('else')
+    print(request)
+
+  return HttpResponse()
+
+# like 취소
+@login_required(login_url='common:login')
+def unlike(request):
+
+  if request.method=="POST":
+    form = LikeForm(request.POST)
+    
+    print(request.body)
+    if form.is_valid():
+      data=request.body.decode()
+      data = data.split('&')
+      data_post=data[0].split('=')[1]
+      post = get_object_or_404(models.Post, pk=data_post)
+      post_filtered = Like.objects.filter(post_id = data_post)
+      if post_filtered:
+        user_filtered = post_filtered.filter(author_id=request.user)
+        if user_filtered :
+          print('like data exist')
+          like = user_filtered.first()
+          print(like)
+          like.delete()
+          post.like_count = post_filtered.count() -1
+          post.save()
+        else:
+          pass
+      else:
+        pass
+    else:
+      print('form is not valid')
+  else:
+    print('else')
+    print(request)
+
+  return HttpResponse()
+
+# def show_like(request):
+#   if request.method=="GET":
+#     print('showlike 함수 시작')
+#     print(request.body)
+#     data=request.body.decode()
+#     print(data)
+#     data = data.split('&')
+#     data_post=data[0].split('=')[1]
+#     print(data_post)
+#     post = get_object_or_404(models.Post, pk=data_post)
+#     post_filtered = Like.objects.filter(post_id = data_post)
+#     if post_filtered:
+#       user_filtered = post_filtered.filter(author_id=request.user)
+#       if user_filtered :
+#         print('like data exist')
+#         # like = user_filtered.first()
+#         data = {
+#           'like':True 
+#         }
+#       # return JsonResponse(data)
+#         return data
+#         return True 
+
+#   else:
+#     pass
+
+#   return HttpResponse()
+
+
+
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
-    post_list = Post.objects.order_by('-create_date')
     post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
-    # post_photo.order_by('-create_date')
-    # post_list.filter(author_id = person.id)
-    # post_photo = Post.objects.filter(author_id = request.user.id)
-    
+
     context = {
-      'post_list': post_list ,
        'person': person,
        'post_photo' : post_photo
        }

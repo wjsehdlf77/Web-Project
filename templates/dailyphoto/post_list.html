@@ -1,11 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 
-
-<div class="home_main_body" style="padding-top: 80px;">
-  <div class="body_form" >
-    
-      {% for post in post_list %}
-      <div class = "sub_body_form">
+<div class="home_main_body" style="padding-top: 80px">
+  <div class="body_form">
+    {% for post in post_list %}
+    <div class="sub_body_form">
       <div class="left">
         <div class="border feed_box">
           <div class="feed_name">
@@ -17,11 +15,10 @@
           <img class="feed_img" src="/media/{{post.photo}}" />
           <div class="feed_icon">
             <span class="material-icons ml-1"> cloud_queue </span>
-          {% block icons %}
-          {% include 'dailyphoto/icons.html' %}
-          {% endblock %}
+            {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
             <div class="asd">
-              <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
+              {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
+
             </div>
           </div>
         </div>
@@ -31,35 +28,25 @@
           <div class="big_feed_title">
             <div>{{post.title}}</div>
           </div>
-          <div class = 'big_feed_content'>
-            
-
-            
+          <div class="big_feed_content">
             <!-- comment -->
-             <div class="comment">
+            <div class="comment">
               {% for comment in post.comment_set.all %}
-                <div id="comment-{{comment.id}}">
+              <div id="comment-{{comment.id}}">
                 <b>{{comment.author.username}}</b>
                 {{comment.content}}
-                </div>
-            {%endfor%}
+              </div>
+              {%endfor%}
             </div>
-          
-            
-          
+
             <!-- comment input -->
             <div class="comment-input">
               <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
-                {% csrf_token %}
-                {{ comment_form }}
-                <input type="submit" value="post">
+                {% csrf_token %} {{ comment_form }}
+                <input type="submit" value="post" />
               </form>
-            </div> 
-
-        
-            
-            
-          </div>  
+            </div>
+          </div>
         </div>
       </div>
     </div>
