@@ -61,11 +61,11 @@
               
           
                <!-- comment input -->
-              <div class="comment-input overflow">  
-                <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
+              <div class="comment-input  ">  
+                <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post" >
                   {% csrf_token %}
                   {{ comment_form }}
-                  <input type="submit" value="post">
+                  <input type="submit" value="post" >  
                 </form>
 
               </div> 
