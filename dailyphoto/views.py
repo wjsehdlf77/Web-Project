@@ -41,7 +41,8 @@ def index(request):
     
 
 
-    context = {'post_list': post_list,  "comment_form" : comment_form }
+    context = {'post_list': post_list}
+
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
