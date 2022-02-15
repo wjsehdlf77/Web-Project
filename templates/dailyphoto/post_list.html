@@ -37,7 +37,7 @@
 
              <div class="comment">
               {% for comment in post.comment_set.all %}
-                <div id="comment-{{comment.id}}">
+                <div id="comment-{{comment.id}} " >
                 <b>{{comment.author.username}}</b>
                 {{comment.content}}
                 </div>
@@ -55,6 +55,7 @@
               </form>
 
             </div> 
+
 
             
           </div> 

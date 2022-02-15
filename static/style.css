@@ -102,6 +102,7 @@
 .body_form {
   display: flex;
   flex-flow: column wrap;
+  
 }
 .sub_body_form {
   display: flex;
@@ -129,6 +130,7 @@
   background-color: white;
   width: 500px;
   height: 500px;
+
   
 }
 
@@ -247,6 +249,12 @@ span {
   color: lightgray;
   display: flex;
   flex-direction: column;
+}
+
+.comment_overflow{
+width : 400px;
+height : 100px;
+overflow : scroll;
 }
 
 /* profile_part */
@@ -400,6 +408,8 @@ div.over {
 .big_feed_content {
   display: flex;
   flex-direction: column;
+  height:500px;
+  width:500px; 
 }
 
 /* Comment */
@@ -437,4 +447,5 @@ div.over {
   margin-left: 16px;
   margin-bottom: 22px;
 }
+
 
