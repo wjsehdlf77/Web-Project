@@ -115,4 +115,4 @@ function search_like(i) {
 
 display_like();
 
-search_like(1);
+// search_like(1);

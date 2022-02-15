@@ -22,10 +22,33 @@
             <div class="asd">
               <span class="feed_txt" id="like_count_{{forloop.counter}}"><b>좋아요 {{post.like_count}}개</b></span>
               <label class="like" id="like_{{forloop.counter}}">
+                
                 <input type="checkbox" />
                 <postid>{{post.id}}</postid>
                 <span><img src="/static/images/cloud_empty.png" class="like_icon" alt="" /></span
-              ></label>
+              >
+
+              <script>
+                console.log('script 시작')
+                var like_list_var= "{{like_list}}"
+                var post_var = "{{post}}"
+                var count = "{{forloop.counter}}"
+                console.log(like_list_var)
+                console.log(post_var)
+                console.log(count)
+                for (i=0;i<like_list_var.length;i++){
+                  if (like_list_var[i]==post_var){
+                id_str = "like_" + count.toString();
+                let checkbox_label = document.getElementById(id_str);
+                // console.log(checkbox_label)
+                let checkbox = checkbox_label.getElementsByTagName("input")[0];
+                let checkbox_in = checkbox_label.getElementsByTagName("span")[0];
+                checkbox.attributes('checked')='checked'
+                checkbox_in.innerHTML = `<img src="/static/images/cloud_full.png" class="like_icon" alt="" />`;
+                console.log('for-if-like문')
+                  }
+                }
+              </script></label>
             </div>
           </div>
         </div>

@@ -15,8 +15,6 @@ function display_icon(icons,num){
   // let div_icons=$("#"+id_num)//에러
   console.log(div_icons)
 
-    
-
     for (i = 0; i < icons_list.length; i++) {
       if (icons_list[i] == "happy") {
         div_icons.insertAdjacentHTML("beforeend",`<span><img src="/static/images/icons/emotion/face-smile-regular.svg" class="icon" alt="" /><i class='fas fa-regular fa-face-smile-beam'></i>happy</span>`);

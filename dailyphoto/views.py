@@ -32,9 +32,21 @@ def index(request):
  
     post_list = Post.objects.order_by('-create_date')
     comment_form = CommentForm
-    
 
-    context = {'post_list': post_list,  "comment_form" : comment_form }
+    like_list = []
+    like_my = Like.objects.filter(author=request.user)
+    for a_post in post_list:
+      print(a_post)
+      is_liked = like_my.filter(post = a_post)
+      print(is_liked)
+      print(is_liked.count())
+      if(is_liked.count()):
+        like_list.append(True)
+      else:
+        like_list.append(False)
+    print(like_list)
+
+    context = {'post_list': post_list,  "comment_form" : comment_form ,'like_list':like_list}
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
@@ -199,33 +211,33 @@ def unlike(request):
 
   return HttpResponse()
 
-def show_like(request):
-  if request.method=="GET":
-    print('showlike 함수 시작')
-    print(request.body)
-    data=request.body.decode()
-    print(data)
-    data = data.split('&')
-    data_post=data[0].split('=')[1]
-    print(data_post)
-    post = get_object_or_404(models.Post, pk=data_post)
-    post_filtered = Like.objects.filter(post_id = data_post)
-    if post_filtered:
-      user_filtered = post_filtered.filter(author_id=request.user)
-      if user_filtered :
-        print('like data exist')
-        # like = user_filtered.first()
-        data = {
-          'like':True 
-        }
-      # return JsonResponse(data)
-        return data
-        return True 
+# def show_like(request):
+#   if request.method=="GET":
+#     print('showlike 함수 시작')
+#     print(request.body)
+#     data=request.body.decode()
+#     print(data)
+#     data = data.split('&')
+#     data_post=data[0].split('=')[1]
+#     print(data_post)
+#     post = get_object_or_404(models.Post, pk=data_post)
+#     post_filtered = Like.objects.filter(post_id = data_post)
+#     if post_filtered:
+#       user_filtered = post_filtered.filter(author_id=request.user)
+#       if user_filtered :
+#         print('like data exist')
+#         # like = user_filtered.first()
+#         data = {
+#           'like':True 
+#         }
+#       # return JsonResponse(data)
+#         return data
+#         return True 
 
-  else:
-    pass
+#   else:
+#     pass
 
-  return HttpResponse()
+#   return HttpResponse()
 
 
 
