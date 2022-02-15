@@ -2,6 +2,9 @@
 
 <div class="home_main_body" style="padding-top: 80px">
   <div class="body_form">
+    {% block icons1 %} {% include 'dailyphoto/icons.html' %} {% endblock %}
+
+
     {% for post in post_list %}
     <div class="sub_body_form">
       <div class="left">
@@ -18,8 +21,10 @@
             {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
             <div class="asd">
               <span class="feed_txt" id="like_count_{{forloop.counter}}"><b>좋아요 {{post.like_count}}개</b></span>
-              <label class="like" id="like_{{forloop.counter}}"
-                ><input type="checkbox" /> <span><img src="/static/images/cloud_empty.png" class="like_icon" alt="" /></span
+              <label class="like" id="like_{{forloop.counter}}">
+                <input type="checkbox" />
+                <postid>{{post.id}}</postid>
+                <span><img src="/static/images/cloud_empty.png" class="like_icon" alt="" /></span
               ></label>
             </div>
           </div>

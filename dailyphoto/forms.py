@@ -4,7 +4,7 @@ from django import forms
 from dailyphoto.models import Post
 
 from django.contrib.auth.forms import UserChangeForm
-from dailyphoto.models import Profile, Comment
+from dailyphoto.models import Profile, Comment,Like
 from django.contrib.auth import get_user_model
 
 
@@ -22,9 +22,11 @@ class PostForm(forms.ModelForm):
     'content': '내용',
     }
 
-# class LikeForm(forms.ModelForm):
-#   class Meta:
-#     model=Post
+class LikeForm(forms.ModelForm):
+  class Meta:
+    model=Like
+    fields=['post']
+    exclude = ['author']
 
 class CommentForm(forms.ModelForm): 
     class Meta:

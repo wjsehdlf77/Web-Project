@@ -39,6 +39,9 @@ class Comment(models.Model):
 class Like(models.Model):
     author = models.ForeignKey(User , on_delete=models.CASCADE)
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    # like_count= models.ForeignKey('Post', on_delete=models.CASCADE)
+    liked = models.BooleanField(default=False)
+    post_num = models.IntegerField(blank=True)
 
 
 class PersonalIconSet(models.Model):

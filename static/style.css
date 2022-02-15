@@ -96,6 +96,9 @@
   display: none;
   /* visibility: hidden; */
 }
+.like > postid {
+  display: none;
+}
 
 .like_icon {
   width: 1.5rem;

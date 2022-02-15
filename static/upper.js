@@ -3,11 +3,13 @@ function helloworld(){
   console.log("helloworld")
 }
 
-function display_icon(icons,counter){
+function display_icon(icons,num){
+
+  // if counter 
 
   let icons_list= icons.split("&amp;");
   console.log(icons_list);
-  id_num = 'icons'+counter.toString()
+  id_num = 'icons'+num.toString()
   console.log(id_num)
   let div_icons = document.getElementById(id_num);
   // let div_icons=$("#"+id_num)//에러

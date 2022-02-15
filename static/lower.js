@@ -22,19 +22,33 @@ function display_like(){
     // console.log(user)
     if (checkbox.checked){
       checkbox_in.innerHTML=`<img src="/static/images/cloud_full.png" class="like_icon" alt="" />`
+      
+let csrf_token = $('[name=csrfmiddlewaretoken]').val();
+// console.log(csrf_token)
+let post_id = checkbox_label.getElementsByTagName('postid')[0];
+// console.log(post_id)
+post_id=parseInt(post_id.textContent)
+// console.log(post_id)
       $.ajax({
         type:'post',
-        url:'/',
+        url:'like/',
         dataType:'json',
         data:{
-          'like':true
+          // 'liked':true,
+          // author:'request.user',
+          'post':post_id,
+          csrfmiddlewaretoken:csrf_token
           // 'author':request.user,
           // 'post':request.post
         },
-        success : function(data){
+        headers: { "X-CSRFToken": "{{ csrf_token }}" },
+        success : function(response){
+          console.log(response)
           alert('success??!!')
         },
-        complete:function(data){
+        error:function(){
+        console.log('error')},
+        complete:function(){
           // console.log('complete')
         }
 
@@ -43,7 +57,6 @@ function display_like(){
     else{
       checkbox_in.innerHTML=`<img src="/static/images/cloud_empty.png" class="like_icon" alt="" />`
     }
-  
     });
     checkbox_label.addEventListener('click',function(){
       // document.readyState
@@ -57,5 +70,8 @@ function display_like(){
   }
 
 }
-
+// var token= '{{csrf_token}}'
+// console.log(token)
+// var csrf_token = $('[name=csrfmiddlewaretoken]').val();
+// console.log(csrf_token)
 display_like()

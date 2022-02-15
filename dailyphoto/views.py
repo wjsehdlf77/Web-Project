@@ -1,7 +1,7 @@
 
 import json
 from json.decoder import JSONDecodeError
-from django.http  import JsonResponse
+from django.http  import JsonResponse , HttpResponse
 from django.views import View
 
 from time import time, timezone
@@ -13,7 +13,7 @@ from django.contrib.auth import get_user_model
 
 
 
-from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
+from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
 from .models import Post, Comment, Profile
 from . import models
 from django.utils import timezone
@@ -125,13 +125,46 @@ def post_create(request):
 
 def like(request):
   if request.method=="POST":
-    pass
+    print('post')
+    print(request)
+    # print(request.id)//없음
+    # print(request.post_id)//없음
+    # print(request.post)//없음
+    # print(request.data)
+    form = LikeForm(request.POST)
+    
+    # data = json.loads(request.body)
+    print(request.body)
+    # print(form)
+    if form.is_valid():    
+      like=form.save(commit=False)
+      print(like)
+      like.author= request.user
+      # print(form.post)
+      print(type(request.body))
+      data=request.body.decode()
+      print(data)
+      data = data.split('&')
+      data_post=data[0].split('=')[1]
+      print(data_post)
+      post = get_object_or_404(models.Post, pk=data_post)
+      print(post)
+      like.post=post
+      print(like)
+      like.save()
+      print('liked')
+    else:
+      print('form is not valid')
+    
   elif request.method=="DELETE":
-    pass
+    print('delete')
+    print(request)
+    
   else:
-    pass
+    print('else')
+    print(request)
 
-  return False
+  return HttpResponse()
 
 #프로필화
 def profile(request, username):
