@@ -1,10 +1,3 @@
-
-
-import json
-from json.decoder import JSONDecodeError
-from django.http  import HttpRequest, HttpResponse, JsonResponse
-from django.views import View
-
 from time import time, timezone
 
 
@@ -19,7 +12,6 @@ from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
 from .models import Post, Comment, Profile
 from . import models
 from django.utils import timezone
-from django.http import JsonResponse
 from django.urls import reverse
 
 
@@ -36,11 +28,9 @@ def index(request):
     dailyphoto 게시물 출력
     """
  
-    post_list = Post.objects.order_by('-create_date')
+    post_list = Post.objects.order_by('-create_date') 
     comment_form = CommentForm()
- 
-    context = {'post_list': post_list, 'comment_form' : comment_form}
-
+    context = {'post_list': post_list, 'comment_form': comment_form}
 
 
     return render(request, 'dailyphoto/post_list.html', context)
@@ -81,7 +71,7 @@ def comment_delete(request, comment_id):
         if request.user == comment.author:
             comment.delete()
 
-        return redirect(reverse('posts:index'))
+        return redirect(reverse('dailyphoto:index'))
 
     else:
         return render(request, 'dailyphoto/post_list.html')
