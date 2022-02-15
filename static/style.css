@@ -68,13 +68,8 @@
 }
 
 .icon {
-  width: 1rem;
-  height: 1rem;
-  object-fit: scale-down;
-  font-size: 1rem;
-  image-rendering: 1rem;
-  width: 10px;
-  height: 10px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 .icon_upload label {
   border-radius: 5px;
@@ -88,16 +83,20 @@
   background-color: lightgray;
   border: thin;
 }
-.icon_upload label > input:checked {
-  background-color: lightgray;
+.icon_upload label input:checked + label {
+  background-color: beige;
 }
 
 /* 메인 화면에 들어갈 css */
 .home_main_body {
+  
+  height: 100vh;
+  width: 100vw;
   display: flex;
   padding-top: 50px;
   background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
   justify-content: center;
+  
 }
 
 .body_form {
@@ -148,7 +147,7 @@
   display: flex;
   flex-direction: column;
 }
-.feed_reply_write{
+.feed_reply_write {
   margin-top: 10px;
   border-top: 1px solid silver;
   display: flex;
@@ -323,7 +322,7 @@ span {
 
 .feed_comment {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .asd {
@@ -393,12 +392,14 @@ span {
 
 .big_feed_content {
   display: flex;
+  flex-direction: column;
 }
 
 /* Comment */
 .comment-input {
   height: 56px;
   border: 1px solid #dbdbdb;
+  width: auto; 
 }
 .comment-input form {
   height: 100%;
@@ -423,3 +424,10 @@ span {
   color: #0095f6;
   font-weight: bolder;
 }
+
+.desc-box {
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 22px;
+}
+

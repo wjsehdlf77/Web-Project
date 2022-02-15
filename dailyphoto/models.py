@@ -9,17 +9,21 @@ from django.contrib.auth.models import User
 
 class Post(models.Model):
     title = models.CharField(max_length = 200,blank=True,null=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    # 수정
+    author = models.ForeignKey(User, null=True, on_delete=models.CASCADE, related_name='post_author')
+    
     content = models.TextField(null=True, blank=True)
     photo = models.ImageField(upload_to="pic/",blank=True,null=True)
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
     like_count = models.IntegerField(default=0)
     icons=models.CharField(max_length=1000,default='',blank=True)
-
+    # 수정
+    caption = models.TextField(blank=False)
+    
+    # 수정
     def __str__(self):
-        return self.subject
-
+        return f"{self.author}:{self.caption}"
     
 class Comment(models.Model):
     author       = models.ForeignKey(User , on_delete=models.CASCADE)
