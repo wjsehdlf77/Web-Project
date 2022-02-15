@@ -20,14 +20,21 @@ function display_like() {
       // console.log(this)
       let pe = this.parentElement.parentElement
       console.log(pe)
-      let div_count = $('feed_txt')
-      // let div_count=pe.getElementsByClassName('feed_txt')
+      // let div_count = $('feed_txt')
+      let div_count=pe.getElementsByClassName('feed_txt')
       console.log(div_count)
-      console.log(div_count.text)
+      let content = div_count.item(0)
+      // console.log(div_count.innerHTML)
     
-      let content = div_count.textContent
+      // let content = div_count.textContent
       // let content = div_count.data()
       console.log(content)
+      console.log(typeof(content))
+      // console.log(content.textContent)
+      content = content.textContent
+
+      c_txt=content.substr(3,content.length)
+      console.log(c_txt)
 
       if (checkbox.checked) {
         checkbox_in.innerHTML = `<img src="/static/images/cloud_full.png" class="like_icon" alt="" />`;
