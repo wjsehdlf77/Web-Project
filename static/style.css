@@ -119,14 +119,17 @@
   padding-top: 50px;
   background-color: rgb(195, 213, 247);
   flex-basis: 0%;
+  width: 500px;
+  height: 500px;
 }
 
 /* 피드 */
 
 .feed_box {
   background-color: white;
-  width: 700px;
-  height: 700px;
+  width: 500px;
+  height: 500px;
+  
 }
 
 .feed_img {
@@ -376,6 +379,10 @@ span {
   height: 400px;
   object-fit: contain;
   margin: 0px;
+}
+
+div.over {
+  overflow: auto;
 }
 
 .big_feed_title {

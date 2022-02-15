@@ -45,21 +45,15 @@
           </div>
           <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
           <div><span class="material-icons ml-1">  cloud_queue </span> <b>좋아요 {{post.like_count}}개</b></div>
+          {% block icons %}
+          {% include 'dailyphoto/icons.html' %}
+          {% endblock %}
         </div>
         {% comment %} 내용 파트 {% endcomment %}
-        <div class="child">
+        <div class="child over">
           <h4 style="text-align:center;"><span style="border: 5px double #DCDCDC; padding: 0.4em;">
             {{post.title}}</span></h4>
           <p style='font-size:25px;'>{{post.content}}</p>
-          <form method="post" class="post-form my-3">
-            {% csrf_token %}
-            <div class="form-group">
-            <span>
-            <textarea class="form-control"name="content" id="content" 
-            rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
-            <button type="submit" class="btn btn-Light" style>게시</button>
-            </span>
-           </form> 
         </div>
       </div>
     </div>
@@ -74,3 +68,14 @@
     {% block script %}{% endblock %}
   </body>
 </html>
+
+
+{% comment %} <form method="post" class="post-form my-3">
+  {% csrf_token %}
+  <div class="form-group">
+  <span>
+  <textarea class="form-control"name="content" id="content" 
+  rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
+  <button type="submit" class="btn btn-Light" style>게시</button>
+  </span>
+ </form>  {% endcomment %}
