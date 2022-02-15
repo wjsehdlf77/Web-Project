@@ -20,8 +20,17 @@
     />
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&display=swap');
+      h4 {
+        font-family: 'Black Han Sans', sans-serif;
+      }
+      p {
+        font-family: 'Nanum Pen Script', cursive;
+      }
+    </style>
   </head>
-  <body >
+  <body>
 
 
 
@@ -34,13 +43,14 @@
             <div class="feed_profile_box"><img class="feed_profile_img" src="/media/{{post.author.profile.image}}" /></div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
-          <img class="detail_photo" src = "/media/{{post.photo}}">
+          <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
           <div><span class="material-icons ml-1">  cloud_queue </span> <b>좋아요 {{post.like_count}}개</b></div>
         </div>
         {% comment %} 내용 파트 {% endcomment %}
         <div class="child">
-          <h3>{{post.title}}</h3>
-          {{post.content}}
+          <h4 style="text-align:center;"><span style="border: 5px double #DCDCDC; padding: 0.4em;">
+            {{post.title}}</span></h4>
+          <p style='font-size:25px;'>{{post.content}}</p>
           <form method="post" class="post-form my-3">
             {% csrf_token %}
             <div class="form-group">

@@ -28,7 +28,7 @@
           </div>
           <div class = 'big_feed_content'>
             
-            <!-- comment -->
+            {% comment %} <!-- comment -->
              <div class="comment">
               {% for comment in post.comment_post %}
                 <div id="comment-{{comment.id}}"
@@ -45,10 +45,9 @@
                 {{ comment_form }}
                 <input type="submit" value="Post">
               </form>
-            </div>
+            </div> {% endcomment %}
         
-            
-            </div>
+
           </div>
         </div>
       </div>

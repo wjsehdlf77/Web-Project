@@ -36,11 +36,11 @@ def index(request):
     """
     dailyphoto 게시물 출력
     """
-    comment_form = CommentForm
  
     post_list = Post.objects.order_by('-create_date')
 
-    context = {'post_list': post_list,  "comment_form" : comment_form }
+    context = {'post_list': post_list}
+
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
