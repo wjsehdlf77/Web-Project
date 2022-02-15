@@ -13,7 +13,6 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth import get_user_model
 
 
-
 from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
 from .models import Post, Comment, Profile, Like, User
 from . import models
@@ -21,8 +20,8 @@ from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
 
+from django.db.models import Q
 
-# from PIL import Image
 
 # 주소 index 
 def index(request):
@@ -30,31 +29,19 @@ def index(request):
     dailyphoto 게시물 출력
     """
 
-    
-    # 본인의 post, 팔로우하는 사람들의 post
     user = get_user_model()
-    follower = get_object_or_404(user, followers=request.user)
+    follow_list= user.objects.filter(followers=request.user)
     
-    post_list = Post.objects.order_by('-create_date').filter(Q(author=request.user)|Q(author=follower)) 
-    
-    
-    comment_form = CommentForm
-    
-    like_list = []
-    like_my = Like.objects.filter(author=request.user)
-    
-    for a_post in post_list:
-      # print(a_post)
-      is_liked = like_my.filter(post = a_post)
-      # print(is_liked)
-      # print(is_liked.count())
-      if(is_liked.count()):
-        like_list.append(1)
-      else:
-        like_list.append(0)
-    # print(like_list)
+    q = Q(author=request.user)
+    if (follow_list.count()>0):
+      for my_following in follow_list:
+        q.add(Q(author=my_following),q.OR)
 
-    context = {'post_list': post_list,  "comment_form" : comment_form ,'like_list':like_list}
+    post_list = Post.objects.filter(q).order_by('-create_date')
+   
+    comment_form = CommentForm
+
+    context = {'post_list': post_list,  "comment_form" : comment_form }
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
@@ -219,36 +206,6 @@ def unlike(request):
 
   return HttpResponse()
 
-# def show_like(request):
-#   if request.method=="GET":
-#     print('showlike 함수 시작')
-#     print(request.body)
-#     data=request.body.decode()
-#     print(data)
-#     data = data.split('&')
-#     data_post=data[0].split('=')[1]
-#     print(data_post)
-#     post = get_object_or_404(models.Post, pk=data_post)
-#     post_filtered = Like.objects.filter(post_id = data_post)
-#     if post_filtered:
-#       user_filtered = post_filtered.filter(author_id=request.user)
-#       if user_filtered :
-#         print('like data exist')
-#         # like = user_filtered.first()
-#         data = {
-#           'like':True 
-#         }
-#       # return JsonResponse(data)
-#         return data
-#         return True 
-
-#   else:
-#     pass
-
-#   return HttpResponse()
-
-
-
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
@@ -307,10 +264,3 @@ def follow(request, user_pk):
 #   return searched
 
  
-
-    
-
-  
-
-
-
