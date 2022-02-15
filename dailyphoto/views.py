@@ -25,13 +25,12 @@ def index(request):
     """
 
     user = get_user_model()
-    fff= user.objects.filter(followers=request.user)
-    print(fff.count())
+    follow_list= user.objects.filter(followers=request.user)
     
     post_list = Post.objects.filter(author = request.user)
-    if (fff.count()>0):
-      for fw in fff:
-        post_list_f = Post.objects.filter(author=fw)    
+    if (follow_list.count()>0):
+      for my_following in follow_list:
+        post_list_f = Post.objects.filter(author=my_following)    
         post_list = post_list.union(post_list_f)
 
     post_list = post_list.order_by('-create_date')
