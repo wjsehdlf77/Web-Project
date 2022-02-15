@@ -29,22 +29,7 @@ def index(request):
     """
     post_list = Post.objects.order_by('-create_date')
     comment_form = CommentForm
-
-    like_list = []
-    like_my = Like.objects.filter(author=request.user)
-    
-    for a_post in post_list:
-      # print(a_post)
-      is_liked = like_my.filter(post = a_post)
-      # print(is_liked)
-      # print(is_liked.count())
-      if(is_liked.count()):
-        like_list.append(1)
-      else:
-        like_list.append(0)
-    # print(like_list)
-
-    context = {'post_list': post_list,  "comment_form" : comment_form ,'like_list':like_list}
+    context = {'post_list': post_list,  "comment_form" : comment_form }
     return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
