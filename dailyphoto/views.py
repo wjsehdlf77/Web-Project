@@ -12,15 +12,11 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth import get_user_model
 
 
-
 from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
 from .models import Post, Comment, Profile, Like
 from . import models
 from django.utils import timezone
 from django.urls import reverse
-
-
-# from PIL import Image
 
 # 주소 index 
 def index(request):
@@ -28,11 +24,20 @@ def index(request):
     dailyphoto 게시물 출력
     """
 
- 
-    # 본인의 post, 팔로우하는 사람들의 post
+    user = get_user_model()
+    fff= user.objects.filter(followers=request.user)
+    print(fff.count())
+    
+    post_list = Post.objects.filter(author = request.user)
+    if (fff.count()>0):
+      for fw in fff:
+        post_list_f = Post.objects.filter(author=fw)    
+        post_list = post_list.union(post_list_f)
 
-    post_list = Post.objects.order_by('-create_date')
+    post_list = post_list.order_by('-create_date')
+    
     comment_form = CommentForm
+
     context = {'post_list': post_list,  "comment_form" : comment_form }
     return render(request, 'dailyphoto/post_list.html', context)
 
@@ -198,36 +203,6 @@ def unlike(request):
 
   return HttpResponse()
 
-# def show_like(request):
-#   if request.method=="GET":
-#     print('showlike 함수 시작')
-#     print(request.body)
-#     data=request.body.decode()
-#     print(data)
-#     data = data.split('&')
-#     data_post=data[0].split('=')[1]
-#     print(data_post)
-#     post = get_object_or_404(models.Post, pk=data_post)
-#     post_filtered = Like.objects.filter(post_id = data_post)
-#     if post_filtered:
-#       user_filtered = post_filtered.filter(author_id=request.user)
-#       if user_filtered :
-#         print('like data exist')
-#         # like = user_filtered.first()
-#         data = {
-#           'like':True 
-#         }
-#       # return JsonResponse(data)
-#         return data
-#         return True 
-
-#   else:
-#     pass
-
-#   return HttpResponse()
-
-
-
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
@@ -286,10 +261,3 @@ def follow(request, user_pk):
 #   return searched
 
  
-
-    
-
-  
-
-
-
