@@ -199,6 +199,34 @@ def unlike(request):
 
   return HttpResponse()
 
+def show_like(request):
+  if request.method=="GET":
+    print('showlike 함수 시작')
+    print(request.body)
+    data=request.body.decode()
+    print(data)
+    data = data.split('&')
+    data_post=data[0].split('=')[1]
+    print(data_post)
+    post = get_object_or_404(models.Post, pk=data_post)
+    post_filtered = Like.objects.filter(post_id = data_post)
+    if post_filtered:
+      user_filtered = post_filtered.filter(author_id=request.user)
+      if user_filtered :
+        print('like data exist')
+        # like = user_filtered.first()
+        data = {
+          'like':True 
+        }
+      # return JsonResponse(data)
+        return data
+        return True 
+
+  else:
+    pass
+
+  return HttpResponse()
+
 
 
 #프로필화
