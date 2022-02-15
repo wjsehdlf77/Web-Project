@@ -40,6 +40,7 @@ def index(request):
  
     post_list = Post.objects.order_by('-create_date')
 
+
     context = {'post_list': post_list,  "comment_form" : comment_form }
     return render(request, 'dailyphoto/post_list.html', context)
 
@@ -180,9 +181,11 @@ def follow(request, user_id):
 
 
 
-# def search(request):
+# def search(request, searched):
+
 
 #   searched = request.GET.get('searched')
+#   return searched
 
  
 
