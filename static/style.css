@@ -1,3 +1,8 @@
+* {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 1rem;
+}
+
 .background_set {
   background-image: url("cloud_background.jfif");
 }
@@ -87,15 +92,28 @@
   background-color: beige;
 }
 
+.like > input {
+  display: none;
+  /* visibility: hidden; */
+}
+.like > postid {
+  display: none;
+}
+
+.like_icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 1rem;
+}
+
 /* 메인 화면에 들어갈 css */
 .home_main_body {
-  
-
+  height: 100vh;
+  width: 100vw;
   display: flex;
   padding-top: 50px;
   background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
   justify-content: center;
-  
 }
 
 .body_form {
@@ -428,7 +446,7 @@ div.over {
 .comment-input {
   height: 56px;
   border: 1px solid #dbdbdb;
-  width: auto; 
+  width: auto;
 }
 .comment-input form {
   height: 100%;
@@ -459,5 +477,3 @@ div.over {
   margin-left: 16px;
   margin-bottom: 22px;
 }
-
-

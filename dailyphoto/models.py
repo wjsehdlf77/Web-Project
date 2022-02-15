@@ -19,11 +19,11 @@ class Post(models.Model):
     like_count = models.IntegerField(default=0)
     icons=models.CharField(max_length=1000,default='',blank=True)
     # 수정
-    caption = models.TextField(blank=False)
+    # caption = models.TextField(blank=False)
     
     # 수정
     def __str__(self):
-        return f"{self.author}:{self.caption}"
+        return f"{self.author}:{self.title}"
     
 class Comment(models.Model):
     author       = models.ForeignKey(User , on_delete=models.CASCADE)
@@ -36,6 +36,12 @@ class Comment(models.Model):
 
     class Meta:
         db_table = 'comments'
+
+
+class Like(models.Model):
+    author = models.ForeignKey(User , on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+
 
 class PersonalIconSet(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
