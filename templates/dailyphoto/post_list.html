@@ -27,38 +27,39 @@
         </div>
       </div>
       <div class="right">
-        <div class="border feed_box over">
-          <div class="big_feed_title">
+        <div class="border feed_box">
+          <div class="big_feed_title overflow">
             <div>{{post.title}}</div>
           </div>
-          <div class = 'big_feed_content'>
+          
+          <div class = 'big_feed_content overflow'>
 
               {{post.content}}
-
-             <div class="comment">
-              {% for comment in post.comment_set.all %}
-                <div id="comment-{{comment.id}} " >
-                <b>{{comment.author.username}}</b>
-                {{comment.content}}
-                </div>
-            {%endfor%}
             </div>
+            
+            
+              <div class="comment overflow">
+                {% for comment in post.comment_set.all %}
+                  <div id="comment-{{comment.id}} " >
+                  <b>{{comment.author.username}}</b>
+                  {{comment.content}}
+                  </div>
+                {%endfor%}
+              </div>
           
             
           
-            <!-- comment input -->
-            <div class="comment-input">
-              <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
-                {% csrf_token %}
-                {{ comment_form }}
-                <input type="submit" value="post">
-              </form>
+               <!-- comment input -->
+              <div class="comment-input overflow">
+                <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
+                  {% csrf_token %}
+                  {{ comment_form }}
+                  <input type="submit" value="post">
+                </form>
 
-            </div> 
-
-
-            
-          </div> 
+              </div> 
+          
+          
         </div>
       </div>
     </div>
