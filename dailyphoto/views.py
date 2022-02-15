@@ -18,6 +18,9 @@ from . import models
 from django.utils import timezone
 from django.urls import reverse
 
+from django.db.models import Q
+
+
 # 주소 index 
 def index(request):
     """
@@ -27,13 +30,12 @@ def index(request):
     user = get_user_model()
     follow_list= user.objects.filter(followers=request.user)
     
-    post_list = Post.objects.filter(author = request.user)
+    q = Q(author=request.user)
     if (follow_list.count()>0):
       for my_following in follow_list:
-        post_list_f = Post.objects.filter(author=my_following)    
-        post_list = post_list.union(post_list_f)
+        q.add(Q(author=my_following),q.OR)
 
-    post_list = post_list.order_by('-create_date')
+    post_list = Post.objects.filter(q).order_by('-create_date')
     
     comment_form = CommentForm
 
