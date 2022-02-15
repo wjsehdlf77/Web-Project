@@ -2,10 +2,11 @@
 
 <div class="home_main_body" style="padding-top: 80px">
   <div class="body_form">
+    
     {% for post in post_list %}
     <div class="sub_body_form">
       <div class="left">
-        <div class="feed_box">
+        <div class="left_feed_box">
           <div class="feed_name">
             <div class="feed_profile_box">
               <img class="feed_profile_img" src="/media/{{post.author.profile.image}}" />
@@ -16,18 +17,14 @@
           <img class="feed_img" src="/media/{{post.photo}}">
           </div>
           <div class="feed_icon">
-            <span class="material-icons ml-1"> cloud_queue </span>
+            {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
             {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
-            <div class="asd">
-              {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-
-            </div>
           </div>
         </div>
       </div>
       <div class="right">
 
-        <div class="border feed_box">
+        <div class="right_feed_box">
           <div class="big_feed_title overflow">
             <div>{{post.title}}</div>
           </div>
@@ -81,4 +78,8 @@
     {% endfor %}
   </div>
 </div>
+
+
+
+
 {% endblock %}

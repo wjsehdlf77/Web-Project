@@ -1,4 +1,5 @@
 
+from gc import get_objects
 import json
 from json.decoder import JSONDecodeError
 from django.http  import JsonResponse , HttpResponse
@@ -13,10 +14,11 @@ from django.contrib.auth import get_user_model
 
 
 from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment, Profile, Like
+from .models import Post, Comment, Profile, Like, User
 from . import models
 from django.utils import timezone
 from django.urls import reverse
+from django.db.models import Q
 
 from django.db.models import Q
 
@@ -36,7 +38,7 @@ def index(request):
         q.add(Q(author=my_following),q.OR)
 
     post_list = Post.objects.filter(q).order_by('-create_date')
-    
+   
     comment_form = CommentForm
 
     context = {'post_list': post_list,  "comment_form" : comment_form }
