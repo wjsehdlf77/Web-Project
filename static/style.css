@@ -375,6 +375,15 @@ span {
   padding: 10px;
 }
 
+.detail_title {
+  margin: 25px 10px 25px 10px;
+  border: 5px double #DCDCDC; 
+  padding: 0.4em;
+}
+.detail_content {
+  margin: 10px 10px 30px 10px;
+
+}
 .postmodal_window .child {
   flex: 1;
 }
@@ -384,6 +393,11 @@ span {
   height: 400px;
   object-fit: contain;
   margin: 0px;
+}
+
+
+div.over {
+  overflow: auto;
 }
 
 

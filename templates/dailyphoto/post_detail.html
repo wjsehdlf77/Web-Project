@@ -30,9 +30,12 @@
       }
     </style>
   </head>
+
   <body>
-
-
+    {% block upload_js %}
+    <!-- 먼저 로딩되어야 작동하는 js 파일 -->
+    <script src="{% static 'upper.js' %}"></script>
+    {% endblock %}
 
     {% block content %}
     <div class="postmodal_overlay">
@@ -51,9 +54,14 @@
         </div>
         {% comment %} 내용 파트 {% endcomment %}
         <div class="child over">
-          <h4 style="text-align:center;"><span style="border: 5px double #DCDCDC; padding: 0.4em;">
-            {{post.title}}</span></h4>
-          <p style='font-size:25px;'>{{post.content}}</p>
+          <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
+          <div class="detail_title">
+            <h4 style="text-align:center;">
+            {{post.title}}</h4>
+          </div>
+          <div class="detail_content">
+            <p style='font-size:25px;'>{{post.content}}</p>
+          </div>
         </div>
       </div>
     </div>
