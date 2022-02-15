@@ -15,6 +15,10 @@ function display_like() {
     checkbox.addEventListener("change", function (e) {
       if (checkbox.checked) {
         checkbox_in.innerHTML = `<img src="/static/images/cloud_full.png" class="like_icon" alt="" />`;
+        // id_str_count = "like_count_" + i.toString();
+        // let div_count = document.getElementById(id_str_count)[0];
+        // console.log(div_count)
+        // div_count.innerHTML=`<b>좋아요 `+{{post.like_count}}+`개</b>`
 
         let csrf_token = $("[name=csrfmiddlewaretoken]").val();
         let post_id = checkbox_label.getElementsByTagName("postid")[0];
@@ -40,9 +44,7 @@ function display_like() {
           },
         });
         
-      location.reload()
 
-      
       } else {
         checkbox_in.innerHTML = `<img src="/static/images/cloud_empty.png" class="like_icon" alt="" />`;
 
@@ -70,8 +72,6 @@ function display_like() {
           },
         });
       }
-
-      
       location.reload()
     });
     // checkbox_label.addEventListener("click", function () {
