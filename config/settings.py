@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dailyphoto',
     'common',
-    'bootstrap4'
+    'bootstrap4',
+    
 ]
 
 MIDDLEWARE = [

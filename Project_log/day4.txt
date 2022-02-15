@@ -22,7 +22,7 @@ To do list(개인별)
 
    김경희 :
 
-   김규배 :
+   김규배 : post_list 전반적인 디자인 변경 (style.css 수정) flex_direction을 이용한 column 수정 
 
    전도일 : 프로필 모달창과 메인피드화면 확대 축소 깨짐 변경
 

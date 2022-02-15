@@ -2,7 +2,7 @@
 
 import json
 from json.decoder import JSONDecodeError
-from django.http  import JsonResponse
+from django.http  import HttpRequest, HttpResponse, JsonResponse
 from django.views import View
 
 from time import time, timezone
@@ -11,13 +11,12 @@ from time import time, timezone
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
-from dailyphoto.models import Profile
 from django.contrib.auth import get_user_model
 
 
 
 from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment
+from .models import Post, Comment, Profile
 from . import models
 from django.utils import timezone
 from django.http import JsonResponse
@@ -38,6 +37,9 @@ def index(request):
     """
  
     post_list = Post.objects.order_by('-create_date')
+    comment_form = CommentForm
+    
+
 
     context = {'post_list': post_list}
 
@@ -55,13 +57,14 @@ def detail(request, id):
 @login_required(login_url='common:login')
 def comment_create(request, post_id):
       if request.user.is_authenticated:
+
             post = get_object_or_404(models.Post, pk=post_id)
 
             form = CommentForm(request.POST)
             if form.is_valid():
                   comment = form.save(commit=False)
                   comment.author = request.user
-                  comment.posts = post
+                  comment.post = post
                   comment.save()
                   
                   return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
@@ -71,19 +74,17 @@ def comment_create(request, post_id):
     
 
 
-@login_required(login_url='common:login')
-def comment_search(self, request, post_id,username):
-    if not Post.objects.filter(id=post_id).exists():
-        return JsonResponse({'message':'POSTING_DOES_NOT_EXIST'}, status=404)
 
-    comment_list = [{
-        "username"  : get_object_or_404(get_user_model(), username = username ),
-        "content"   : comment.content,
-        "create_at" : comment.created_date
-        } for comment in Comment.objects.filter(post_id=post_id)
-    ]
+def comment_delete(request, comment_id):
+    if request.user.is_authenticated:
+        comment = get_object_or_404(models.Comment, pk=comment_id)
+        if request.user == comment.author:
+            comment.delete()
 
-    return JsonResponse({'data':comment_list}, status=200)
+        return redirect(reverse('posts:index'))
+
+    else:
+        return render(request, 'dailyphoto/post_list.html')
       
 
 # 글 업로드 함수
@@ -134,21 +135,14 @@ def post_create(request):
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
-    post_list = Post.objects.order_by('-create_date')
     post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
-    # post_photo.order_by('-create_date')
-    # post_list.filter(author_id = person.id)
-    # post_photo = Post.objects.filter(author_id = request.user.id)
     
     context = {
-      'post_list': post_list ,
        'person': person,
        'post_photo' : post_photo
        }
-    # url='dailyphoto/profile/'+username+'.html'
-    url='dailyphoto/profile.html'
-    print(url)
 
+    url='dailyphoto/profile.html'
     return render(request, url, context)
 
 
@@ -187,7 +181,15 @@ def follow(request, user_id):
 
 
 
+# def search(request, searched):
 
+
+#   searched = request.GET.get('searched')
+#   return searched
+
+ 
+
+    
 
   
 

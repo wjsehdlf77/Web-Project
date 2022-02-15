@@ -18,14 +18,15 @@
   </head>
 
   <body>
-    {% include 'nav.html' %} {% block content %}{% endblock %}
+    {% block upload_js %}
+    <!-- 먼저 로딩되어야 작동하는 js 파일 -->
+    <script src="{% static 'upper.js' %}"></script>
+    {% endblock %} {% include 'nav.html' %} {% block content %}{% endblock %} {% block script %}
 
     <!-- jQuery JS -->
     <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
     <!-- Bootstrap JS -->
     <script src="{% static 'bootstrap.min.js' %}"></script>
-    <!-- 업로드 js -->
-    <script src="{% static 'upload.js' %}"></script>
-    {% block script %}{% endblock %}
+    {% endblock %}
   </body>
 </html>

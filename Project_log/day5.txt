@@ -4,26 +4,31 @@ To to list(개인별)
 
   김경희 - 상세보기 페이지 완성하고 연결 
 
-  김규배 - 포스트리스트에 댓글기능 추가
+  김규배 - 메인 피드 포스트에 댓글기능 추가
 
-  전도일 - 포스트리스트에 댓글기는 추가 
+  전도일 - 포스트에 댓글기능 추가 / 유저 팔로잉 기능 추가
 
-  정희정 - 데이터테이블 아이콘 필드에 여러개의 키워드를 varchar로 함께 집어넣도록 변경. 
+  정희정 - 업로드 기능 진행 - 데이터테이블 아이콘 필드에 여러개의 키워드를 varchar로 함께 집어넣도록 변경. 아이콘 출력
 
 
 활동내용:
 
   모두가 함께:
+    로그인한 사용자 외의 타 사용자 프로필 포스트 열람하기 
+    프로필 필터 - 프로필 소유 유저의 포스트만 필터되도록 하기
+    프로필의 사진이 최신순으로 뜨도록 하기 (Post.objects.order_by)
 
   각자 한 것:
 
-   김경희 :
+   김경희 : 포스트 디테일 
 
-   김규배 :
+   김규배 : dailyphoto 메인 화면 게시물 댓글 기능 구현, background 크기 수정
 
-   전도일 :
+   전도일 :팔로우 팔로잉기능 거의 구현, 네비바에 서치해서 다른 유저의 마이페이지로 이동, 다른유저의 마이페이지 화면 수정
 
-   정희정 : 
+   정희정 : 아이콘 모델 정리 - icons 필드에 여러개 키워드를 같이 넣도록 데이터 필드를 통합함. css 정리
+
+
 
 
 
@@ -32,7 +37,49 @@ To to list(개인별)
 
 
 
+- comment.post = post_id 로 지정해서 post data를 읽어 들이지 못했음. 
+- post_list.html에서 댓글 입력 받고 출력하는 과정에서 comment가 save되지 않아 테이블에 데이터가 저장되지 않았음.
+- <div class="home_main_body">가 전체화면을 나타내는 block인데 크기가 전체화면으로 적용 되지 않아서 배경 색이 일정부분만 적용 되는걸 확인
+    할 수 있었음 
 
-알게된것
+
+
+해결방안
+- post = get_object_or_404(models.Post, pk=post_id) 로 post 데이터를 받았기 때문에 comment.post = post로 변경해주면 됐음.
+- {% for comment in post.comment_set.all %} 여기에서 in에 알맞지 않은 데이터 이름을 지정 그래서 comment의 전체적인 레코드를 사용하기
+위하여 post.comment_set.all 사용해서 comments 테이블의 데이터를 이용할 수 있게 되었음. 
+- home_main_body가 부모 클래스인 body의 전체 크기를 이용하기 위해 width와 height를 각각 100vw 100vh로 적용해줌 
+
+
+
+
+알게 된 것:
+
+  1. form data를 중간에 수정하기는 매우 어려움.
+    form의 onsubmit 함수로 formdata를 변경하는 자바스크립트 함수를 넣으려고 시도 했으나, formdata를 자바스크립트로 접근할 수 없었다. 
+
+  2.form data를 리스트로 받는 법
+    name="이름[]"
+    계속 뜨던 validation오류는 form data에 빈칸이 있어서 나던 거였다. 
+    list로 받고 view.py에서 string으로 수정해서 넣어주면 됨
+
+  3. Post.objects.order_by(~~)의 결과물은 QuerySet였음 Post가 아님
+
+  4. 장고 템플릿 변수를 자바스크립트로 사용하는법. 
+    <script type="text/javascript">
+    var a = "{{someDjangoVariable}}";
+    </script>
+
+    let은 자꾸 이미 지정되어있다는 오류가 난다..?
+
+  5. 장고 for문 내부에서 {{forloop.counter}}를 사용하여 for문의 카운트 숫자를 접근할수있다. 
+
+  6. _set.all 의 기능에 대해서 알게됨
+
+  7. css 에서 viewpoint->vw,vh의 기능 
+
+
+
+
 
 
