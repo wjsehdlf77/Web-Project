@@ -37,8 +37,10 @@ def index(request):
     """
  
     post_list = Post.objects.order_by('-create_date')
-    comment_from = CommentForm
-    context = {'post_list': post_list}
+    comment_form = CommentForm()
+ 
+    context = {'post_list': post_list, 'comment_form' : comment_form}
+
 
 
     return render(request, 'dailyphoto/post_list.html', context)
