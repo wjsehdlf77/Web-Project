@@ -102,6 +102,7 @@
 .body_form {
   display: flex;
   flex-flow: column wrap;
+  
 }
 .sub_body_form {
   display: flex;
@@ -127,6 +128,7 @@
   background-color: white;
   width: 700px;
   height: 700px;
+  
 }
 
 .feed_img {
@@ -399,6 +401,8 @@ overflow : scroll;
 .big_feed_content {
   display: flex;
   flex-direction: column;
+  height:500px;
+  width:500px; 
 }
 
 /* Comment */
@@ -436,4 +440,5 @@ overflow : scroll;
   margin-left: 16px;
   margin-bottom: 22px;
 }
+
 
