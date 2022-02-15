@@ -32,21 +32,24 @@
                     {% endif%}
                 <div>
                         <div>
-                          팔로잉 : {{ follow_user.followings.all|length }} / 팔로워 : {{ follow_user.followers.all|length }}
+                          팔로잉 : {{ person.followings.all|length }} / 팔로워 : {{ person.followers.all|length }}
                         </div>
                       
-                        {% if person.id != user.id %}
-                          <div>
-                            {% comment %} <form action="{% url 'dailyphoto:follow' follow_user.id %}" method='POST'> {% endcomment %}
-                              {% csrf_token %}
-                              {% if user in follow_user.followers.all %}
-                                <input type="submit" value='팔로우 취소'>
-                              {% else %}
-                                <input type="submit" value='팔로우'>
-                              {% endif %}
-                            </form>
-                          </div>  
-                        {% endif %}
+                        <div>
+                        
+                          {% if user != person %}
+                            <div>
+                              <form action="{% url 'dailyphoto:follow' person.pk%}" method='POST'>
+                                {% csrf_token %}
+                                {% if user in person.followers.all %}
+                                  <input type="submit" value='팔로우 취소'>
+                                {% else %}
+                                  <input type="submit" value='팔로우'>
+                                {% endif %}
+                              </form>
+                            </div>  
+                          {% endif %}
+                        </div>
                       </div>
             </div>
          </div>

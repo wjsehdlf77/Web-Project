@@ -27,10 +27,11 @@
         </div>
       </div>
       <div class="right">
-        <div class="border feed_box">
+        <div class="border feed_box overflow">
           <div class="big_feed_title">
             <div>{{post.title}}</div>
           </div>
+          
           <div class = 'big_feed_content'>
 
               {{post.content}}
@@ -46,7 +47,7 @@
           
             
           
-            <!-- comment input -->
+        
             <div class="comment-input">
               <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
                 {% csrf_token %}
@@ -55,9 +56,8 @@
               </form>
 
             </div> 
-
-            
           </div> 
+          
         </div>
       </div>
     </div>
