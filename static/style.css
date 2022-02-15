@@ -119,11 +119,13 @@
 .body_form {
   display: flex;
   flex-flow: column wrap;
+  
 }
 .sub_body_form {
   display: flex;
 
   flex-direction: row;
+  
 }
 
 .left {
@@ -136,6 +138,7 @@
   padding-top: 50px;
   background-color: rgb(195, 213, 247);
   flex-basis: 0%;
+  
 }
 
 /* 피드 */
@@ -144,6 +147,11 @@
   background-color: white;
   width: 700px;
   height: 700px;
+
+  
+}
+.overflow{
+  overflow : auto;
 }
 
 .feed_img {
@@ -262,6 +270,7 @@ span {
   display: flex;
   flex-direction: column;
 }
+
 
 /* profile_part */
 
@@ -384,6 +393,15 @@ span {
   padding: 10px;
 }
 
+.detail_title {
+  margin: 25px 10px 25px 10px;
+  border: 5px double #DCDCDC; 
+  padding: 0.4em;
+}
+.detail_content {
+  margin: 10px 10px 30px 10px;
+
+}
 .postmodal_window .child {
   flex: 1;
 }
@@ -391,9 +409,15 @@ span {
 .detail_photo {
   width: 450px;
   height: 400px;
-  object-fit: cover;
+  object-fit: contain;
   margin: 0px;
 }
+
+
+div.over {
+  overflow: auto;
+}
+
 
 .big_feed_title {
   display: flex;
@@ -401,17 +425,23 @@ span {
   margin: 10px 10px 30px 10px;
   border: 1px solid;
   border-radius: 10px;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bold;
   font-family: cursive;
   justify-content: center;
+  height : 72px;  
 }
 
 .big_feed_content {
   display: flex;
   flex-direction: column;
+  height : 470px; 
+ 
 }
 
+.comment{
+  height:50px;
+}
 /* Comment */
 .comment-input {
   height: 56px;

@@ -20,10 +20,22 @@
     />
     <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Pen+Script&display=swap');
+      h4 {
+        font-family: 'Black Han Sans', sans-serif;
+      }
+      p {
+        font-family: 'Nanum Pen Script', cursive;
+      }
+    </style>
   </head>
-  <body >
 
-
+  <body>
+    {% block upload_js %}
+    <!-- 먼저 로딩되어야 작동하는 js 파일 -->
+    <script src="{% static 'upper.js' %}"></script>
+    {% endblock %}
 
     {% block content %}
     <div class="postmodal_overlay">
@@ -34,22 +46,22 @@
             <div class="feed_profile_box"><img class="feed_profile_img" src="/media/{{post.author.profile.image}}" /></div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
-          <img class="detail_photo" src = "/media/{{post.photo}}">
+          <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
           <div><span class="material-icons ml-1">  cloud_queue </span> <b>좋아요 {{post.like_count}}개</b></div>
+          {% block icons %}
+          {% include 'dailyphoto/icons.html' %}
+          {% endblock %}
         </div>
         {% comment %} 내용 파트 {% endcomment %}
-        <div class="child">
-          <h3>{{post.title}}</h3>
-          {{post.content}}
-          <form method="post" class="post-form my-3">
-            {% csrf_token %}
-            <div class="form-group">
-            <span>
-            <textarea class="form-control"name="content" id="content" 
-            rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
-            <button type="submit" class="btn btn-Light" style>게시</button>
-            </span>
-           </form> 
+        <div class="child over">
+          <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
+          <div class="detail_title">
+            <h4 style="text-align:center;">
+            {{post.title}}</h4>
+          </div>
+          <div class="detail_content">
+            <p style='font-size:25px;'>{{post.content}}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -64,3 +76,14 @@
     {% block script %}{% endblock %}
   </body>
 </html>
+
+
+{% comment %} <form method="post" class="post-form my-3">
+  {% csrf_token %}
+  <div class="form-group">
+  <span>
+  <textarea class="form-control"name="content" id="content" 
+  rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
+  <button type="submit" class="btn btn-Light" style>게시</button>
+  </span>
+ </form>  {% endcomment %}

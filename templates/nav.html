@@ -27,7 +27,12 @@
       {% comment %} 상단 고정 sticky-top {% endcomment %}
       <div class="container">
         <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
-        <input class="form-control" style="width: 200px" type="search" placeholder="Search" aria-label="Search" />
+
+
+        <form class="form-inline my-2 my-md-0" method="get" action="">
+          <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="b" value="{{b}}">
+        </form> 
+
         <div>
           <ul class="navbar-nav ml-auto">
             <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons-outlined">logout</span></a>
@@ -37,8 +42,6 @@
             <img src="/media/{{user.profile.image}}" class="avata-sm rounded-circle"/></a>
             </ul>
           </div>
-
-
         </div>
       </div>
     </nav>

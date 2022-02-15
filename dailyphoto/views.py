@@ -17,7 +17,6 @@ from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, Commen
 from .models import Post, Comment, Profile, Like
 from . import models
 from django.utils import timezone
-from django.http import JsonResponse
 from django.urls import reverse
 
 
@@ -28,8 +27,6 @@ def index(request):
     """
     dailyphoto 게시물 출력
     """
-    
- 
     post_list = Post.objects.order_by('-create_date')
     comment_form = CommentForm
 
@@ -84,7 +81,7 @@ def comment_delete(request, comment_id):
         if request.user == comment.author:
             comment.delete()
 
-        return redirect(reverse('posts:index'))
+        return redirect(reverse('dailyphoto:index'))
 
     else:
         return render(request, 'dailyphoto/post_list.html')
@@ -251,10 +248,8 @@ def profile(request, username):
        'person': person,
        'post_photo' : post_photo
        }
-    # url='dailyphoto/profile/'+username+'.html'
-    url='dailyphoto/profile.html'
-    print(url)
 
+    url='dailyphoto/profile.html'
     return render(request, url, context)
 
 
@@ -293,7 +288,15 @@ def follow(request, user_id):
 
 
 
+# def search(request, searched):
 
+
+#   searched = request.GET.get('searched')
+#   return searched
+
+ 
+
+    
 
   
 
