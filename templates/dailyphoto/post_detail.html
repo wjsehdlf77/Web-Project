@@ -46,7 +46,11 @@
             <div class="feed_profile_box"><img class="feed_profile_img" src="/media/{{post.author.profile.image}}" /></div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
+          {% if post.photo %}
           <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
+          {% else %}
+          <div><img class="detail_photo" src = "/static/images/DailyphotoLogo_r.png"></div>
+          {% endif%}
           <div><span class="material-icons ml-1">  cloud_queue </span> <b>좋아요 {{post.like_count}}개</b></div>
           {% block icons %}
           {% include 'dailyphoto/icons.html' %}
@@ -55,12 +59,15 @@
         {% comment %} 내용 파트 {% endcomment %}
         <div class="child over">
           <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
-          <div class="detail_title">
-            <h4 style="text-align:center;">
-            {{post.title}}</h4>
+          <div>
+            <h4 class="detail_title">{{post.title}}</h4>
           </div>
           <div class="detail_content">
             <p style='font-size:25px;'>{{post.content}}</p>
+          </div>
+          <div class="detail_buttons">
+            <button id="modify_{{post.id}}">수정</button>
+            <button id="delete_{{post.id}}">삭제</button>
           </div>
         </div>
       </div>
