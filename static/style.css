@@ -454,6 +454,12 @@ div.over {
   overflow: auto;
 }
 
+.searchbutton {
+  border:none;
+}
+
+
+/*  */
 
 .big_feed_title {
   display: block;
