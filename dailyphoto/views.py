@@ -129,6 +129,16 @@ def post_create(request):
   return render(request, 'dailyphoto/upload_page.html', context )
 
 
+#글 수정
+def post_update(request):
+  pass
+
+#글 삭제
+def post_delete(request):
+  pass
+
+
+
 #like
 @login_required(login_url='common:login')
 def like(request):
