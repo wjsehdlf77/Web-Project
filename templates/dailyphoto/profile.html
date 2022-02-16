@@ -5,10 +5,11 @@
     <div class="sub_body">
         <div style="display: flex; flex-direction: row">
             <div class="profile_photo">
-                {% if person.profile.image.url%}
+                {% if person.profile.image%}
                   <img class="profile_img" src = "{{person.profile.image.url}}">
-                {% elseif %}
-                
+                {% else %}
+                  <img class = 'profile_img' src = "/static/fc9246c04e82487ab0fe515f9d24f415.jpg">
+                {% endif %}
             </div>
 
             <div style="display: flex; flex-direction:column; margin: 40px 100px">
@@ -52,6 +53,8 @@
                           {% endif %}
                         </div>
                       </div>
+                      <audio autoplay controls loop><source src = "{{person.profile.music.url}}"></audio>
+                      {% comment %} <iframe></iframe> 브라우저마다 안되면 이걸써 {% endcomment %}
             </div>
          </div>
         <div class = 'feed_body'>

@@ -68,4 +68,4 @@ class ProfileForm(forms.ModelForm):
     image = forms.ImageField(label="이미지", required=False)
     class Meta:
         model = Profile
-        fields = ['nickname', 'description', 'image',]
+        fields = ['nickname', 'description', 'image','music']
