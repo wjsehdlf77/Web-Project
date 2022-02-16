@@ -25,65 +25,51 @@ from django.db.models import Q
 
 # 주소 index 
 def index(request):
-    """
-    dailyphoto 게시물 출력
-    """
+  """
+  dailyphoto 게시물 출력
+  """
 
-    user = get_user_model()
-    follow_list= user.objects.filter(followers=request.user)
-    
-    q = Q(author=request.user)
-    if (follow_list.count()>0):
-      for my_following in follow_list:
-        q.add(Q(author=my_following),q.OR)
+  user = get_user_model()
+  follow_list= user.objects.filter(followers=request.user)
+  
+  q = Q(author=request.user)
+  if (follow_list.count()>0):
+    for my_following in follow_list:
+      q.add(Q(author=my_following),q.OR)
 
-    post_list = Post.objects.filter(q).order_by('-create_date')
-   
-    comment_form = CommentForm
+  post_list = Post.objects.filter(q).order_by('-create_date')
+  
+  comment_form = CommentForm
 
-    like_list = []
-    like_my = Like.objects.filter(author=request.user)
-    
-    for a_post in post_list:
-      # print(a_post)
-      is_liked = like_my.filter(post = a_post)
-      # print(is_liked)
-      # print(is_liked.count())
-      if(is_liked.count()):
-        like_list.append(1)
-      else:
-        like_list.append(0)
-    # print(like_list)
-
-    context = {'post_list': post_list,  "comment_form" : comment_form ,'like_list':like_list}
-    return render(request, 'dailyphoto/post_list.html', context)
+  context = {'post_list': post_list,  "comment_form" : comment_form}
+  return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
 def detail(request, id):
-    
-    post  = get_object_or_404(Post, pk=id) # 예외일때 404에러 발생
-    # get_object_or_404 <- 오류 화면 구성
-    context = {'post': post}
-    return render(request, 'dailyphoto/post_detail.html', context)
+  
+  post  = get_object_or_404(Post, pk=id) # 예외일때 404에러 발생
+  # get_object_or_404 <- 오류 화면 구성
+  context = {'post': post}
+  return render(request, 'dailyphoto/post_detail.html', context)
   
 
 @login_required(login_url='common:login')
 def comment_create(request, post_id):
-      if request.user.is_authenticated:
+  if request.user.is_authenticated:
 
-            post = get_object_or_404(models.Post, pk=post_id)
+    post = get_object_or_404(models.Post, pk=post_id)
 
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                  comment = form.save(commit=False)
-                  comment.author = request.user
-                  comment.post = post
-                  comment.save()
-                  
-                  return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = form.save(commit=False)
+      comment.author = request.user
+      comment.post = post
+      comment.save()
+      
+      return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
 
-            else:
-                  return render(request, 'dailyphoto/post_list.html')
+    else:
+      return render(request, 'dailyphoto/post_list.html')
                   
 
 def comment_delete(request, comment_id):

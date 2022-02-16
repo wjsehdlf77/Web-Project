@@ -46,7 +46,11 @@
             <div class="feed_profile_box"><img class="feed_profile_img" src="/media/{{post.author.profile.image}}" /></div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
+          {% if post.photo %}
           <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
+          {% else %}
+          <div><img class="detail_photo" src = "/static/images/DailyphotoLogo_r.png"></div>
+          {% endif%}
           <div><span class="material-icons ml-1">  cloud_queue </span> <b>좋아요 {{post.like_count}}개</b></div>
           {% block icons %}
           {% include 'dailyphoto/icons.html' %}

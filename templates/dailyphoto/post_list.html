@@ -14,7 +14,11 @@
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
           <div class = 'big_feed_img'>
+            {% if post.photo %}
           <img class="feed_img" src="/media/{{post.photo}}">
+          {% else %}
+          <img class="feed_img" src="/static/images/DailyphotoLogo_r.png">
+          {% endif%}
           </div>
           <div class="feed_icon">
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
