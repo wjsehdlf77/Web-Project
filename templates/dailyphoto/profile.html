@@ -59,9 +59,9 @@
                         <div class = 'big_feed'>
                           
           {% if post.photo %}
-           <img class="row_feed" onclick="location.href='{% url 'dailyphoto:detail' id=post.id %}'" src = "/media/{{post.photo}}">
+          <a href="{% url 'dailyphoto:detail' id=post.id %}"><img class="row_feed" src = "/media/{{post.photo}}"></a>
           {% else %}
-          <img class="row_feed" onclick="location.href='{% url 'dailyphoto:detail' id=post.id %}'" src ="/static/images/DailyphotoLogo_r.png">
+          <a href="{% url 'dailyphoto:detail' id=post.id %}"><img class="row_feed" src = "/static/images/DailyphotoLogo_r.png"></a>
           {% endif%}
                                
                         </div>
