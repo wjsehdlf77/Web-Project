@@ -424,10 +424,15 @@ span {
   margin: 25px 10px 25px 10px;
   border: 5px double #DCDCDC; 
   padding: 0.4em;
+  display: block;
+  overflow-wrap: break-word;
+  /* text-overflow: ellipsis;/ */
+  /* overflow: hidden; */
+  text-align:center;
+  
 }
 .detail_content {
   margin: 10px 10px 30px 10px;
-
 }
 .postmodal_window .child {
   flex: 1;
@@ -439,7 +444,11 @@ span {
   object-fit: contain;
   margin: 0px;
 }
-
+.detail_buttons{
+  position:absolute;
+  bottom:5%;
+  right: 5%;
+}
 
 div.over {
   overflow: auto;

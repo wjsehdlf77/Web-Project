@@ -59,12 +59,15 @@
         {% comment %} 내용 파트 {% endcomment %}
         <div class="child over">
           <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
-          <div class="detail_title">
-            <h4 style="text-align:center;">
-            {{post.title}}</h4>
+          <div>
+            <h4 class="detail_title">{{post.title}}</h4>
           </div>
           <div class="detail_content">
             <p style='font-size:25px;'>{{post.content}}</p>
+          </div>
+          <div class="detail_buttons">
+            <button id="modify_{{post.id}}">수정</button>
+            <button id="delete_{{post.id}}">삭제</button>
           </div>
         </div>
       </div>
