@@ -1,5 +1,11 @@
-from time import time, timezone
 
+from gc import get_objects
+import json
+from json.decoder import JSONDecodeError
+from django.http  import JsonResponse , HttpResponse
+from django.views import View
+
+from time import time, timezone
 
 from wsgiref.util import request_uri
 from django.contrib.auth.decorators import login_required
@@ -7,63 +13,64 @@ from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth import get_user_model
 
 
-
-from .forms import PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment, Profile
+from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
+from .models import Post, Comment, Profile, Like, User
 from . import models
 from django.utils import timezone
 from django.urls import reverse
+from django.db.models import Q
 
+from django.db.models import Q
 
-
-
-
-
-
-# from PIL import Image
 
 # 주소 index 
 def index(request):
-    """
-    dailyphoto 게시물 출력
-    """
- 
-    post_list = Post.objects.order_by('-create_date') 
-    comment_form = CommentForm()
-    context = {'post_list': post_list, 'comment_form': comment_form}
+  """
+  dailyphoto 게시물 출력
+  """
 
+  user = get_user_model()
+  follow_list= user.objects.filter(followers=request.user)
+  
+  q = Q(author=request.user)
+  if (follow_list.count()>0):
+    for my_following in follow_list:
+      q.add(Q(author=my_following),q.OR)
 
-    return render(request, 'dailyphoto/post_list.html', context)
+  post_list = Post.objects.filter(q).order_by('-create_date')
+  
+  comment_form = CommentForm
+
+  context = {'post_list': post_list,  "comment_form" : comment_form}
+  return render(request, 'dailyphoto/post_list.html', context)
 
 # post 상세
 def detail(request, id):
-    
-    post  = get_object_or_404(Post, pk=id) # 예외일때 404에러 발생
-    # get_object_or_404 <- 오류 화면 구성
-    context = {'post': post}
-    return render(request, 'dailyphoto/post_detail.html', context)
+  
+  post  = get_object_or_404(Post, pk=id) # 예외일때 404에러 발생
+  # get_object_or_404 <- 오류 화면 구성
+  context = {'post': post}
+  return render(request, 'dailyphoto/post_detail.html', context)
   
 
 @login_required(login_url='common:login')
 def comment_create(request, post_id):
-      if request.user.is_authenticated:
+  if request.user.is_authenticated:
 
-            post = get_object_or_404(models.Post, pk=post_id)
+    post = get_object_or_404(models.Post, pk=post_id)
 
-            form = CommentForm(request.POST)
-            if form.is_valid():
-                  comment = form.save(commit=False)
-                  comment.author = request.user
-                  comment.post = post
-                  comment.save()
+    form = CommentForm(request.POST)
+    if form.is_valid():
+      comment = form.save(commit=False)
+      comment.author = request.user
+      comment.post = post
+      comment.save()
+      
+      return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
+
+    else:
+      return render(request, 'dailyphoto/post_list.html')
                   
-                  return redirect(reverse('dailyphoto:index')+"#comment-"+str(comment.id))
-
-            else:
-                  return render(request, 'dailyphoto/post_list.html')
-    
-
-
 
 def comment_delete(request, comment_id):
     if request.user.is_authenticated:
@@ -122,11 +129,88 @@ def post_create(request):
   return render(request, 'dailyphoto/upload_page.html', context )
 
 
+#like
+@login_required(login_url='common:login')
+def like(request):
+
+  def liking(post, like,like_count):
+    like.post=post
+    post.like_count = like_count + 1
+    print(like)
+    like.save()
+    post.save()
+    print('liked')
+
+  if request.method=="POST":
+    form = LikeForm(request.POST)
+    
+    print(request.body)
+    if form.is_valid():
+      like=form.save(commit=False)
+      like.author= request.user
+      data=request.body.decode()
+      data = data.split('&')
+      data_post=data[0].split('=')[1]
+      post = get_object_or_404(models.Post, pk=data_post)
+      post_filtered = Like.objects.filter(post_id = data_post)
+      if post_filtered:
+        user_filtered = post_filtered.filter(author_id=request.user)
+        if user_filtered :
+          print('double liking error')
+        else:
+          like_count=post_filtered.count()
+          liking(post,like,like_count)
+      else:
+        like_count=post_filtered.count()
+        liking(post,like,like_count)
+    else:
+      print('form is not valid')
+  else:
+    print('else')
+    print(request)
+
+  return HttpResponse()
+
+# like 취소
+@login_required(login_url='common:login')
+def unlike(request):
+
+  if request.method=="POST":
+    form = LikeForm(request.POST)
+    
+    print(request.body)
+    if form.is_valid():
+      data=request.body.decode()
+      data = data.split('&')
+      data_post=data[0].split('=')[1]
+      post = get_object_or_404(models.Post, pk=data_post)
+      post_filtered = Like.objects.filter(post_id = data_post)
+      if post_filtered:
+        user_filtered = post_filtered.filter(author_id=request.user)
+        if user_filtered :
+          print('like data exist')
+          like = user_filtered.first()
+          print(like)
+          like.delete()
+          post.like_count = post_filtered.count() -1
+          post.save()
+        else:
+          pass
+      else:
+        pass
+    else:
+      print('form is not valid')
+  else:
+    print('else')
+    print(request)
+
+  return HttpResponse()
+
 #프로필화
 def profile(request, username):
     person = get_object_or_404(get_user_model(), username = username )
     post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
-    
+
     context = {
        'person': person,
        'post_photo' : post_photo
@@ -158,15 +242,17 @@ def modify_profile(request):
 
 
 
-def follow(request, user_id):
-  if request.user.is_authenicated:
-    follow_user = get_object_or_404(get_user_model(), pk = user_id)
-    if follow_user != request.user:
-      if follow_user.followers.filter(pk = request.user.id).exists():
-        follow_user.followers.remove(request.user)
-      else:
-        follow_user.followers.add(request.user)
-      return redirect('dailyphoto:profile', follow_user.username)
+def follow(request, user_pk):
+    if request.user.is_authenticated:
+        user = get_user_model()
+        person = get_object_or_404(user, pk=user_pk)
+        if person != request.user:
+            # if request.user.followings.filter(pk=user_pk).exists():
+            if person.followers.filter(pk=request.user.pk).exists():
+                person.followers.remove(request.user)
+            else:
+                person.followers.add(request.user)
+        return redirect('dailyphoto:profile', person.username)
     return redirect('dailyphoto:login')
 
 
@@ -178,10 +264,3 @@ def follow(request, user_id):
 #   return searched
 
  
-
-    
-
-  
-
-
-

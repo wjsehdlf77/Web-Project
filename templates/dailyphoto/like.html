@@ -1,0 +1,21 @@
+<label class="like" id="like_{{forloop.counter}}">
+  {% if post.like_set.all %}
+  {% for lkp in post.like_set.all %}
+  {% if lkp.author == user %}
+  <input type="checkbox" checked />
+  <postid>{{post.id}}</postid>
+  <span><img src="/static/images/cloud_full.png" class="like_icon" alt="" /></span>
+  {% elif forloop.last %}
+  <input type="checkbox" />
+  <postid>{{post.id}}</postid>
+  <span><img src="/static/images/cloud_empty.png" class="like_icon" alt="" /></span>
+  {% endif %}
+  {% endfor %}
+  {% else %}
+  <input type="checkbox" />
+  <postid>{{post.id}}</postid>
+  <span><img src="/static/images/cloud_empty.png" class="like_icon" alt="" /></span>
+  {% endif%}
+  <span class="feed_txt" id="like_count_{{forloop.counter}}"><b>좋아요 {{post.like_count}}개</b></span>
+
+</label>

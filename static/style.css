@@ -1,3 +1,8 @@
+* {
+  font-family: "Gowun Dodum", sans-serif;
+  font-size: 1rem;
+}
+
 .background_set {
   background-image: url("cloud_background.jfif");
 }
@@ -70,6 +75,7 @@
 .icon {
   width: 1.5rem;
   height: 1.5rem;
+  vertical-align: bottom; 
 }
 .icon_upload label {
   border-radius: 5px;
@@ -87,15 +93,26 @@
   background-color: beige;
 }
 
+.like > input {
+  display: none;
+  /* visibility: hidden; */
+}
+.like > postid {
+  display: none;
+}
+
+.like_icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  /* font-size: 1rem; */
+}
+
 /* 메인 화면에 들어갈 css */
 .home_main_body {
-  
-
   display: flex;
   padding-top: 50px;
-  background-color: rgb(195, 213, 247); /* 배경 약간 회색 */
+  background-color: #c9e0e8;
   justify-content: center;
-  
 }
 
 .body_form {
@@ -105,40 +122,68 @@
 }
 .sub_body_form {
   display: flex;
-
+  padding: 50px 100px 50px 100px;
+  justify-content: space-between;
+  background-image: url("1644906582236.jpg"); 
+  background-repeat : no-repeat;
+  background-size :  100% 105%;
   flex-direction: row;
   
 }
 
 .left {
-  padding-top: 50px;
-  background-color: rgb(195, 213, 247);
-  flex-basis: 0%;
+  margin-right: 25px;
+  margin-top: 50px;
 }
 
 .right {
-  padding-top: 50px;
-  background-color: rgb(195, 213, 247);
-  flex-basis: 0%;
+  display: flex;
+  margin-left: 25px;
   
+
 }
 
 /* 피드 */
 
-.feed_box {
-  background-color: white;
+.left_feed_box {
+
   width: 700px;
   height: 700px;
+  display: flex;
+  flex-direction: column;
+}
+.right_feed_box {
+
+  width: 600px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  justify-content: center;
+  margin-left:100px;
+  margin-right:30px;
+  
+  
+}
+
+.big_feed_img {
+  display: flex;
+  justify-content: center;
 
   
 }
 .overflow{
   overflow : auto;
+
 }
 
 .feed_img {
-  width: 100%;
-  object-fit: contain;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+ 
+  width: 500px;
+  height: 500px;
 }
 
 .feed_content {
@@ -166,9 +211,10 @@
 }
 
 .feed_icon {
-  padding: 5px 5px 0px 5px;
+  padding: 5px 5px 0px 25px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  vertical-align: bottom; 
 }
 span {
   padding-right: 5px;
@@ -300,6 +346,7 @@ span {
   width: 240px;
   height: 240px;
   object-fit: cover;
+  border: 2px solid silver;
   margin: 10px;
 }
 
@@ -333,9 +380,7 @@ span {
   flex-direction: column;
 }
 
-.asd {
-  float: right;
-}
+
 
 /* diary 글 박스 */
 .dairy_post_box {
@@ -379,10 +424,15 @@ span {
   margin: 25px 10px 25px 10px;
   border: 5px double #DCDCDC; 
   padding: 0.4em;
+  display: block;
+  overflow-wrap: break-word;
+  /* text-overflow: ellipsis;/ */
+  /* overflow: hidden; */
+  text-align:center;
+  
 }
 .detail_content {
   margin: 10px 10px 30px 10px;
-
 }
 .postmodal_window .child {
   flex: 1;
@@ -394,7 +444,11 @@ span {
   object-fit: contain;
   margin: 0px;
 }
-
+.detail_buttons{
+  position:absolute;
+  bottom:5%;
+  right: 5%;
+}
 
 div.over {
   overflow: auto;
@@ -408,16 +462,22 @@ div.over {
 /*  */
 
 .big_feed_title {
-  display: flex;
-  padding: 20px 0;
+  display: block;
+  padding: 20px 10px;
   margin: 10px 10px 30px 10px;
   border: 1px solid;
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
-  font-family: cursive;
-  justify-content: center;
-  height : 72px;  
+  /* font-family: cursive; */
+  /* justify-content: center; */
+  text-align: center;
+  height : 72px; 
+  width: 500px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  
+  
 }
 
 .big_feed_content {
@@ -434,7 +494,7 @@ div.over {
 .comment-input {
   height: 56px;
   border: 1px solid #dbdbdb;
-  width: auto; 
+  width: auto;
 }
 .comment-input form {
   height: 100%;
@@ -465,5 +525,3 @@ div.over {
   margin-left: 16px;
   margin-bottom: 22px;
 }
-
-
