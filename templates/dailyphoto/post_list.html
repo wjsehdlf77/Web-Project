@@ -41,9 +41,9 @@
               <div class="comment overflow" >
                   
                 {% for comment in post.comment_set.all %}
-                  <div id="comment-{{comment.id}} "  >
-                  <b>{{comment.author.username}}</b>
-                  {{comment.content}}
+                  <div id="comment-{{comment.id}} " class="clearfix" >
+                    <b>{{comment.author.username}}</b>
+                    {{comment.content}}
                  
                   {% if user.id == comment.author.id %}
                         <div style="float:right">
