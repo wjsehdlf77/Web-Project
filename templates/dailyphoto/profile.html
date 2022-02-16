@@ -5,8 +5,9 @@
     <div class="sub_body">
         <div style="display: flex; flex-direction: row">
             <div class="profile_photo">
-                
-                <img class="profile_img" src = "{{person.profile.image.url}}">
+                {% if person.profile.image.url%}
+                  <img class="profile_img" src = "{{person.profile.image.url}}">
+                {% elseif %}
                 
             </div>
 

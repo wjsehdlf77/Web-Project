@@ -24,7 +24,7 @@
   <body>
     {%load static %}{% static "" as baseUrl %}
     {% comment %} opacity:0.5 내비바 투명도 {% endcomment %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top " style="width: 100%;; position: fixed">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top opacity:0.7" style="width: 100%;; position: fixed">
       {% comment %} 상단 고정 sticky-top {% endcomment %}
       <div class="container">
         <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
@@ -34,7 +34,7 @@
           <input class="form-control" type="text" placeholder="Search Id" id="id_name"/>
           <button class="searchbutton" type="button" onclick="getValueInput()"><span class="material-icons-outlined">
             search
-            </span></button> 
+            </span></button>
         </form>
       
 

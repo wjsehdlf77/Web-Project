@@ -20,8 +20,6 @@ from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
 
-from django.db.models import Q
-
 
 # 주소 index 
 def index(request):
@@ -39,7 +37,7 @@ def index(request):
 
   post_list = Post.objects.filter(q).order_by('-create_date')
   
-  comment_form = CommentForm
+  comment_form = CommentForm()
 
   context = {'post_list': post_list,  "comment_form" : comment_form}
   return render(request, 'dailyphoto/post_list.html', context)
