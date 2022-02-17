@@ -1,8 +1,13 @@
-{% include 'base.html' %} {% block content %} {% load bootstrap4 %}
+ 
+{% include 'base.html' %}{% block content %} {% load bootstrap4 %}
+
+
 <div class="modal_overlay" id="id_modal_upload">
   <form method="post" class="post-form modal_window" enctype="multipart/form-data" id="form_upload" onsubmit="">
     {% csrf_token %}
-    <div class="upload_left">사진</div>
+    <div class="upload_left">사진
+      <img class="upload_preview" id="preview_pic"/> 
+    </div>
     <div class="upload_right">
       <div class="form-group">
         <label for="content"></label>
@@ -15,16 +20,23 @@
           value="{{ form.title.value|default_if_none:'' }}"
         />
       </div>
-      <input type="date">
+      <input type="date" id="datePicker">
       <hr />
       <div class="form-group icon_upload">
-        <label><input type="checkbox" name="icons[]" value="happy" /><i class="fas fa-regular fa-face-smile-beam"></i> happy</label>
-        <label><input type="checkbox" name="icons[]" value="hearts" /> <i class="fas fa-regular fa-face-smile-hearts"></i> hearts</label>
-        <label><input type="checkbox" name="icons[]" value="meh" /> <i class="fas fa-regular fa-face-meh"></i> meh </label>
+        오늘의 감정:
+        <label><input type="checkbox" name="icons[]" value="happy" /><img src="/static/images/icons/emotion/happy.png" class="icon" alt="" /></label>
+        <label><input type="checkbox" name="icons[]" value="hearts" /><img src="/static/images/icons/emotion/love.png" class="icon" alt="" /></label>
+        <label><input type="checkbox" name="icons[]" value="meh" /><img src="/static/images/icons/emotion/rolling-eyes.png" class="icon" alt="" /></label>
         <br />
-        <label><input type="checkbox" name="icons[]" value="sunny" /><i class="fas fa-sun"></i> sunny</label>
-        <label><input type="checkbox" name="icons[]" value="cloud" /> <i class="fas fa-solid fa-clouds"></i> cloud</label>
-        <label><input type="checkbox" name="icons[]" value="rain" /><i class="fas fa-cloud-showers-heavy"></i> rain</label>
+        오늘의 날씨:
+        <label><input type="checkbox" name="icons[]" value="sunny" /><img src="/static/images/icons/weather/sun.png" class="icon" alt="" /></label>
+        <label><input type="checkbox" name="icons[]" value="cloud" /><img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" /></label>
+        <label><input type="checkbox" name="icons[]" value="rain" /><img src="/static/images/icons/weather/rain.png" class="icon" alt="" /></label>
+        <br/>
+        오늘 있었던 일: 
+        <label><input type="checkbox" name="icons[]" value="school" /><img src="/static/images/icons/things/school.png" class="icon" alt="" /></label>
+        <label><input type="checkbox" name="icons[]" value="weight" /><img src="/static/images/icons/things/weight.png" class="icon" alt="" /></label>
+
       </div>
       <div class="form-group">
         <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">
@@ -32,7 +44,7 @@
         >
       </div>
       <div>
-        <input type="file" name="photo" accept="image/*" id="id_photo" />
+        <input type="file" name="photo" accept="image/*" id="id_photo"/>
       </div>
       <button type="submit" class="btn btn-primary" id="upload"><i class="fas fa-save"></i> 저장하기</button>
       <a href=" {% url 'dailyphoto:index' %}" class="btn btn-primary">닫기</a>
@@ -43,4 +55,9 @@
   console.log("upload_page 인클루드 되었습니다. ");
 </script>
 
+{% endblock %}
+
+사진 스크립트
+{% block preview %}
+<script src = "/static/preview.js"></script>
 {% endblock %}

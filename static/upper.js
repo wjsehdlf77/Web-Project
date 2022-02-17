@@ -3,6 +3,7 @@ function helloworld() {
   console.log("helloworld");
 }
 
+
 function display_icon(icons, num) {
   // if counter
 
@@ -45,17 +46,17 @@ function display_icon(icons, num) {
       if (icons_list[i] == "sunny") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<img src="/static/images/icons/weather/sun.png" class="icon" alt="" />`
+          `<img src="/static/images/icons/weather/sun.png" class="icon" alt="" /> `
         );
       } else if (icons_list[i] == "cloud") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" />`
+          `<img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" /> `
         );
       } else if (icons_list[i] == "rain") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<img src="/static/images/icons/weather/storm.png" class="icon" alt="" /> `
+          `<img src="/static/images/icons/weather/rain.png" class="icon" alt="" /> `
         );
       }
 
