@@ -1,7 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="home_main_body" style="padding-top: 80px">
-  <div class="body_form">
+<div class="home_main_body" style="padding-top: 80px" >
+  
+  <div class="body_form ">
+    <form method="GET" action="{% url 'dailyphoto:search' %}" >
+      <div id="search" >
+        <input name="search" type="date" >
+        <button class="btn btn-outline-secondary" type="submit">검색</button>
+      </div>
+      </form> 
     {% for post in post_list %}
     <div class="sub_body_form">
       <div class="left">
@@ -24,6 +31,7 @@
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
             <!-- icon -->
             {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
+            <p>Uploaded Date:{{ post.create_date | date:' Y.m.d' }}</p>
           </div>
         </div>
       </div>
@@ -31,6 +39,7 @@
         <div class="right_feed_box">
           <div class="big_feed_title">{{post.title}}</div>
           <div class="big_feed_content overflow">{{post.content}}</div>
+            <hr>
               <div class="comment overflow" >
                 {% for comment in post.comment_set.all %}
                   <div id="comment-{{comment.id}} " class="clearfix" >
@@ -61,3 +70,6 @@
 </div>
 
 {% endblock %}
+
+
+

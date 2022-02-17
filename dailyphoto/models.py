@@ -5,6 +5,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import FileExtensionValidator
 
 
 
@@ -66,6 +67,9 @@ class Profile(models.Model):
     description = models.TextField(blank=True)
     nickname = models.CharField(max_length=40, blank=True)
     image = models.ImageField(upload_to= 'image/', blank=True)   #Pillow설치
+    music = models.FileField(upload_to= 'music/', blank = True, validators=[FileExtensionValidator(allowed_extensions=['mp3'])]) 
+
+
 
 
     def __str__(self):

@@ -22,10 +22,17 @@ urlpatterns = [
     path('modify/', views.modify_profile, name="modify_profile"),
     path('like/',views.like, name='like'),
     path('unlike/',views.unlike, name='unlike'),
+    
+   
   # COMMENT
     path('<int:post_id>/comment_create/' , views.comment_create, name="comment_create"),
     path('<int:comment_id>/comment_delete/', views.comment_delete, name="comment_delete"),
 
+  # search
+    path('search/',views.search, name="search"),
+    
+    path('search/like/',views.like, name='like'),
+    path('search/unlike/',views.unlike, name='unlike'),
     
 
 

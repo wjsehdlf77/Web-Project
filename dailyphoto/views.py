@@ -17,6 +17,30 @@ def index(request):
   """
   dailyphoto 게시물 출력
   """
+  
+
+    # 조회
+  post_list = Post.objects.order_by('-create_date')      
+  user = get_user_model()
+  follow_list= user.objects.filter(followers=request.user)
+  
+  q = Q(author=request.user)
+  if (follow_list.count()>0):
+    for my_following in follow_list:
+      q.add(Q(author=my_following),q.OR)
+
+
+  post_list = Post.objects.filter(q).order_by('-create_date')
+ 
+  
+  comment_form = CommentForm()
+
+  context = {'post_list': post_list,  "comment_form" : comment_form}
+  return render(request, 'dailyphoto/post_list.html', context)
+
+# 검색기능 
+def search(request):
+  post_list = Post.objects.all()
 
   user = get_user_model()
   follow_list= user.objects.filter(followers=request.user)
@@ -26,12 +50,18 @@ def index(request):
     for my_following in follow_list:
       q.add(Q(author=my_following),q.OR)
 
+
   post_list = Post.objects.filter(q).order_by('-create_date')
   
+  search = request.GET.get('search','')
+  if search:
+     post_list = post_list.filter(
+      Q(create_date__icontains = search) 
+    )
   comment_form = CommentForm
 
-  context = {'post_list': post_list,  "comment_form" : comment_form}
-  return render(request, 'dailyphoto/post_list.html', context)
+  return render(request, 'dailyphoto/post_list.html', {'post_list':post_list, 'search':search, 'comment_form':comment_form})
+
 
 # post 상세
 def detail(request, id):
@@ -282,6 +312,7 @@ def follow(request, user_pk):
                 person.followers.add(request.user)
         return redirect('dailyphoto:profile', person.username)
     return redirect('dailyphoto:login')
+
 
 
 
