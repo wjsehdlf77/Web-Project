@@ -111,7 +111,7 @@
 .home_main_body {
   display: flex;
   padding-top: 50px;
-  justify-content: center;
+  justify-content:center;
 }
 
 .body_form {
