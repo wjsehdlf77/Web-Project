@@ -12,8 +12,8 @@ urlpatterns = [
     path('detail/<int:id>/', views.detail, name="detail"), # <int:post_id>/   <- 상세보기 주소
   # 글 생성/수정/삭제
     path('upload/', views.post_create, name="post_create"),
-    path('update/',views.post_update,name="post_update"),
-    path('delete/',views.post_delete,name="post_delete"),
+    path('update/<int:post_id>',views.post_update,name="post_update"),
+    path('delete/<int:post_id>',views.post_delete,name="post_delete"),
   # 팔로우
     path('<int:user_pk>/follow/', views.follow, name='follow'),
   # PROFILE
