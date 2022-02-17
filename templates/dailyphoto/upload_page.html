@@ -24,19 +24,31 @@
       <hr />
       <div class="form-group icon_upload">
         오늘의 감정:
-        <label><input type="checkbox" name="icons[]" value="happy" /><img src="/static/images/icons/emotion/happy.png" class="icon" alt="" /></label>
-        <label><input type="checkbox" name="icons[]" value="hearts" /><img src="/static/images/icons/emotion/love.png" class="icon" alt="" /></label>
-        <label><input type="checkbox" name="icons[]" value="meh" /><img src="/static/images/icons/emotion/rolling-eyes.png" class="icon" alt="" /></label>
+        <script>
+          for (i=0;i<emotion_list.length;i++){
+            // console.log(emotion_list[i])
+            temp_html = `<label title="`+emotion_list[i]+`"><input type="checkbox" name="icons[]" value="`+emotion_list[i]+`" /><img src="/static/images/icons/emotion/`+emotion_list[i]+`.png" class="icon" alt="" /></label>`
+            $('.icon_upload').append(temp_html)
+          }
+        </script>        
         <br />
         오늘의 날씨:
-        <label><input type="checkbox" name="icons[]" value="sunny" /><img src="/static/images/icons/weather/sun.png" class="icon" alt="" /></label>
-        <label><input type="checkbox" name="icons[]" value="cloud" /><img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" /></label>
-        <label><input type="checkbox" name="icons[]" value="rain" /><img src="/static/images/icons/weather/rain.png" class="icon" alt="" /></label>
+        <script>
+          for (i=0;i<weather_list.length;i++){
+            // console.log(weather_list[i])
+            temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
+            $('.icon_upload').append(temp_html)
+          }
+        </script>      
         <br/>
         오늘 있었던 일: 
-        <label><input type="checkbox" name="icons[]" value="school" /><img src="/static/images/icons/things/school.png" class="icon" alt="" /></label>
-        <label><input type="checkbox" name="icons[]" value="weight" /><img src="/static/images/icons/things/weight.png" class="icon" alt="" /></label>
-
+        <script>
+          for (i=0;i<things_list.length;i++){
+            // console.log(weather_list[i])
+            temp_html = `<label title="`+things_list[i]+`"><input type="checkbox" name="icons[]" value="`+things_list[i]+`" /><img src="/static/images/icons/things/`+things_list[i]+`.png" class="icon" alt="" /></label>`
+            $('.icon_upload').append(temp_html)
+          }
+        </script>      
       </div>
       <div class="form-group">
         <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">

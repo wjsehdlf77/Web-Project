@@ -1,10 +1,10 @@
 // console.log("upper.js 가 로드되었습니다.")
 
-const emotion_list= ["angel","angry","angry_devil","broken-heart","cool","cry","dead","devil","flat","happy","hearts","joycry","kiss","laugh","love","meh","neutral","puke","puke_rainbow","relax","rolling-eyes","sad","sad_cry","shut","sigh","sleep","smile","smile_heart","stunned","suprised","suspicious","sweat","thinking","why","wink","yummy"]
+const emotion_list= ["angel","angry","angry_devil","broken-heart","cool","cry","dead","devil","flat","happy","hearts","joycry","kiss","laugh","love","neutral","puke","puke_rainbow","relax","rolling-eyes","sad","sad_cry","shut","sigh","sleep","smile","smile_heart","stunned","surprised","suspicious","sweat","thinking","why","wink","yummy"]
 
 const weather_list=["cloudy", "cold","leaf","moon","rain","rainbow","snow","snow_cloudy","storm","sun","wind"]
 
-const things_list = ["school","weight"]
+const things_list = ["camera","chat","civil-rights","covid-19","dental","game-over","grandma","hard-work","hold-hand","level-up","medicine","peace","school","sing","washer","weight","whatsapp","zehovah"]
 
 
 function helloworld() {
@@ -29,7 +29,7 @@ function display_icon(icons, num) {
     for (i = 0; i < icons_list.length; i++) {
       for(j=0;j<emotion_list.length;j++){
         if(icons_list[i]==emotion_list[j]){
-          let temp_html=`<span><img src="/static/images/icons/emotion/`+emotion_list[j]+`.png" class="icon" alt="" /></span>`
+          let temp_html=`<span title="`+emotion_list[j]+`"><img src="/static/images/icons/emotion/`+emotion_list[j]+`.png" class="icon" alt="" /></span>`
           div_icons.insertAdjacentHTML("beforeend",temp_html)
           continue here;
         }
@@ -63,7 +63,7 @@ function display_icon(icons, num) {
     for (i = 0; i < icons_list.length; i++) {
       for(j=0;j<weather_list.length;j++){
         if(icons_list[i]==weather_list[j]){
-          let temp_html=`<span><img src="/static/images/icons/weather/`+weather_list[j]+`.png" class="icon" alt="" /></span>`
+          let temp_html=`<span title="`+weather_list[j]+`"><img src="/static/images/icons/weather/`+weather_list[j]+`.png" class="icon" alt="" /></span>`
           div_icons.insertAdjacentHTML("beforeend",temp_html)
           continue top;
         }
@@ -99,7 +99,7 @@ function display_icon(icons, num) {
     for (i = 0; i < icons_list.length; i++) {
       for(j=0;j<things_list.length;j++){
         if(icons_list[i]==things_list[j]){
-          let temp_html=`<span><img src="/static/images/icons/things/`+things_list[j]+`.png" class="icon" alt="" /></span>`
+          let temp_html=`<span title="`+things_list[j]+`"><img src="/static/images/icons/things/`+things_list[j]+`.png" class="icon" alt="" /></span>`
           div_icons.insertAdjacentHTML("beforeend",temp_html)
           continue things;
         }

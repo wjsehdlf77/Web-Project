@@ -79,6 +79,7 @@
 .icon {
   width: 2rem;
   height: 2rem;
+  margin:2px;
   /* vertical-align: bottom; */
 }
 .icon_upload label {
@@ -88,12 +89,14 @@
 .icon_upload input {
   border: thin;
   /* display: none; */
+}:checked {
+  background-color: beige;
 }
 .icon_upload label:hover {
   background-color: lightgray;
   border: thin;
 }
-.icon_upload label input:checked + label {
+.icon_upload label input:checked {
   background-color: beige;
 }
 
