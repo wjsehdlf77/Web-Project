@@ -2,6 +2,11 @@
 
 <div class="home_main_body" style="padding-top: 80px">
   <div class="body_form">
+    <form action="{% url 'dailyphoto:index' post.create_date %}" method="post">
+      {% csrf_token %}
+      {{ comment_form }}
+      <input type="submit" value="post">
+    </form>
     {% for post in post_list %}
     <div class="sub_body_form">
       <div class="left">
@@ -24,6 +29,7 @@
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
             <!-- like -->
             {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
+            <p>Uploaded Date:{{ post.create_date | date:' Y.m.d' }}</p>
           </div>
         </div>
       </div>
