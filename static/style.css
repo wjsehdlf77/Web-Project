@@ -122,11 +122,11 @@
 .sub_body_form {
   display: flex;
   padding: 50px 100px 50px 100px;
-  justify-content: space-between;
   background-image: url("1644906582236.jpg"); 
   background-repeat : no-repeat;
   background-size :  100% 105%;
   flex-direction: row;
+  
   
 }
 
@@ -320,6 +320,7 @@ span {
   display: flex;
   justify-content: center;
   padding-top: 100px;
+  background-color: #c9e0e8;
   z-index: 1;
   flex-wrap: wrap;
 }
@@ -328,7 +329,6 @@ span {
   justify-content: center;
   flex-direction: column;
   width: 1000px;
-  /*   */
   background-color: #f8f9fa;
   align-items: center;
   padding: 0px 0px 40px 0px;

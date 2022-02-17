@@ -24,7 +24,7 @@
   <body>
     {%load static %}{% static "" as baseUrl %}
     {% comment %} opacity:0.5 내비바 투명도 {% endcomment %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top " style="width: 100%;; position: fixed">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top opacity:0.7" style="width: 100%;; position: fixed">
       {% comment %} 상단 고정 sticky-top {% endcomment %}
       <div class="container">
         <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
@@ -34,10 +34,9 @@
           <input class="form-control" type="text" placeholder="Search Id" id="id_name"/>
           <button class="searchbutton" type="button" onclick="getValueInput()"><span class="material-icons-outlined">
             search
-            </span></button> 
+            </span></button>
         </form>
       
-
 
 
         <div>
@@ -46,7 +45,11 @@
             <a class="nav-link" href="{% url 'dailyphoto:index' %}"><span class="material-icons">home</span></a>
             <a class="nav-link" href="{% url 'dailyphoto:post_create' %}"><span class="material-icons-outlined">add_box</span></a>
             <a class="nav-link" href="/dailyphoto/profile/{{user.username}}">
+              {% if user.profile.image %}
             <img src="/media/{{user.profile.image}}" class="avata-sm rounded-circle"/></a>
+              {% else %}
+            <img src="/static/fc9246c04e82487ab0fe515f9d24f415.jpg" class="avata-sm rounded-circle"/></a>
+            {% endif %}
             </ul>
           </div>
         </div>
