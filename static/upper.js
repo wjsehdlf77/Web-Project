@@ -35,7 +35,6 @@ function display_icon(icons, num) {
 
   if (is_in(icons_list, weather_list)) {
     div_icons.insertAdjacentHTML("beforeend", `<span>  오늘의 날씨:</span>`);
-
     top:
     for (i = 0; i < icons_list.length; i++) {
       for(j=0;j<weather_list.length;j++){

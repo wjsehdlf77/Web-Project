@@ -25,9 +25,10 @@
       <div class="form-group icon_upload">
         오늘의 감정:
         <script>
+          var upload_icons = $('.icon_upload')
           for (i=0;i<emotion_list.length;i++){
             temp_html = `<label title="`+emotion_list[i]+`"><input type="checkbox" name="icons[]" value="`+emotion_list[i]+`" /><img src="/static/images/icons/emotion/`+emotion_list[i]+`.png" class="icon" alt="" /></label>`
-            $('.icon_upload').append(temp_html)
+            upload_icons.append(temp_html)
           }
         </script>        
         <br />
@@ -35,7 +36,7 @@
         <script>
           for (i=0;i<weather_list.length;i++){
             temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
-            $('.icon_upload').append(temp_html)
+            upload_icons.append(temp_html)
           }
         </script>      
         <br/>
@@ -43,7 +44,7 @@
         <script>
           for (i=0;i<things_list.length;i++){
             temp_html = `<label title="`+things_list[i]+`"><input type="checkbox" name="icons[]" value="`+things_list[i]+`" /><img src="/static/images/icons/things/`+things_list[i]+`.png" class="icon" alt="" /></label>`
-            $('.icon_upload').append(temp_html)
+            upload_icons.append(temp_html)
           }
         </script>      
       </div>
