@@ -13,15 +13,11 @@ function helloworld() {
 
 
 function display_icon(icons, num) {
-  // if counter
 
   let icons_list = icons.split("&amp;");
   console.log(icons_list);
   id_num = "icons" + num.toString();
-  // console.log(id_num)
   let div_icons = document.getElementById(id_num);
-  // console.log(div_icons)
-
 
   if (is_in(icons_list, emotion_list)) {
     div_icons.insertAdjacentHTML("beforeend", `<span>오늘의 감정:</span>`);
@@ -34,25 +30,6 @@ function display_icon(icons, num) {
           continue here;
         }
       }
-      // if (icons_list[i] == "happy") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<span><img src="/static/images/icons/emotion/happy.png" class="icon" alt="" /></span>`
-      //   );
-      //   continue;
-      // } else if (icons_list[i] == "hearts") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<span><img src="/static/images/icons/emotion/hearts.png" class="icon" alt="" /></span>`
-      //   );
-      //   continue;
-      // } else if (icons_list[i] == "meh") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<img src="/static/images/icons/emotion/rolling-eyes.png" class="icon" alt="" />`
-      //   );
-      //   continue;
-      // }
     }
   }
 
@@ -68,29 +45,6 @@ function display_icon(icons, num) {
           continue top;
         }
       }
-
-
-      // if (icons_list[i] == "sunny") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<img src="/static/images/icons/weather/sun.png" class="icon" alt="" /> `
-      //   );
-      // } else if (icons_list[i] == "cloud") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" /> `
-      //   );
-      // } else if (icons_list[i] == "rain") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<img src="/static/images/icons/weather/rain.png" class="icon" alt="" /> `
-      //   );
-      // }
-
-      // if (icons_list[i] == "-1") {
-      //   div_icons.insertAdjacentHTML("beforeend", " ");
-      // } else {
-      // }
     }
   }
   if(is_in(icons_list,things_list)){
@@ -104,18 +58,6 @@ function display_icon(icons, num) {
           continue things;
         }
       }
-
-      // if (icons_list[i] == "school") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<span><img src="/static/images/icons/things/school.png" class="icon" alt="" /></span>`
-      //   );
-      // } else if (icons_list[i] == "hearts") {
-      //   div_icons.insertAdjacentHTML(
-      //     "beforeend",
-      //     `<span><img src="/static/images/icons/things/weight.png" class="icon" alt="" /></span>`
-      //   );
-      // }
     }
   }
 }

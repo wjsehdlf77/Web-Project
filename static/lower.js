@@ -75,7 +75,7 @@ function display_like() {
       let pe = this.parentElement.parentElement
       let div_count=pe.getElementsByClassName('feed_txt')
       let count_id= div_count[0].getAttribute('id')
-      console.log(count_id)
+      // console.log(count_id)
       let content = div_count.item(0)
       content = content.textContent
 
@@ -86,11 +86,11 @@ function display_like() {
       else{
         c_txt=(parseInt(c_txt)-1).toString()}
       let temp_html = '<b>좋아요 '+c_txt+'개</b>'
-      console.log(div_count)
+      // console.log(div_count)
       like_c=$("#"+count_id)
       like_c.empty()
       like_c.append(temp_html)
-      console.log($("#"+count_id))
+      // console.log($("#"+count_id))
     });
   }
 }

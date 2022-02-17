@@ -26,7 +26,6 @@
         오늘의 감정:
         <script>
           for (i=0;i<emotion_list.length;i++){
-            // console.log(emotion_list[i])
             temp_html = `<label title="`+emotion_list[i]+`"><input type="checkbox" name="icons[]" value="`+emotion_list[i]+`" /><img src="/static/images/icons/emotion/`+emotion_list[i]+`.png" class="icon" alt="" /></label>`
             $('.icon_upload').append(temp_html)
           }
@@ -35,7 +34,6 @@
         오늘의 날씨:
         <script>
           for (i=0;i<weather_list.length;i++){
-            // console.log(weather_list[i])
             temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
             $('.icon_upload').append(temp_html)
           }
@@ -44,7 +42,6 @@
         오늘 있었던 일: 
         <script>
           for (i=0;i<things_list.length;i++){
-            // console.log(weather_list[i])
             temp_html = `<label title="`+things_list[i]+`"><input type="checkbox" name="icons[]" value="`+things_list[i]+`" /><img src="/static/images/icons/things/`+things_list[i]+`.png" class="icon" alt="" /></label>`
             $('.icon_upload').append(temp_html)
           }
