@@ -13,52 +13,72 @@ function display_icon(icons, num) {
   let div_icons = document.getElementById(id_num);
   // console.log(div_icons)
 
-  if (is_in(icons_list, ["happy", "hearts", "meh"])) {
+  if (is_in(icons_list, ["angel","angry","angry_devil","broken-heart","cool","cry","dead","devil","flat","happy","hearts","joycry","kiss","laugh","love","meh","neutral","puke","puke_rainbow","relax","rolling-eyes","sad","sad_cry","shut","sigh","sleep","smile","smile_heart","stunned","suprised","suspicious","sweat","thinking","why","wink","yummy"])) {
     div_icons.insertAdjacentHTML("beforeend", `<span>오늘의 감정:</span>`);
     for (i = 0; i < icons_list.length; i++) {
       if (icons_list[i] == "happy") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<span><img src="/static/images/icons/emotion/face-smile-regular.svg" class="icon" alt="" /><i class='fas fa-regular fa-face-smile-beam'></i> </span>`
+          `<span><img src="/static/images/icons/emotion/happy.png" class="icon" alt="" /></span>`
         );
+        continue;
       } else if (icons_list[i] == "hearts") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<span><img src="/static/images/icons/emotion/hand-holding-heart-solid.svg" class="icon" alt="" /><i class='fas fa-regular fa-face-smile-hearts'></i> </span>`
+          `<span><img src="/static/images/icons/emotion/hearts.png" class="icon" alt="" /></span>`
         );
+        continue;
       } else if (icons_list[i] == "meh") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<img src="/static/images/icons/emotion/face-meh-solid.svg" class="icon" alt="" /><i class='fas fa-regular fa-face-meh'></i> `
+          `<img src="/static/images/icons/emotion/rolling-eyes.png" class="icon" alt="" />`
         );
+        continue;
       }
     }
   }
 
   if (is_in(icons_list, ["sunny", "cloud", "rain"])) {
-    div_icons.insertAdjacentHTML("beforeend", `<span>오늘의 날씨:</span>`);
+    div_icons.insertAdjacentHTML("beforeend", `<span>  오늘의 날씨:</span>`);
 
     for (i = 0; i < icons_list.length; i++) {
       if (icons_list[i] == "sunny") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<img src="/static/images/icons/weather/sun-solid.svg" class="icon" alt="" /><i class='fas fa-sun'></i> `
+          `<img src="/static/images/icons/weather/sun.png" class="icon" alt="" />`
         );
       } else if (icons_list[i] == "cloud") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<img src="/static/images/icons/weather/cloud-solid.svg" class="icon" alt="" /><i class='fas fa-solid fa-clouds'></i> `
+          `<img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" />`
         );
       } else if (icons_list[i] == "rain") {
         div_icons.insertAdjacentHTML(
           "beforeend",
-          `<img src="/static/images/icons/weather/cloud-showers-heavy-solid.svg" class="icon" alt="" /> `
+          `<img src="/static/images/icons/weather/storm.png" class="icon" alt="" /> `
         );
       }
 
       if (icons_list[i] == "-1") {
         div_icons.insertAdjacentHTML("beforeend", " ");
       } else {
+      }
+    }
+  }
+
+  if(is_in(icons_list,["school","weight"])){
+    div_icons.insertAdjacentHTML("beforeend", `<span>오늘 있었던 일:</span>`);
+    for (i = 0; i < icons_list.length; i++) {
+      if (icons_list[i] == "school") {
+        div_icons.insertAdjacentHTML(
+          "beforeend",
+          `<span><img src="/static/images/icons/things/school.png" class="icon" alt="" /></span>`
+        );
+      } else if (icons_list[i] == "hearts") {
+        div_icons.insertAdjacentHTML(
+          "beforeend",
+          `<span><img src="/static/images/icons/things/weight.png" class="icon" alt="" /></span>`
+        );
       }
     }
   }

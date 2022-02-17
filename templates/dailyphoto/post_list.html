@@ -31,34 +31,20 @@
         <div class="right_feed_box">
           <div class="big_feed_title">{{post.title}}</div>
           <div class="big_feed_content overflow">{{post.content}}</div>
-          
-      
-            
-            
               <div class="comment overflow" >
-                  
                 {% for comment in post.comment_set.all %}
                   <div id="comment-{{comment.id}} " class="clearfix" >
                     <b>{{comment.author.username}}</b>
                     {{comment.content}}
-                 
                   {% if user.id == comment.author.id %}
                         <div style="float:right">
                         <a style="color:black; " href="{% url 'dailyphoto:comment_delete' comment.id %}" >
                           <span class="material-icons-outlined" >delete</span></a>
                         </div>
-                        
                         {% endif %} 
-                  
                       </div> 
                 {%endfor%} 
-                     
-
-                
               </div>
-          
-              
-          
                <!-- comment input -->
               <div class="comment-input overflow">  
                 <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
