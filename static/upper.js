@@ -1,4 +1,12 @@
 // console.log("upper.js 가 로드되었습니다.")
+
+const emotion_list= ["angel","angry","angry_devil","broken-heart","cool","cry","dead","devil","flat","happy","hearts","joycry","kiss","laugh","love","meh","neutral","puke","puke_rainbow","relax","rolling-eyes","sad","sad_cry","shut","sigh","sleep","smile","smile_heart","stunned","suprised","suspicious","sweat","thinking","why","wink","yummy"]
+
+const weather_list=["cloudy", "cold","leaf","moon","rain","rainbow","snow","snow_cloudy","storm","sun","wind"]
+
+const things_list = ["school","weight"]
+
+
 function helloworld() {
   console.log("helloworld");
 }
@@ -14,73 +22,100 @@ function display_icon(icons, num) {
   let div_icons = document.getElementById(id_num);
   // console.log(div_icons)
 
-  if (is_in(icons_list, ["angel","angry","angry_devil","broken-heart","cool","cry","dead","devil","flat","happy","hearts","joycry","kiss","laugh","love","meh","neutral","puke","puke_rainbow","relax","rolling-eyes","sad","sad_cry","shut","sigh","sleep","smile","smile_heart","stunned","suprised","suspicious","sweat","thinking","why","wink","yummy"])) {
+
+  if (is_in(icons_list, emotion_list)) {
     div_icons.insertAdjacentHTML("beforeend", `<span>오늘의 감정:</span>`);
+    here:
     for (i = 0; i < icons_list.length; i++) {
-      if (icons_list[i] == "happy") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<span><img src="/static/images/icons/emotion/happy.png" class="icon" alt="" /></span>`
-        );
-        continue;
-      } else if (icons_list[i] == "hearts") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<span><img src="/static/images/icons/emotion/hearts.png" class="icon" alt="" /></span>`
-        );
-        continue;
-      } else if (icons_list[i] == "meh") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<img src="/static/images/icons/emotion/rolling-eyes.png" class="icon" alt="" />`
-        );
-        continue;
+      for(j=0;j<emotion_list.length;j++){
+        if(icons_list[i]==emotion_list[j]){
+          let temp_html=`<span><img src="/static/images/icons/emotion/`+emotion_list[j]+`.png" class="icon" alt="" /></span>`
+          div_icons.insertAdjacentHTML("beforeend",temp_html)
+          continue here;
+        }
       }
+      // if (icons_list[i] == "happy") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<span><img src="/static/images/icons/emotion/happy.png" class="icon" alt="" /></span>`
+      //   );
+      //   continue;
+      // } else if (icons_list[i] == "hearts") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<span><img src="/static/images/icons/emotion/hearts.png" class="icon" alt="" /></span>`
+      //   );
+      //   continue;
+      // } else if (icons_list[i] == "meh") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<img src="/static/images/icons/emotion/rolling-eyes.png" class="icon" alt="" />`
+      //   );
+      //   continue;
+      // }
     }
   }
 
-  if (is_in(icons_list, ["sunny", "cloud", "rain"])) {
+  if (is_in(icons_list, weather_list)) {
     div_icons.insertAdjacentHTML("beforeend", `<span>  오늘의 날씨:</span>`);
 
+    top:
     for (i = 0; i < icons_list.length; i++) {
-      if (icons_list[i] == "sunny") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<img src="/static/images/icons/weather/sun.png" class="icon" alt="" /> `
-        );
-      } else if (icons_list[i] == "cloud") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" /> `
-        );
-      } else if (icons_list[i] == "rain") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<img src="/static/images/icons/weather/rain.png" class="icon" alt="" /> `
-        );
+      for(j=0;j<weather_list.length;j++){
+        if(icons_list[i]==weather_list[j]){
+          let temp_html=`<span><img src="/static/images/icons/weather/`+weather_list[j]+`.png" class="icon" alt="" /></span>`
+          div_icons.insertAdjacentHTML("beforeend",temp_html)
+          continue top;
+        }
       }
 
-      if (icons_list[i] == "-1") {
-        div_icons.insertAdjacentHTML("beforeend", " ");
-      } else {
-      }
+
+      // if (icons_list[i] == "sunny") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<img src="/static/images/icons/weather/sun.png" class="icon" alt="" /> `
+      //   );
+      // } else if (icons_list[i] == "cloud") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<img src="/static/images/icons/weather/cloudy.png" class="icon" alt="" /> `
+      //   );
+      // } else if (icons_list[i] == "rain") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<img src="/static/images/icons/weather/rain.png" class="icon" alt="" /> `
+      //   );
+      // }
+
+      // if (icons_list[i] == "-1") {
+      //   div_icons.insertAdjacentHTML("beforeend", " ");
+      // } else {
+      // }
     }
   }
-
-  if(is_in(icons_list,["school","weight"])){
+  if(is_in(icons_list,things_list)){
     div_icons.insertAdjacentHTML("beforeend", `<span>오늘 있었던 일:</span>`);
+    things:
     for (i = 0; i < icons_list.length; i++) {
-      if (icons_list[i] == "school") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<span><img src="/static/images/icons/things/school.png" class="icon" alt="" /></span>`
-        );
-      } else if (icons_list[i] == "hearts") {
-        div_icons.insertAdjacentHTML(
-          "beforeend",
-          `<span><img src="/static/images/icons/things/weight.png" class="icon" alt="" /></span>`
-        );
+      for(j=0;j<things_list.length;j++){
+        if(icons_list[i]==things_list[j]){
+          let temp_html=`<span><img src="/static/images/icons/things/`+things_list[j]+`.png" class="icon" alt="" /></span>`
+          div_icons.insertAdjacentHTML("beforeend",temp_html)
+          continue things;
+        }
       }
+
+      // if (icons_list[i] == "school") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<span><img src="/static/images/icons/things/school.png" class="icon" alt="" /></span>`
+      //   );
+      // } else if (icons_list[i] == "hearts") {
+      //   div_icons.insertAdjacentHTML(
+      //     "beforeend",
+      //     `<span><img src="/static/images/icons/things/weight.png" class="icon" alt="" /></span>`
+      //   );
+      // }
     }
   }
 }
