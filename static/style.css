@@ -111,8 +111,7 @@
 .home_main_body {
   display: flex;
   padding-top: 50px;
-  background-color: #c9e0e8;
-  justify-content: center;
+  justify-content:center;
 }
 
 .body_form {
@@ -182,8 +181,9 @@
   display: flex;
   align-items: center;
  
-  width: 500px;
+  width: 610px;
   height: 500px;
+ 
 }
 
 .feed_content {
@@ -329,9 +329,9 @@ span {
   justify-content: center;
   flex-direction: column;
   width: 1000px;
+  background-color: #f8f9fa;
   align-items: center;
   padding: 0px 0px 40px 0px;
-  background-color: #f8f9fa;
   border-radius: 20px;
 }
 
