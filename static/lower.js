@@ -1,5 +1,4 @@
 console.log("lower.js 가 로드되었습니다.");
-
 function helloworld() {
   console.log("helloworld");
 }
@@ -13,28 +12,8 @@ function display_like() {
     let checkbox_label = document.getElementById(id_str);
     let checkbox = checkbox_label.getElementsByTagName("input")[0];
     let checkbox_in = checkbox_label.getElementsByTagName("span")[0];
-
-
     checkbox.addEventListener("change", function (e) {
-    
-      // console.log(this)
-      let pe = this.parentElement.parentElement
-      console.log(pe)
-      // let div_count = $('feed_txt')
-      let div_count=pe.getElementsByClassName('feed_txt')
-      console.log(div_count)
-      let content = div_count.item(0)
-      // console.log(div_count.innerHTML)
-    
-      // let content = div_count.textContent
-      // let content = div_count.data()
-      console.log(content)
-      console.log(typeof(content))
-      // console.log(content.textContent)
-      content = content.textContent
 
-      c_txt=content.substr(3,content.length)
-      console.log(c_txt)
 
       if (checkbox.checked) {
         checkbox_in.innerHTML = `<img src="/static/images/cloud_full.png" class="like_icon" alt="" />`;
@@ -91,14 +70,28 @@ function display_like() {
           },
         });
       }
-      // location.reload()
+      
+
+      let pe = this.parentElement.parentElement
+      let div_count=pe.getElementsByClassName('feed_txt')
+      let count_id= div_count[0].getAttribute('id')
+      // console.log(count_id)
+      let content = div_count.item(0)
+      content = content.textContent
+
+      c_txt=content.substr(3,content.length)
+      c_txt=c_txt.substr(0,c_txt.length-1)
+      if (checkbox.checked){
+        c_txt=(parseInt(c_txt)+1).toString()}
+      else{
+        c_txt=(parseInt(c_txt)-1).toString()}
+      let temp_html = '<b>좋아요 '+c_txt+'개</b>'
+      // console.log(div_count)
+      like_c=$("#"+count_id)
+      like_c.empty()
+      like_c.append(temp_html)
+      // console.log($("#"+count_id))
     });
-    // checkbox_label.addEventListener("click", function () {
-    //   like_count = "like_count" + i.toString();
-    //   // window.location.reload()
-    //   location.reload()
-    //   // $("#" + like_count).load(window.location.href + "#" + like_count);
-    // });
   }
 }
 
