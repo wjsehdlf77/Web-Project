@@ -53,7 +53,9 @@
                           {% endif %}
                         </div>
                       </div>
+                      {% if person.profile.music %}
                       <audio autoplay controls loop><source src = "{{person.profile.music.url}}"></audio>
+                      {% endif %}
                       {% comment %} <iframe></iframe> 브라우저마다 안되면 이걸써 {% endcomment %}
             </div>
          </div>
