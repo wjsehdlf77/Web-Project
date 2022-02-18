@@ -29,7 +29,8 @@ function display_icon(icons, num) {
           continue here;
         }
       }
-    }
+    } 
+    div_icons.insertAdjacentHTML("beforeend",`<br>`)
   }
 
   if (is_in(icons_list, weather_list)) {
@@ -44,6 +45,7 @@ function display_icon(icons, num) {
         }
       }
     }
+    div_icons.insertAdjacentHTML("beforeend",`<br>`)
   }
   if(is_in(icons_list,things_list)){
     div_icons.insertAdjacentHTML("beforeend", `<span>오늘 있었던 일:</span>`);
@@ -57,6 +59,7 @@ function display_icon(icons, num) {
         }
       }
     }
+    div_icons.insertAdjacentHTML("beforeend",`<br/>`)
   }
 }
 

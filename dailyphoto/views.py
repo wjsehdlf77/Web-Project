@@ -30,11 +30,39 @@ def index(request):
 
 
   post_list = Post.objects.filter(q).order_by('-create_date')
- 
+
+  all_users = list(user.objects.values_list('username'))
+  print(all_users)
+  all_users = list(user.objects.values_list('username')[0])
+  print(all_users)
+  all_users = list(user.objects.values_list('username').values('username'))
+  print(all_users)
+  # all_users=list(user.objects.values['username'])
+  # print(all_users)
+  # all_users = list(user.objects.values_list('username').get('username'))
+  # print(all_users)
+
+  # all_users = list(user.objects.values_list('username').values('username'))
+  # print(all_users)
+
+  all_users = list(user.objects.values('username'))
+  print(all_users)
+  user_list = []
+  for us in all_users:
+    user_list.append(us['username'])
+
+  print(user_list)
+
+  # all_users=user.objects.values('username')
+  # print(all_users)
+  # all_users=list(all_users)
+  # print(all_users)
+
+
   
   comment_form = CommentForm()
 
-  context = {'post_list': post_list,  "comment_form" : comment_form}
+  context = {'post_list': post_list,  "comment_form" : comment_form,'user_list':user_list}
   return render(request, 'dailyphoto/post_list.html', context)
 
 # 검색기능 

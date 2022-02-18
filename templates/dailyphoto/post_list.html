@@ -34,16 +34,21 @@
           <div class="feed_icon">
             <!-- like -->
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-            <!-- icon -->
-            {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
-            <p>Uploaded Date:{{ post.create_date | date:' Y.m.d' }}</p>
+            <br>
+            Uploaded Date:{{ post.create_date | date:' Y.m.d' }}
+            {% if post.modify_date %}
+            <br>Updated Date:{{post.modify_date|date:'Y.m.d'}}
+            {% endif %}
           </div>
         </div>
       </div>
       <div class="right">
         <div class="right_feed_box">
           <div class="big_feed_title">{{post.title}}</div>
-          <div class="big_feed_content overflow">{{post.content}}</div>
+            <!-- icon -->
+            {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
+            <hr>
+          <div class="big_feed_content overflow">Dear diary : {{post.content}}</div>
           <hr />
           <div class="comment overflow">
             {% for comment in post.comment_set.all %}
