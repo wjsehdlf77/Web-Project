@@ -22,6 +22,8 @@ def index(request):
   post_list = Post.objects.order_by('-create_date')      
   user = get_user_model()
   follow_list= user.objects.filter(followers=request.user)
+
+  
   
   q = Q(author=request.user)
   if (follow_list.count()>0):
@@ -29,11 +31,39 @@ def index(request):
       q.add(Q(author=my_following),q.OR)
 
   post_list = Post.objects.filter(q).order_by('-create_date')
- 
+
+  all_users = list(user.objects.values_list('username'))
+  print(all_users)
+  all_users = list(user.objects.values_list('username')[0])
+  print(all_users)
+  all_users = list(user.objects.values_list('username').values('username'))
+  print(all_users)
+  # all_users=list(user.objects.values['username'])
+  # print(all_users)
+  # all_users = list(user.objects.values_list('username').get('username'))
+  # print(all_users)
+
+  # all_users = list(user.objects.values_list('username').values('username'))
+  # print(all_users)
+
+  all_users = list(user.objects.values('username'))
+  print(all_users)
+  user_list = []
+  for us in all_users:
+    user_list.append(us['username'])
+
+  print(user_list)
+
+  # all_users=user.objects.values('username')
+  # print(all_users)
+  # all_users=list(all_users)
+  # print(all_users)
+
+
   
   comment_form = CommentForm()
 
-  context = {'post_list': post_list,  "comment_form" : comment_form}
+  context = {'post_list': post_list,  "comment_form" : comment_form,'user_list':user_list}
   return render(request, 'dailyphoto/post_list.html', context)
 
 # 검색기능 
@@ -128,7 +158,6 @@ def post_create(request):
       # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
       icons = request.POST.getlist('icons[]')
       post.icons='&'.join(icons)
-
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
@@ -139,7 +168,7 @@ def post_create(request):
       print('form is not valid')
 
   else:
-    print('request method is get')
+    print('request method is get -upload')
     form=PostForm()
     
   context = {'form': form }
@@ -149,24 +178,68 @@ def post_create(request):
 #글 수정
 def post_update(request,post_id):
   if request.method== "POST":
-    post = get_object_or_404(models.Post, pk=post_id)
     form = PostForm(request.POST)
-    context = {'form': form }
+    # print(form)
+    context = {'form': form}
     if form.is_valid():
-      pass
+      post = get_object_or_404(models.Post, pk=post_id)
+      # post_before = post
+      post_temp = form.save(commit=False)
 
+      # title이 입력
+      if post_temp.title != None:
+        post.title=post_temp.title
+
+      # photo 입력
+      if 'photo' in request.FILES:
+        post.photo=request.FILES['photo']
+      else:
+        pass
+      
+      #content
+      post.content=post_temp.content
+
+      # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
+      icons = request.POST.getlist('icons[]')
+      post.icons='&'.join(icons)
+
+      #
+      post.author= request.user
+      # post.like_count=post_temp.like_count
+      # post.create_date=post_temp.creat_date
+      post.modify_date=timezone.now()
+
+      post.save()
+      print('post update made')
+
+      return redirect('dailyphoto:index')
     else:
       print('post update - form is not valid')
-
-    render(request, 'dailyphoto/upload_page.html', context )
+      print(request)
+      print(form)
     
   else:
     print('request method is get')
+    post = get_object_or_404(models.Post, pk=post_id)
+    print(post)
+    print(post.content)
+    form = PostForm(instance=post)
+    print(form)
+    context = {'form': form ,'post':post}
+    if form.is_valid():
+      print('get update - form is valid')
+      return render(request, 'dailyphoto/update_page.html', context )  
 
-    form = PostForm(request.POST)
-    context = {'form': form }
+    else:
+      print('get update - form is not valid')
+      # form = PostForm(request.POST)
+      # print(form)
+      
+      # form = PostForm(request.GET)
+      # print(form)
+      context = {'form': form }
   
-  return render(request, 'dailyphoto/upload_page.html', context )
+  return render(request, 'dailyphoto/update_page.html', context )
 
 
   
@@ -282,7 +355,6 @@ def profile(request, username):
       return redirect('dailyphoto:index')
 
 
-
 def modify_profile(request):
     if request.method == 'POST':
       user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -302,8 +374,6 @@ def modify_profile(request):
         })
 
 
-
-
 def follow(request, user_pk):
     if request.user.is_authenticated:
         user = get_user_model()
@@ -317,13 +387,3 @@ def follow(request, user_pk):
         return redirect('dailyphoto:profile', person.username)
     return redirect('dailyphoto:login')
 
-
-
-
-# def search(request, searched):
-
-
-#   searched = request.GET.get('searched')
-#   return searched
-
- 

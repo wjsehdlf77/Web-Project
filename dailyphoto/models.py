@@ -23,9 +23,9 @@ class Post(models.Model):
     # 수정
     # caption = models.TextField(blank=False)
     
-    # 수정
-    def __str__(self):
-        return f"{self.author}:{self.title}"
+    # # 수정
+    # def __str__(self):
+    #     return f"{self.author}:{self.title}"
     
 class Comment(models.Model):
     author       = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
