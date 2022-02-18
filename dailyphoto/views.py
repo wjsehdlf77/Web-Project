@@ -129,7 +129,6 @@ def post_create(request):
       # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
       icons = request.POST.getlist('icons[]')
       post.icons='&'.join(icons)
-
       post.author= request.user
       post.create_date=timezone.now()
       post.save()
@@ -150,23 +149,66 @@ def post_create(request):
 #글 수정
 def post_update(request,post_id):
   if request.method== "POST":
-    post = get_object_or_404(models.Post, pk=post_id)
-    form = PostForm(post)
-    print(form)
-    context = {'form': form }
+    form = PostForm(request.POST)
+    # print(form)
+    context = {'form': form}
     if form.is_valid():
-      pass
+      post = get_object_or_404(models.Post, pk=post_id)
+      # post_before = post
+      post_temp = form.save(commit=False)
 
+      # title이 입력
+      if post_temp.title != None:
+        post.title=post_temp.title
+
+      # photo 입력
+      if 'photo' in request.FILES:
+        post.photo=request.FILES['photo']
+      else:
+        pass
+      
+      #content
+      post.content=post_temp.content
+
+      # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
+      icons = request.POST.getlist('icons[]')
+      post.icons='&'.join(icons)
+
+      #
+      post.author= request.user
+      # post.like_count=post_temp.like_count
+      # post.create_date=post_temp.creat_date
+      post.modify_date=timezone.now()
+
+      post.save()
+      print('post update made')
+
+      return redirect('dailyphoto:index')
     else:
       print('post update - form is not valid')
-
-    render(request, 'dailyphoto/update_page.html', context )
+      print(request)
+      print(form)
     
   else:
     print('request method is get')
+    post = get_object_or_404(models.Post, pk=post_id)
+    print(post)
+    print(post.content)
+    form = PostForm(instance=post)
+    print(form)
+    context = {'form': form ,'post':post}
+    if form.is_valid():
+      print('get update - form is valid')
+      return render(request, 'dailyphoto/update_page.html', context )  
 
-    form = PostForm(request.POST)
-    context = {'form': form }
+    else:
+      print('get update - form is not valid')
+      # form = PostForm(request.POST)
+      # print(form)
+      
+      # form = PostForm(request.GET)
+      # print(form)
+      context = {'form': form }
   
   return render(request, 'dailyphoto/update_page.html', context )
 

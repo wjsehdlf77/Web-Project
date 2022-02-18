@@ -6,29 +6,38 @@
   <form method="post" class="post-form modal_window" enctype="multipart/form-data" id="form_upload" onsubmit="">
     {% csrf_token %}
     <div class="upload_left">사진
-      <img class="upload_preview" id="preview_pic"/> 
+      {% if form.photo %}
+      <img class="upload_preview" id="preview_pic" src="/media/{{form.photo.value}}"/>
+      {% elif 0 %}
+      <img class="upload_preview" id="preview_pic"/>
+      {% endif%} 
     </div>
     <div class="upload_right">
       <div class="form-group">
-        <label for="content">
+        <div class="upload_upper">
+        <label for="title" style="word-break:keep-all; align-self: center;">제목: </label>
         <input
           type="text"
           class="form-control"
           name="title"
           id="id_title"
-          placeholder="글 제목"
-          defalut="{{form.title.value|default_if_none:'' }}"
+          placeholder="입력하지 않으면 날짜가 제목이 됩니다."
           value="{{form.title.value|default_if_none:'' }}"
-        />
-      </label>
+        /></div>
       </div>
-      <hr />
       <div class="form-group icon_upload">
         오늘의 감정:
         <script>
+          // console.log('28줄')
+          var saved_icons= "{{form.icons.value}}"
+          saved_icons=saved_icons.split("&amp;");
+          console.log(saved_icons)
           var upload_icons = $('.icon_upload')
           for (i=0;i<emotion_list.length;i++){
-            temp_html = `<label title="`+emotion_list[i]+`"><input type="checkbox" name="icons[]" value="`+emotion_list[i]+`" /><img src="/static/images/icons/emotion/`+emotion_list[i]+`.png" class="icon" alt="" /></label>`
+            if(saved_icons.includes(emotion_list[i])) {
+            temp_html = `<label title="`+emotion_list[i]+`"><input type="checkbox" checked name="icons[]" value="`+emotion_list[i]+`" /><img src="/static/images/icons/emotion/`+emotion_list[i]+`.png" class="icon" alt="" /></label>`}
+            else{
+            temp_html = `<label title="`+emotion_list[i]+`"><input type="checkbox" name="icons[]" value="`+emotion_list[i]+`" /><img src="/static/images/icons/emotion/`+emotion_list[i]+`.png" class="icon" alt="" /></label>`}
             upload_icons.append(temp_html)
           }
         </script>        
@@ -36,22 +45,31 @@
         오늘의 날씨:
         <script>
           for (i=0;i<weather_list.length;i++){
-            temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
+            if(saved_icons.includes(weather_list[i])){
+              temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" checked name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
             upload_icons.append(temp_html)
+          }
+            else {
+              temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
+            upload_icons.append(temp_html)
+          }
           }
         </script>      
         <br/>
         오늘 있었던 일: 
         <script>
           for (i=0;i<things_list.length;i++){
-            temp_html = `<label title="`+things_list[i]+`"><input type="checkbox" name="icons[]" value="`+things_list[i]+`" /><img src="/static/images/icons/things/`+things_list[i]+`.png" class="icon" alt="" /></label>`
-            upload_icons.append(temp_html)
+            if(saved_icons.includes(things_list[i])){temp_html = `<label title="`+things_list[i]+`"><input type="checkbox" checked name="icons[]" value="`+things_list[i]+`" /><img src="/static/images/icons/things/`+things_list[i]+`.png" class="icon" alt="" /></label>`
+            upload_icons.append(temp_html)}
+            else{temp_html = `<label title="`+things_list[i]+`"><input type="checkbox" name="icons[]" value="`+things_list[i]+`" /><img src="/static/images/icons/things/`+things_list[i]+`.png" class="icon" alt="" /></label>`
+            upload_icons.append(temp_html)}
           }
         </script>      
       </div>
       <div class="form-group">
-        <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?" defalut="{{ form.content.value|default_if_none:'' }}">
-{{ form.content.value|default_if_none:'' }}</textarea
+        <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">
+{{ form.content.value|default_if_none:'' }}
+</textarea
         >
       </div>
       <div>

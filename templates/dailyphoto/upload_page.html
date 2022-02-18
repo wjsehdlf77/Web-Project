@@ -1,51 +1,72 @@
- 
 {% include 'base.html' %}{% block content %} {% load bootstrap4 %}
-
 
 <div class="modal_overlay" id="id_modal_upload">
   <form method="post" class="post-form modal_window" enctype="multipart/form-data" id="form_upload" onsubmit="">
     {% csrf_token %}
-    <div class="upload_left">사진
-      <img class="upload_preview" id="preview_pic"/> 
+    <div class="upload_left">
+      사진
+      <img class="upload_preview" id="preview_pic" />
     </div>
     <div class="upload_right">
       <div class="form-group">
-        <label for="content"></label>
-        <input
-          type="text"
-          class="form-control"
-          name="title"
-          placeholder="글 제목을 입력하세요."
-          id="id_title"
-          value="{{ form.title.value|default_if_none:'' }}"
-        />
+        <div class="upload_upper">
+          <label for="title" style="word-break:keep-all; align-self: center;">제목: </label>
+          <input
+            type="text"
+            class="form-control"
+            name="title"
+            placeholder="입력하지 않으면 날짜가 제목이 됩니다."
+            id="id_title"
+            value="{{ form.title.value|default_if_none:'' }}"
+          />
+        </div>
       </div>
-      <hr />
       <div class="form-group icon_upload">
         오늘의 감정:
         <script>
-          var upload_icons = $('.icon_upload')
-          for (i=0;i<emotion_list.length;i++){
-            temp_html = `<label title="`+emotion_list[i]+`"><input type="checkbox" name="icons[]" value="`+emotion_list[i]+`" /><img src="/static/images/icons/emotion/`+emotion_list[i]+`.png" class="icon" alt="" /></label>`
-            upload_icons.append(temp_html)
+          var upload_icons = $(".icon_upload");
+          for (i = 0; i < emotion_list.length; i++) {
+            temp_html =
+              `<label title="` +
+              emotion_list[i] +
+              `"><input type="checkbox" name="icons[]" value="` +
+              emotion_list[i] +
+              `" /><img src="/static/images/icons/emotion/` +
+              emotion_list[i] +
+              `.png" class="icon" alt="" /></label>`;
+            upload_icons.append(temp_html);
           }
-        </script>        
+        </script>
         <br />
         오늘의 날씨:
-        <script>  
-          for (i=0;i<weather_list.length;i++){
-            temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
-            upload_icons.append(temp_html)
-          }
-        </script>      
-        <br/>
-        오늘 있었던 일: 
         <script>
-          for (i=0;i<things_list.length;i++){
-            temp_html = `<label title="`+things_list[i]+`"><input type="checkbox" name="icons[]" value="`+things_list[i]+`" /><img src="/static/images/icons/things/`+things_list[i]+`.png" class="icon" alt="" /></label>`
-            upload_icons.append(temp_html)
+          for (i = 0; i < weather_list.length; i++) {
+            temp_html =
+              `<label title="` +
+              weather_list[i] +
+              `"><input type="checkbox" name="icons[]" value="` +
+              weather_list[i] +
+              `"/><img src="/static/images/icons/weather/` +
+              weather_list[i] +
+              `.png" class="icon" alt="" /></label>`;
+            upload_icons.append(temp_html);
           }
-        </script>      
+        </script>
+        <br />
+        오늘 있었던 일:
+        <script>
+          for (i = 0; i < things_list.length; i++) {
+            temp_html =
+              `<label title="` +
+              things_list[i] +
+              `"><input type="checkbox" name="icons[]" value="` +
+              things_list[i] +
+              `" /><img src="/static/images/icons/things/` +
+              things_list[i] +
+              `.png" class="icon" alt="" /></label>`;
+            upload_icons.append(temp_html);
+          }
+        </script>
       </div>
       <div class="form-group">
         <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">
@@ -53,7 +74,7 @@
         >
       </div>
       <div>
-        <input type="file" name="photo" accept="image/*" id="id_photo"/>
+        <input type="file" name="photo" accept="image/*" id="id_photo" />
       </div>
       <button type="submit" class="btn btn-primary" id="upload"><i class="fas fa-save"></i> 저장하기</button>
       <a href=" {% url 'dailyphoto:index' %}" class="btn btn-primary">닫기</a>
@@ -64,9 +85,6 @@
   console.log("upload_page 인클루드 되었습니다. ");
 </script>
 
-{% endblock %}
-
-사진 스크립트
-{% block preview %}
-<script src = "/static/preview.js"></script>
+{% endblock %} 사진 스크립트 {% block preview %}
+<script src="/static/preview.js"></script>
 {% endblock %}

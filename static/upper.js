@@ -11,7 +11,6 @@ function helloworld() {
   console.log("helloworld");
 }
 
-
 function display_icon(icons, num) {
 
   let icons_list = icons.split("&amp;");
