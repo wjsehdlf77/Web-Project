@@ -67,9 +67,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
 -->
   <script>
-
     const getValueInput = () =>{
-      var name = "{{user.username}}"
+
+      var name = [];
+
       let inputValue = document.getElementById("id_name").value; 
       if (name.indexOf(inputValue) != -1 ) {
         var link = 'http://127.0.0.1:8000/dailyphoto/profile/'+inputValue;
@@ -80,6 +81,7 @@
       }
     }
 
+    
   </script>
   </body>
 </html>
