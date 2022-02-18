@@ -17,7 +17,6 @@ def index(request):
   """
   dailyphoto 게시물 출력
   """
-  
 
     # 조회
   post_list = Post.objects.order_by('-create_date')      
@@ -28,7 +27,6 @@ def index(request):
   if (follow_list.count()>0):
     for my_following in follow_list:
       q.add(Q(author=my_following),q.OR)
-
 
   post_list = Post.objects.filter(q).order_by('-create_date')
  
@@ -266,16 +264,22 @@ def unlike(request):
 
 #프로필화
 def profile(request, username):
-    person = get_object_or_404(get_user_model(), username = username )
-    post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
+    # person = get_object_or_404(get_user_model(), username = username )
+    user = get_user_model()
+    person = user.objects.filter(username=username).first()
+    
+    if person :
+      post_photo = Post.objects.filter(author_id = person.id).order_by('-create_date')
 
-    context = {
-       'person': person,
-       'post_photo' : post_photo
-       }
+      context = {
+        'person': person,
+        'post_photo' : post_photo
+        }
 
-    url='dailyphoto/profile.html'
-    return render(request, url, context)
+      url='dailyphoto/profile.html'
+      return render(request, url, context)
+    else:
+      return redirect('dailyphoto:index')
 
 
 

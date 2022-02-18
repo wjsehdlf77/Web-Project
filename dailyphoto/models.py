@@ -69,9 +69,6 @@ class Profile(models.Model):
     image = models.ImageField(upload_to= 'image/', blank=True)   #Pillow설치
     music = models.FileField(upload_to= 'music/', blank = True, validators=[FileExtensionValidator(allowed_extensions=['mp3'])]) 
 
-
-
-
     def __str__(self):
         return self.nickname
 
