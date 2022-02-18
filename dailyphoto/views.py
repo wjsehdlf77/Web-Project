@@ -17,7 +17,6 @@ def index(request):
   """
   dailyphoto 게시물 출력
   """
-  
 
     # 조회
   post_list = Post.objects.order_by('-create_date')      
@@ -141,7 +140,7 @@ def post_create(request):
       print('form is not valid')
 
   else:
-    print('request method is get')
+    print('request method is get -upload')
     form=PostForm()
     
   context = {'form': form }
@@ -152,7 +151,8 @@ def post_create(request):
 def post_update(request,post_id):
   if request.method== "POST":
     post = get_object_or_404(models.Post, pk=post_id)
-    form = PostForm(request.POST)
+    form = PostForm(post)
+    print(form)
     context = {'form': form }
     if form.is_valid():
       pass
@@ -160,7 +160,7 @@ def post_update(request,post_id):
     else:
       print('post update - form is not valid')
 
-    render(request, 'dailyphoto/upload_page.html', context )
+    render(request, 'dailyphoto/update_page.html', context )
     
   else:
     print('request method is get')
@@ -168,7 +168,7 @@ def post_update(request,post_id):
     form = PostForm(request.POST)
     context = {'form': form }
   
-  return render(request, 'dailyphoto/upload_page.html', context )
+  return render(request, 'dailyphoto/update_page.html', context )
 
 
   
@@ -278,7 +278,6 @@ def profile(request, username):
     return render(request, url, context)
 
 
-
 def modify_profile(request):
     if request.method == 'POST':
       user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -298,8 +297,6 @@ def modify_profile(request):
         })
 
 
-
-
 def follow(request, user_pk):
     if request.user.is_authenticated:
         user = get_user_model()
@@ -313,13 +310,3 @@ def follow(request, user_pk):
         return redirect('dailyphoto:profile', person.username)
     return redirect('dailyphoto:login')
 
-
-
-
-# def search(request, searched):
-
-
-#   searched = request.GET.get('searched')
-#   return searched
-
- 

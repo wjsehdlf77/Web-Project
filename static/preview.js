@@ -19,5 +19,5 @@ function read_f(e) {
   }
 }
 
-  document.getElementById('datePicker').valueAsDate = new Date();
+  // document.getElementById('datePicker').valueAsDate = new Date();
   document.getElementById("id_photo").addEventListener('change', read_f, false);

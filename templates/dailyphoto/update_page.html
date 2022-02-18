@@ -10,15 +10,17 @@
     </div>
     <div class="upload_right">
       <div class="form-group">
-        <label for="content"></label>
+        <label for="content">
         <input
           type="text"
           class="form-control"
           name="title"
-          placeholder="글 제목을 입력하세요."
           id="id_title"
-          value="{{ form.title.value|default_if_none:'' }}"
+          placeholder="글 제목"
+          defalut="{{form.title.value|default_if_none:'' }}"
+          value="{{form.title.value|default_if_none:'' }}"
         />
+      </label>
       </div>
       <hr />
       <div class="form-group icon_upload">
@@ -32,7 +34,7 @@
         </script>        
         <br />
         오늘의 날씨:
-        <script>  
+        <script>
           for (i=0;i<weather_list.length;i++){
             temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
             upload_icons.append(temp_html)
@@ -48,12 +50,12 @@
         </script>      
       </div>
       <div class="form-group">
-        <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?">
+        <textarea class="form-control" name="content" id="id_content" rows="10" placeholder="오늘 하루는 무슨 일이 있었나요?" defalut="{{ form.content.value|default_if_none:'' }}">
 {{ form.content.value|default_if_none:'' }}</textarea
         >
       </div>
       <div>
-        <input type="file" name="photo" accept="image/*" id="id_photo"/>
+        <input type="file" name="photo" accept="image/*" id="id_photo" />
       </div>
       <button type="submit" class="btn btn-primary" id="upload"><i class="fas fa-save"></i> 저장하기</button>
       <a href=" {% url 'dailyphoto:index' %}" class="btn btn-primary">닫기</a>
