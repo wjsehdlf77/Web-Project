@@ -61,16 +61,20 @@
                   <span class="material-icons-outlined">delete</span></a
                 >
               </div>
+               <!-- comment input -->
+              <div class="comment-input overflow"  class="clearfix" >  
+                <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
+                  {% csrf_token %}
+                    <label for="id_content" style="padding-top:3px;">댓글내용:</label>
+                    <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width:350px; " >
+                    <input type="submit" value="post" style="padding-bottom:30px;">
+                  
+                </form>
               {% endif %}
             </div>
             {%endfor%}
           </div>
-          <!-- comment input -->
-          <div class="comment-input overflow">
-            <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
-              {% csrf_token %} {{ comment_form }}
-              <input type="submit" value="post" />
-            </form>
+          
           </div>
         </div>
       </div>
