@@ -69,17 +69,9 @@
   <script>
 
     const getValueInput = () =>{
-
-      var name = [];
-
       let inputValue = document.getElementById("id_name").value; 
-      if (name.indexOf(inputValue) != -1 ) {
-        var link = 'http://127.0.0.1:8000/dailyphoto/profile/'+inputValue;
-        location.href = link;
-      }
-      else {
-        alert("존재하지 않는 사용자입니다.");
-      }
+      var link = 'http://127.0.0.1:8000/dailyphoto/profile/'+inputValue;
+      location.href = link;
     }
 
     
