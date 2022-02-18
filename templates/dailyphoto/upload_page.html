@@ -33,7 +33,7 @@
         </script>        
         <br />
         오늘의 날씨:
-        <script>
+        <script>  
           for (i=0;i<weather_list.length;i++){
             temp_html = `<label title="`+weather_list[i]+`"><input type="checkbox" name="icons[]" value="`+weather_list[i]+`"/><img src="/static/images/icons/weather/`+weather_list[i]+`.png" class="icon" alt="" /></label>`
             upload_icons.append(temp_html)
