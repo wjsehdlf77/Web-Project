@@ -22,6 +22,8 @@ def index(request):
   post_list = Post.objects.order_by('-create_date')      
   user = get_user_model()
   follow_list= user.objects.filter(followers=request.user)
+
+  
   
   q = Q(author=request.user)
   if (follow_list.count()>0):
