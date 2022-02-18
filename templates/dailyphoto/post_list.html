@@ -27,9 +27,9 @@
             {% endif%}
           </div>
           <div class="feed_icon">
-            <!-- icon -->
-            {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
             <!-- like -->
+            {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
+            <!-- icon -->
             {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
             <p>Uploaded Date:{{ post.create_date | date:' Y.m.d' }}</p>
           </div>
@@ -39,9 +39,6 @@
         <div class="right_feed_box">
           <div class="big_feed_title">{{post.title}}</div>
           <div class="big_feed_content overflow">{{post.content}}</div>
-          
-      
-            
             <hr>
               <div class="comment overflow" >
                 {% for comment in post.comment_set.all %}

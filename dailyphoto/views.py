@@ -1,13 +1,5 @@
 
-from gc import get_objects
-import json
-from json.decoder import JSONDecodeError
-from django.http  import JsonResponse , HttpResponse
-from django.views import View
-
-from time import time, timezone
-
-from wsgiref.util import request_uri
+from django.http  import  HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth import get_user_model
@@ -19,7 +11,6 @@ from . import models
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
-
 
 # 주소 index 
 def index(request):
@@ -155,6 +146,45 @@ def post_create(request):
     
   context = {'form': form }
   return render(request, 'dailyphoto/upload_page.html', context )
+
+
+#글 수정
+def post_update(request,post_id):
+  if request.method== "POST":
+    post = get_object_or_404(models.Post, pk=post_id)
+    form = PostForm(request.POST)
+    context = {'form': form }
+    if form.is_valid():
+      pass
+
+    else:
+      print('post update - form is not valid')
+
+    render(request, 'dailyphoto/upload_page.html', context )
+    
+  else:
+    print('request method is get')
+
+    form = PostForm(request.POST)
+    context = {'form': form }
+  
+  return render(request, 'dailyphoto/upload_page.html', context )
+
+
+  
+
+#글 삭제
+def post_delete(request,post_id):
+  if request.method== "GET":
+    print('request method is get.')
+    post = get_object_or_404(models.Post, pk=post_id)
+    form = PostForm(request.POST)
+    if form.is_valid():
+      print('form is valid -delete')
+      post.delete()
+    else:
+      print('post delete - form is not valid')
+  return redirect('dailyphoto:index')
 
 
 #like
