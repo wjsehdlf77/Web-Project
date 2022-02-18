@@ -16,11 +16,11 @@
         <div class="left_feed_box">
           <div class="feed_name">
             <div class="feed_profile_box">
-              {% if person.profile.image%}
-                  <img class="profile_img" src = "{{person.profile.image.url}}">
-                {% else %}
-                  <img class = 'profile_img' src = "/static/fc9246c04e82487ab0fe515f9d24f415.jpg">
-                {% endif %}
+              {% if post.author.profile.image %}
+                <img class="profile_img" src = "{{post.author.profile.image.url}}">
+              {% else %}
+                <img class = 'profile_img' src = "/static/fc9246c04e82487ab0fe515f9d24f415.jpg">
+              {% endif %}
             </div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
@@ -55,27 +55,27 @@
             {% for comment in post.comment_set.all %}
             <div id="comment-{{comment.id}} " class="clearfix">
               <b>{{comment.author.username}}</b>
-              {{comment.content}} {% if user.id == comment.author.id %}
+              {{comment.content}} 
+              {% if user.id == comment.author.id %}
               <div style="float: right">
                 <a style="color: black" href="{% url 'dailyphoto:comment_delete' comment.id %}">
                   <span class="material-icons-outlined">delete</span></a
                 >
               </div>
-               <!-- comment input -->
-              <div class="comment-input overflow"  class="clearfix" >  
-                <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
-                  {% csrf_token %}
-                    <label for="id_content" style="padding-top:3px;">댓글내용:</label>
-                    <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width:350px; " >
-                    <input type="submit" value="post" style="padding-bottom:30px;">
-                  
-                </form>
               {% endif %}
             </div>
             {%endfor%}
+            
           </div>
-          
-          </div>
+          <!-- comment input -->
+          <div class="comment-input overflow"  class="clearfix" >  
+           <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
+             {% csrf_token %}
+               <label for="id_content" style="padding-top:3px;">댓글내용:</label>
+               <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width:350px; " >
+               <input type="submit" value="post" style="padding-bottom:30px;" >
+           </form>
+         </div>
         </div>
       </div>
     </div>
