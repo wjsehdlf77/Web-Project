@@ -1,21 +1,26 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="home_main_body" style="padding-top: 80px" >
-  
   <div class="body_form ">
+    <div style="float:left; width:1680px; height:35 px;">
     <form method="GET" action="{% url 'dailyphoto:search' %}" >
       <div id="search" >
         <input name="search" type="date" >
         <button class="btn btn-outline-secondary" type="submit">검색</button>
       </div>
       </form> 
+    </div>
     {% for post in post_list %}
     <div class="sub_body_form">
       <div class="left">
         <div class="left_feed_box">
           <div class="feed_name">
             <div class="feed_profile_box">
-              <img class="feed_profile_img" src="/media/{{post.author.profile.image}}" />
+              {% if person.profile.image%}
+                  <img class="profile_img" src = "{{person.profile.image.url}}">
+                {% else %}
+                  <img class = 'profile_img' src = "/static/fc9246c04e82487ab0fe515f9d24f415.jpg">
+                {% endif %}
             </div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>

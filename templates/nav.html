@@ -29,15 +29,12 @@
       <div class="container">
         <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
 
-      
         <form class="form-inline">
-          <input class="form-control" type="text" placeholder="Search Id" id="id_name"/>
+          <input class="form-control" type="text" placeholder="Search Id" id="id_name" onkeyup="if(window.event.keyCode==13){getValueInput()}"/>
           <button class="searchbutton" type="button" onclick="getValueInput()"><span class="material-icons-outlined">
             search
             </span></button>
         </form>
-      
-
 
         <div>
           <ul class="navbar-nav ml-auto">
@@ -71,7 +68,9 @@
 -->
   <script>
     const getValueInput = () =>{
+
       var name = [];
+
       let inputValue = document.getElementById("id_name").value; 
       if (name.indexOf(inputValue) != -1 ) {
         var link = 'http://127.0.0.1:8000/dailyphoto/profile/'+inputValue;
