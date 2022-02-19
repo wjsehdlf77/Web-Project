@@ -1,10 +1,12 @@
 * {
   font-family: "Gowun Dodum", sans-serif;
+  box-sizing: border-box;
   font-size: 1rem;
 }
 
 .background_set {
-  background-image: url("cloud_background.jfif");
+  background-image: url("szabo-viktor.jpg");
+  background-size: cover;
 }
 
 /* upload page*/
@@ -125,6 +127,8 @@
 .home_main_body {
   display: flex;
   justify-content:center;
+  left: 0px;
+  right: 0;
 }
 
 .body_form {
@@ -135,10 +139,12 @@
 
 }
 .sub_body_form {
+  width: 60%;
+  height: auto;
   display: flex;
-  background-image: url("1644906582236.jpg"); 
+  background-image: url("diary.jpg"); 
   background-repeat : no-repeat;
-  background-size :  90% 105%;
+  background-size : 100%;
   background-position: top;
   flex-direction: row;
   margin-bottom: 10px;
