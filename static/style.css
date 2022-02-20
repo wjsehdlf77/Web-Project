@@ -76,12 +76,8 @@
 }
 
 .upload_upper {
-  display: flex; flex-direction: row;
-  /* overflow: hidden; */
-  /* display: flex; */
-  /* align-items:flex-start; */
-  /* flex-direction: row; */
-  /* display: inline-block; */
+  display: flex; 
+  flex-direction: row;
 }
 
 
@@ -151,26 +147,18 @@
 .sub_body_form {
   height: 80vh;
   width: 120vh;
-  /* width:auto; */
-  /* width:60vw; */
-  /* width: calc(height*0.6); */
-  /* width: 80%; */
-  /* height: auto; */
   display: flex;
   background-image: url("diary.jpg"); 
   background-repeat : no-repeat;
-  /* background-size : 100%;*/
   background-size: cover;
-  /* background-position: top; */
   flex-direction: row;
   margin-bottom: 20px;
   padding-bottom: 20px;
   justify-content: center;
-  /* align-item: center; */
-
 }
 
 .left {
+  flex:1;
 
   display: flex;
   width: 50%;
@@ -189,31 +177,19 @@
 
 .left_feed_box {
 
-  /* width: 600px; */
-  /* height: 600px; */
   display: flex;
   flex-direction: column;
-  /* margin-top: 70px; */
-  /* margin-right: 50px; */
   justify-content: center;
-  /* align-items: center; */
   padding: 0% 12% 5% 5%;
-  /* padding-bottom: 10px; */
-  /* padding-right: 10%; */
 
   
 }
 .right_feed_box {
 
-  /* width: 600px; */
-  /* height: 600px; */
   display: flex;
-  /* margin-top: 70px; */
   flex-direction: column;
   justify-content: flex-end;
-  /* width : fit-content;  */
   padding-left: 10%;
-  /* padding-right: 4%; */
   width:95%;
   
   
@@ -227,30 +203,34 @@
 
 .big_feed_img {
   flex:1;
-  /* display: flex; */
-  /* height:80%; */
   width: 100%;
-  /* padding:5%; */
   justify-content: center;
   align-items: center;
   margin: auto;
+  /* object-fit: fill; */
 }
 .feed_img {
   flex:1;
-  object-fit: contain;
-  /* overflow:  */
+  object-fit: cover;
+  object-position:center;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  /* width: 100%; */
+  max-width: 100%;
+  /* width: initial; */
+  /* min-width: inherit; */
+  /* width: max-content; */
+  /* width: inherit;; */
   height: 50vh;
   /* height: 60% */
   /* height:400px; */
   
 }
 .feed_icon {
-  padding-bottom: 30px;
-  /* padding: 5px 5px 0px 25px; */
+  /* padding:  */
+  /* padding-bottom: 30px; */
+  padding: 5px 5px 25px 0px;
   display: flex;
   flex-direction: column;
   vertical-align: bottom; 
@@ -262,7 +242,6 @@
   width: 100%;
   height: max-content;
   flex:1;
-
   /* margin-left: 30px; */
 }
 
@@ -288,9 +267,6 @@
 
 .comment_wrap{
   display: block;
-/* float:inline-end; */
-/* float:0; */
-/* justify-content: flex-end; */
 }
 .overflow{
   overflow : auto;
