@@ -39,7 +39,6 @@
             {% if post.modify_date %}
             <br>Updated Date:{{post.modify_date|date:'Y.m.d'}}
             {% endif %}
-          </div>
         </div>
       </div>
       
@@ -58,8 +57,7 @@
               {{comment.content}} {% if user.id == comment.author.id %}
               <div style="float: right">
                 <a style="color: black" href="{% url 'dailyphoto:comment_delete' comment.id %}">
-                  <span class="material-icons-outlined">delete</span></a
-                >
+                  <span class="material-icons-outlined">delete</span></a>
               </div>
                <!-- comment input -->
               <div class="comment-input overflow"  class="clearfix" >  
@@ -71,7 +69,7 @@
                   
                 </form>
               {% endif %}
-            </div>
+          </div>
             {%endfor%}
           </div>
           
