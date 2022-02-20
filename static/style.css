@@ -506,7 +506,7 @@ span {
 }
 
 .detail_title {
-  margin: 25px 10px 25px 10px;
+  margin: 25px 10px 10px 10px;
   border: 5px double #DCDCDC; 
   padding: 0.4em;
   display: block;
