@@ -23,9 +23,9 @@ class Post(models.Model):
     # 수정
     # caption = models.TextField(blank=False)
     
-    # 수정
-    def __str__(self):
-        return f"{self.author}:{self.title}"
+    # # 수정
+    # def __str__(self):
+    #     return f"{self.author}:{self.title}"
     
 class Comment(models.Model):
     author       = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
@@ -68,9 +68,6 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=40, blank=True)
     image = models.ImageField(upload_to= 'image/', blank=True)   #Pillow설치
     music = models.FileField(upload_to= 'music/', blank = True, validators=[FileExtensionValidator(allowed_extensions=['mp3'])]) 
-
-
-
 
     def __str__(self):
         return self.nickname
