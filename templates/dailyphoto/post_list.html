@@ -19,7 +19,7 @@
               {% if post.author.profile.image %}
               <img class="profile_img" src="{{post.author.profile.image.url}}" />
               {% else %}
-              <img class="profile_img" src="/static/images/DefualtImage.jpg" />
+              <img class="profile_img" src="/static/images/DefualtProfile.jpg" />
               {% endif %}
             </div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
@@ -28,7 +28,7 @@
             {% if post.photo %}
             <img class="feed_img" src="/media/{{post.photo}}" />
             {% else %}
-            <img class="feed_img" src="/static/images/logo.png" />
+            <img class="feed_img" src="/static/images/logo2.png" />
             {% endif%}
           </div>
           <div class="feed_icon">
