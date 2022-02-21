@@ -52,17 +52,25 @@
           {% endif%}
           <!-- like -->
           {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-          <!-- icon -->
-          {% block icons %}
-          {% include 'dailyphoto/icons.html' %}
-          {% endblock %}
+          <br>
+          Uploaded Date:{{ post.create_date | date:' Y.m.d' }}
+          {% if post.modify_date %}
+          <br>Updated Date:{{post.modify_date|date:'Y.m.d'}}
+          {% endif %}
+          
         </div>
         {% comment %} 내용 파트 {% endcomment %}
         <div class="child over">
           <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
           <div>
-            <h4 class="detail_title">{{post.title}}</h4>
+            <h5 class="detail_title">{{post.title}}</h5>
+          <!-- icon -->
+          <div class="ml-3">
+          {% block icons %}
+          {% include 'dailyphoto/icons.html' %}
+          {% endblock %}<br>
           </div>
+        </div>
           <div class="detail_content">
             <p style='font-size:25px;'>{{post.content}}</p>
           </div>

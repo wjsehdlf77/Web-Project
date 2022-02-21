@@ -1,14 +1,14 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="home_main_body" style="padding-top: 80px" >
-  <div class="body_form ">
-    <div style="float:left; width:1680px; height:35 px;">
-    <form method="GET" action="{% url 'dailyphoto:search' %}" >
-      <div id="search" >
-        <input name="search" type="date" >
-        <button class="btn btn-outline-secondary" type="submit">검색</button>
-      </div>
-      </form> 
+<div class="home_main_body" style="padding-top: 80px">
+  <div class="body_form">
+    <div class="calender">
+      <form method="GET" action="{% url 'dailyphoto:search' %}">
+        <div id="search">
+          <input name="search" type="date" />
+          <button class="btn btn-outline-secondary" type="submit">검색</button>
+        </div>
+      </form>
     </div>
     {% for post in post_list %}
     <div class="sub_body_form">
@@ -17,10 +17,10 @@
           <div class="feed_name">
             <div class="feed_profile_box">
               {% if post.author.profile.image %}
-              <img class="profile_img" src = "{{post.author.profile.image.url}}">
-                {% else %}
-                  <img class = 'profile_img' src = "/static/fc9246c04e82487ab0fe515f9d24f415.jpg">
-                {% endif %}
+              <img class="profile_img" src="{{post.author.profile.image.url}}" />
+              {% else %}
+              <img class="profile_img" src="/static/fc9246c04e82487ab0fe515f9d24f415.jpg" />
+              {% endif %}
             </div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
@@ -34,51 +34,54 @@
           <div class="feed_icon">
             <!-- like -->
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-            <br>
-            Uploaded Date:{{ post.create_date | date:' Y.m.d' }}
-            {% if post.modify_date %}
-            <br>Updated Date:{{post.modify_date|date:'Y.m.d'}}
-            {% endif %}
+            Uploaded Date:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
+            <br />Updated Date:{{post.modify_date|date:'Y.m.d'}} {% endif %}
           </div>
         </div>
       </div>
-      
+
       <div class="right">
         <div class="right_feed_box">
           <div class="big_feed_title">{{post.title}}</div>
-            <!-- icon -->
-            {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
-            <hr>
+          <!-- icon -->
+          {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
+          <hr />
           <div class="big_feed_content overflow">Dear diary : {{post.content}}</div>
           <hr />
-          <div class="comment overflow">
-            {% for comment in post.comment_set.all %}
-            <div id="comment-{{comment.id}} " class="clearfix">
-              <b>{{comment.author.username}}</b>
-              {{comment.content}} 
-              {% if user.id == comment.author.id %}
-              <div style="float: right">
-                <a style="color: black" href="{% url 'dailyphoto:comment_delete' comment.id %}">
-                  <span class="material-icons-outlined">delete</span></a
-                >
+          <div class="comment_wrap">
+            <div class="comment overflow">
+              {% for comment in post.comment_set.all %}
+              <div id="comment-{{comment.id}} " class="clearfix">
+                <b>{{comment.author.username}}</b>
+                {{comment.content}} {% if user.id == comment.author.id %}
+                <div style="float: right">
+                  <a style="color: black" href="{% url 'dailyphoto:comment_delete' comment.id %}">
+                    <span class="material-icons-outlined">delete</span></a
+                  >
+                </div>
+                {% endif %}
               </div>
-              {% endif %}
+              {%endfor%}
             </div>
-            {%endfor%}
-            
+            <!-- comment input -->
+            <div class="comment-input overflow" class="clearfix">
+              <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
+                {% csrf_token %}
+                <label for="id_content" style="padding-top: 3px">댓글내용:</label>
+                <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width: 350px" />
+                <input type="submit" value="post" style="padding-bottom: 30px" />
+              </form>
+            </div> 
+            <!-- comment input -->
           </div>
-          <!-- comment input -->
-          <div class="comment-input overflow"  class="clearfix" >  
-           <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
-             {% csrf_token %}
-               <label for="id_content" style="padding-top:3px;">댓글내용:</label>
-               <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width:350px; " >
-               <input type="submit" value="post" style="padding-bottom:30px;" >
-           </form>
-         </div>
+          <!-- comment wrap -->
         </div>
+        <!-- right feed box -->
       </div>
+      <!-- right -->
     </div>
+    <!-- sub body form -->
+    <div style="height: 10vh"></div>
     {% endfor %}
   </div>
 </div>
