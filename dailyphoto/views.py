@@ -323,7 +323,6 @@ def profile(request, username):
       url='dailyphoto/profile.html'
       return render(request, url, context)
     else:
-      pyautogui.alert('존재하지 않는 사용자입니다.')
       return redirect('dailyphoto:index')
 
 

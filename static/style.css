@@ -214,7 +214,7 @@
 .feed_img {
   flex:1;
   /* object-fit: fill; */
-  object-fit: cover;
+  object-fit: contain;
   /* object-position:center;/ */
   display: flex;
   justify-content: center;

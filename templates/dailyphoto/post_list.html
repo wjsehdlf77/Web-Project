@@ -34,8 +34,10 @@
           <div class="feed_icon">
             <!-- like -->
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-            Uploaded Date:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
-            <br />Updated Date:{{post.modify_date|date:'Y.m.d'}} {% endif %}
+            Uploaded Date:{{ post.create_date | date:' Y.m.d' }} 
+            <!-- 수정 -->
+            {% if post.modify_date %}
+            / Updated Date:{{ post.modify_date|date:' Y.m.d'}} {% endif %}
           </div>
         </div>
       </div>
@@ -69,7 +71,7 @@
                 {% csrf_token %}
                 <label for="id_content" style="padding-top: 3px">댓글내용:</label>
                 <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width: 350px" />
-                <input type="submit" value="post" style="padding-bottom: 30px" />
+                <input type="submit" value="댓글달기" style="padding-bottom: 30px" />
               </form>
             </div> 
             <!-- comment input -->
