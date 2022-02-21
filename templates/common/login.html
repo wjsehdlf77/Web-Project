@@ -48,8 +48,8 @@
           value="{{ form.password.value|default_if_none:'' }}"
         />
       </div>
-      <button type="submit" class="btn btn-info"><i class="fas fa-sign-in-alt mr-2"></i> 로그인</button>
-      <a href="{%url 'common:signup' %}" class="btn btn-info"><i class="fas fa-user-plus mr-2"></i> 회원가입</a>
+      <button type="submit" class="btn btn-light" style="border-color: #aaaaaa;"><i class="fas fa-sign-in-alt mr-2"></i> 로그인</button>
+      <a href="{%url 'common:signup' %}" class="btn btn-light" style="border-color: #aaaaaa;"><i class="fas fa-user-plus mr-2"></i> 회원가입</a>
     </form>
   </div>
   {% endblock %}
