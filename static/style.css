@@ -9,6 +9,10 @@
   background-size: cover;
 }
 
+.post_list_background_set{
+  background-image: url("background.jpg");
+  background-size: cover;
+}
 /* upload page*/
 
 .box {

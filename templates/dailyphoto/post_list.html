@@ -34,8 +34,8 @@
           <div class="feed_icon">
             <!-- like -->
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-            Uploaded Date:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
-            <br />Updated Date:{{post.modify_date|date:'Y.m.d'}} {% endif %}
+            게시 날짜:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
+            <br />수정 날짜:{{ post.modify_date | date:' Y.m.d' }} {% endif %}
           </div>
         </div>
       </div>
@@ -46,7 +46,7 @@
           <!-- icon -->
           {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
           <hr />
-          <div class="big_feed_content overflow">Dear diary : {{post.content}}</div>
+          <div class="big_feed_content overflow">{{post.content}}</div>
           <hr />
           <div class="comment_wrap">
             <div class="comment overflow">
