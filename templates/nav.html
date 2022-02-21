@@ -28,17 +28,17 @@
       {% comment %} 상단 고정 sticky-top {% endcomment %}
       <div class="container">
         <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/logo.png" />
-        <div style="display:flex;">
+        <div style="display:flex; margin-left:400px;"  >
           <form class="form-inline">
-            <input class="form-control" type="text" placeholder="Search Id" id="id_name" onkeyup="if(window.event.keyCode==13){getValueInput()}"/>
+            <input size="20" style= "height:30px;"class="form-control" type="text" placeholder="Search Id" id="id_name" onkeyup="if(window.event.keyCode==13){getValueInput()}"/>
             <button class="searchbutton" type="button" onclick="getValueInput()"><span class="material-icons-outlined">
               search
               </span></button>
           </form>
           <form method="GET" action="{% url 'dailyphoto:search' %}">
-            <div id="search">
-              <input name="search" type="date" />
-              <button class="btn btn-basic" type="submit">검색</button>
+            <div id="search" style="margin-left:100px;">
+              <input name="search" type="date"  />
+              <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button>
             </div>
           </form>
         </div>
