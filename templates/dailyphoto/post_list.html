@@ -69,9 +69,11 @@
             <div class="comment-input overflow" class="clearfix">
               <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
                 {% csrf_token %}
-                <label for="id_content" style="padding-top: 3px">댓글내용:</label>
-                <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width: 350px" />
+
+                <label class="mr-2" for="id_content " style="font-size: small; padding-top: 3px;">댓글내용:</label>
+                <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width: 310px" />
                 <input type="submit" value="댓글달기" style="padding-bottom: 30px" />
+
               </form>
             </div> 
             <!-- comment input -->
