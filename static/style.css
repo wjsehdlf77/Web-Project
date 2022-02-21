@@ -5,13 +5,13 @@
 }
 
 .background_set {
+
   background-image: url("images/BackgroundImage.jpg");
   background-size: cover;
 }
 
 
 .post_list_background_set{
-  
   background-image: url("images/BackgroundImage.jpg");
   background-size: 100vw;
   background-attachment: fixed;
