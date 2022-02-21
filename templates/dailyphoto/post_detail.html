@@ -53,10 +53,13 @@
           <!-- like -->
           {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
           <br>
-          Uploaded Date:{{ post.create_date | date:' Y.m.d' }}
+            <div style="font-size: small;">
+            Uploaded Date:{{ post.create_date | date:' Y.m.d' }}
           {% if post.modify_date %}
           <br>Updated Date:{{post.modify_date|date:'Y.m.d'}}
           {% endif %}
+          </div>
+          
           
         </div>
         {% comment %} 내용 파트 {% endcomment %}
