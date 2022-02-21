@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="home_main_body" style="padding-top: 80px">
+<div class="home_main_body post_list_background_set" style="padding-top: 80px">
   <div class="body_form">
     <div class="calender">
       <form method="GET" action="{% url 'dailyphoto:search' %}">
@@ -28,14 +28,16 @@
             {% if post.photo %}
             <img class="feed_img" src="/media/{{post.photo}}" />
             {% else %}
-            <img class="feed_img" src="/static/images/DailyphotoLogo_r.png" />
+            <img class="feed_img" src="/static/101618235.png" />
             {% endif%}
           </div>
           <div class="feed_icon">
             <!-- like -->
             {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-            Uploaded Date:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
-            <br />Updated Date:{{post.modify_date|date:'Y.m.d'}} {% endif %}
+
+            게시 날짜:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
+            <br />수정 날짜:{{ post.modify_date | date:' Y.m.d' }} {% endif %}
+
           </div>
         </div>
       </div>
@@ -46,7 +48,7 @@
           <!-- icon -->
           {% block icons %} {% include 'dailyphoto/icons.html' %} {% endblock %}
           <hr />
-          <div class="big_feed_content overflow">Dear diary : {{post.content}}</div>
+          <div class="big_feed_content overflow">{{post.content}}</div>
           <hr />
           <div class="comment_wrap">
             <div class="comment overflow">
@@ -67,9 +69,11 @@
             <div class="comment-input overflow" class="clearfix">
               <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
                 {% csrf_token %}
-                <label for="id_content" style="padding-top: 3px">댓글내용:</label>
-                <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width: 350px" />
-                <input type="submit" value="post" style="padding-bottom: 30px" />
+
+                <label class="mr-2" for="id_content " style="font-size: small; padding-top: 3px;">댓글내용:</label>
+                <input type="text" name="content" maxlength="1000" required="" id="id_content" style="width: 310px" />
+                <input type="submit" value="댓글달기" style="padding-bottom: 30px" />
+
               </form>
             </div> 
             <!-- comment input -->
