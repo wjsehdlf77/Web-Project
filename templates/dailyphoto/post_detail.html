@@ -1,114 +1,57 @@
-{% load static %}
+{% include 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Dailyphoto</title>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
-      integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
-      crossorigin="anonymous"
-    />
-      <!-- 요기에 구글 머티리얼 아이콘 -->
-      <link
-      href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
-    
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
-      * {
-        font-family: "Gowun Dodum", sans-serif;
-        font-size: 1rem;
-      }
-    </style>
-  </head>
-
-  <body>
-    {% block upload_js %}
-    <!-- 먼저 로딩되어야 작동하는 js 파일 -->
-    <script src="{% static 'upper.js' %}"></script>
-    {% endblock %}
-
-    {% block content %}
-    <div class="postmodal_overlay">
-      <div class="postmodal_window">
-        {% comment %} 사진파트 {% endcomment %}
-        <div class="child">
-          <div class="feed_name">
-            <div class="feed_profile_box">
-              {% if post.author.profile.image %}
-              <img class="profile_img" src="{{post.author.profile.image.url}}" />
-              {% else %}
-              <img class="profile_img" src="/static/images/DefualtImage.jpg" />
-              {% endif %}
-            </div>
-            <span class="feed_name_txt">{{ post.author.username}}</span>
-          </div>
-          {% if post.photo %}
-          <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
+{% block content %}
+<div class="postmodal_overlay">
+  <div class="postmodal_window">
+    {% comment %} 사진파트 {% endcomment %}
+    <div class="child">
+      <div class="feed_name">
+        <div class="feed_profile_box">
+          {% if post.author.profile.image %}
+          <img class="profile_img" src="{{post.author.profile.image.url}}" />
           {% else %}
-          <div><img class="detail_photo" src = "/static/images/logo.png"></div>
-          {% endif%}
-          <!-- like -->
-          {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-          <br>
-            <div style="font-size: small;">
-            게시 날짜:{{ post.create_date | date:' Y.m.d' }}
-          {% if post.modify_date %}
-          / 수정 날짜:{{post.modify_date|date:' Y.m.d'}}
+          <img class="profile_img" src="/static/images/DefualtProfile.jpg" />
           {% endif %}
-          </div>
-          
-          
         </div>
-        {% comment %} 내용 파트 {% endcomment %}
-        <div class="child over">
-          <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
-          <div>
-            <h5 class="detail_title">{{post.title}}</h5>
-          <!-- icon -->
-          <div class="ml-3">
-          {% block icons %}
-          {% include 'dailyphoto/icons.html' %}
-          {% endblock %}<br>
-          </div>
-        </div>
-          <div class="detail_content">
-            <p style='font-size:25px;'>{{post.content}}</p>
-          </div>
-          <div class="detail_buttons">
-            <a href="{% url 'dailyphoto:post_update' post.id %}"><button id="modify_{{post.id}}" class="btn btn-primary" type="submit">수정</button></a>
-            <button id="delete_{{post.id}}" class="btn btn-secondary" type="submit" onclick="if(confirm('삭제하시겠습니까?')){location.href=`{% url 'dailyphoto:post_delete' post.id%}`}">삭제</button>
-          </div>
-        </div>
+        <span class="feed_name_txt">{{ post.author.username}}</span>
+      </div>
+      {% if post.photo %}
+      <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
+      {% else %}
+      <div><img class="detail_photo" src = "/static/images/logo.png"></div>
+      {% endif%}
+      <!-- like -->
+      <span class="feed_txt"><b>좋아요 {{post.like_count}}개</b></span>
+      <br>
+        <div style="font-size: small;">
+        게시 날짜:{{ post.create_date | date:' Y.m.d' }}
+      {% if post.modify_date %}
+      / 수정 날짜:{{post.modify_date|date:' Y.m.d'}}
+      {% endif %}
+      </div>
+
+
+    </div>
+    {% comment %} 내용 파트 {% endcomment %}
+    <div class="child over">
+      <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
+      <div>
+        <h5 class="detail_title">{{post.title}}</h5>
+      <!-- icon -->
+      <div class="ml-3">
+      {% block icons %}
+      {% include 'dailyphoto/icons.html' %}
+      {% endblock %}<br>
       </div>
     </div>
-    {% endblock %}
-
-
-
-    <!-- jQuery JS -->
-    <script src="{% static 'jquery-3.6.0.min.js' %}"></script>
-    <!-- Bootstrap JS -->
-    <script src="{% static 'bootstrap.min.js' %}"></script>
-    {% block script %}{% endblock %}
-  </body>
-</html>
-
-
-{% comment %} <form method="post" class="post-form my-3">
-  {% csrf_token %}
-  <div class="form-group">
-  <span>
-  <textarea class="form-control"name="content" id="content" 
-  rows="1" style="resize: none;" placeholder="댓글 달기...">{{ form.content.value|default_if_none:'' }}</textarea> </div>
-  <button type="submit" class="btn btn-Light" style>게시</button>
-  </span>
- </form>  {% endcomment %}
+      <div class="detail_content">
+        <p style='font-size:25px;'>{{post.content}}</p>
+      </div>
+      <div class="detail_buttons">
+        <a href="{% url 'dailyphoto:post_update' post.id %}"><button id="modify_{{post.id}}" class="btn btn-light" style="border-color: #aaaaaa;" type="submit">수정</button></a>
+        <button id="delete_{{post.id}}" class="btn btn-light" style="border-color: #aaaaaa;" type="submit" onclick="if(confirm('삭제하시겠습니까?')){location.href=`{% url 'dailyphoto:post_delete' post.id%}`}">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
