@@ -11,6 +11,7 @@ from . import models
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
+import pyautogui
 
 # 주소 index 
 def index(request):
@@ -23,48 +24,18 @@ def index(request):
   user = get_user_model()
   follow_list= user.objects.filter(followers=request.user)
 
-  
-  
   q = Q(author=request.user)
   if (follow_list.count()>0):
     for my_following in follow_list:
       q.add(Q(author=my_following),q.OR)
 
   post_list = Post.objects.filter(q).order_by('-create_date')
-
-  all_users = list(user.objects.values_list('username'))
-  print(all_users)
-  all_users = list(user.objects.values_list('username')[0])
-  print(all_users)
-  all_users = list(user.objects.values_list('username').values('username'))
-  print(all_users)
-  # all_users=list(user.objects.values['username'])
-  # print(all_users)
-  # all_users = list(user.objects.values_list('username').get('username'))
-  # print(all_users)
-
-  # all_users = list(user.objects.values_list('username').values('username'))
-  # print(all_users)
-
-  all_users = list(user.objects.values('username'))
-  print(all_users)
-  user_list = []
-  for us in all_users:
-    user_list.append(us['username'])
-
-  print(user_list)
-
-  # all_users=user.objects.values('username')
-  # print(all_users)
-  # all_users=list(all_users)
-  # print(all_users)
-
-
   
   comment_form = CommentForm()
 
-  context = {'post_list': post_list,  "comment_form" : comment_form,'user_list':user_list}
+  context = {'post_list': post_list,  "comment_form" : comment_form}
   return render(request, 'dailyphoto/post_list.html', context)
+
 
 # 검색기능 
 def search(request):
@@ -352,6 +323,7 @@ def profile(request, username):
       url='dailyphoto/profile.html'
       return render(request, url, context)
     else:
+      pyautogui.alert('존재하지 않는 사용자입니다.')
       return redirect('dailyphoto:index')
 
 
