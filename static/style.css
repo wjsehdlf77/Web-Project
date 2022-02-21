@@ -5,14 +5,17 @@
 }
 
 .background_set {
-  background-image: url("szabo-viktor.jpg");
-  background-size: cover;
+  background-image: url("background13.jpg");
+  background-size: contain;
+  background-size: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 
 .post_list_background_set{
   
-  background-image: url("background4.jpg");
+  background-image: url("background13.jpg");
   background-size: contain;
   background-size: 100vw;
   background-attachment: fixed;
