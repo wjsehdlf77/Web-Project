@@ -42,21 +42,27 @@
         {% comment %} 사진파트 {% endcomment %}
         <div class="child">
           <div class="feed_name">
-            <div class="feed_profile_box"><img class="feed_profile_img" src="/media/{{post.author.profile.image}}" /></div>
+            <div class="feed_profile_box">
+              {% if post.author.profile.image %}
+              <img class="profile_img" src="{{post.author.profile.image.url}}" />
+              {% else %}
+              <img class="profile_img" src="/static/images/DefualtImage.jpg" />
+              {% endif %}
+            </div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
           </div>
           {% if post.photo %}
           <div><img class="detail_photo" src = "/media/{{post.photo}}"></div>
           {% else %}
-          <div><img class="detail_photo" src = "/static/images/DailyphotoLogo_r.png"></div>
+          <div><img class="detail_photo" src = "/static/images/logo.png"></div>
           {% endif%}
           <!-- like -->
           {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
           <br>
             <div style="font-size: small;">
-            Uploaded Date:{{ post.create_date | date:' Y.m.d' }}
+            게시 날짜:{{ post.create_date | date:' Y.m.d' }}
           {% if post.modify_date %}
-          /Updated Date:{{post.modify_date|date:' Y.m.d'}}
+          / 수정 날짜:{{post.modify_date|date:' Y.m.d'}}
           {% endif %}
           </div>
           
