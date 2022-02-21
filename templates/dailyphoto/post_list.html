@@ -2,14 +2,14 @@
 
 <div class="home_main_body post_list_background_set" style="padding-top: 80px">
   <div class="body_form">
-    <div class="calender">
+    {% comment %} <div class="calender">
       <form method="GET" action="{% url 'dailyphoto:search' %}">
         <div id="search">
           <input name="search" type="date" />
-          <button class="btn btn-outline-secondary" type="submit">검색</button>
+          <button class="btn btn-basic" type="submit">검색</button>
         </div>
       </form>
-    </div>
+    </div> {% endcomment %}
     {% for post in post_list %}
     <div class="sub_body_form">
       <div class="left">
@@ -19,7 +19,7 @@
               {% if post.author.profile.image %}
               <img class="profile_img" src="{{post.author.profile.image.url}}" />
               {% else %}
-              <img class="profile_img" src="/static/images/DefualtImage.jpg" />
+              <img class="profile_img" src="/static/images/DefualtProfile.jpg" />
               {% endif %}
             </div>
             <span class="feed_name_txt">{{ post.author.username}}</span>
@@ -28,7 +28,7 @@
             {% if post.photo %}
             <img class="feed_img" src="/media/{{post.photo}}" />
             {% else %}
-            <img class="feed_img" src="/static/images/logo.png" />
+            <img class="feed_img" src="/static/images/logo2.png" />
             {% endif%}
           </div>
           <div class="feed_icon">
