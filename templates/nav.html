@@ -27,7 +27,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top opacity:0.7" style="width: 100%;; position: fixed">
       {% comment %} 상단 고정 sticky-top {% endcomment %}
       <div class="container">
-        <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/DailyphotoLogo.png" />
+        <img style="height: 50px; object-fit: contain" src="{{baseUrl}}101618235.png" />
 
         <form class="form-inline">
           <input class="form-control" type="text" placeholder="Search Id" id="id_name" onkeyup="if(window.event.keyCode==13){getValueInput()}"/>
@@ -70,9 +70,14 @@
 
     const getValueInput = () =>{
       let inputValue = document.getElementById("id_name").value; 
+      if (inputValue!==''){
       var link = 'http://127.0.0.1:8000/dailyphoto/profile/'+inputValue;
       location.href = link;
     }
+    else{
+      alert('검색할 아이디를 사용해주세요')
+    }
+  }
 
     
   </script>
