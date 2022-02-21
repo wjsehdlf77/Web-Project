@@ -11,6 +11,7 @@ from . import models
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
+import pyautogui
 
 # 주소 index 
 def index(request):
@@ -352,6 +353,7 @@ def profile(request, username):
       url='dailyphoto/profile.html'
       return render(request, url, context)
     else:
+      pyautogui.alert('존재하지 않는 사용자입니다.')
       return redirect('dailyphoto:index')
 
 
