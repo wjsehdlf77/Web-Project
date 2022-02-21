@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="home_main_body" style="padding-top: 80px">
+<div class="home_main_body post_list_background_set" style="padding-top: 80px">
   <div class="body_form">
     <div class="calender">
       <form method="GET" action="{% url 'dailyphoto:search' %}">
@@ -28,7 +28,7 @@
             {% if post.photo %}
             <img class="feed_img" src="/media/{{post.photo}}" />
             {% else %}
-            <img class="feed_img" src="/static/images/DailyphotoLogo_r.png" />
+            <img class="feed_img" src="/static/101618235.png" />
             {% endif%}
           </div>
           <div class="feed_icon">
