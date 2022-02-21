@@ -10,8 +10,14 @@
 }
 
 .post_list_background_set{
-  background-image: url("background.jpg");
-  background-size: cover;
+  
+  background-image: url("background4.jpg");
+  background-size: contain;
+  background-size: 100vw;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  
 }
 /* upload page*/
 
@@ -151,7 +157,7 @@
   height: 80vh;
   width: 150vh;
   display: flex;
-  background-image: url("diary8-15.png"); 
+  background-image: url("diary.png"); 
   background-repeat : no-repeat;
   background-size: contain;
   flex-direction: row;
