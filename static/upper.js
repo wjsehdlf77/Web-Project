@@ -65,7 +65,6 @@ function display_icon(icons, num) {
 
 function is_in(list_1, list_2) {
   for (i = 0; i < list_2.length; i++) {
-    // console.log(list_2[i]);
     if (list_1.includes(list_2[i])) {
       return true;
     }

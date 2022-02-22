@@ -14,7 +14,6 @@ function display_like() {
     let checkbox_in = checkbox_label.getElementsByTagName("span")[0];
     checkbox.addEventListener("change", function (e) {
 
-
       if (checkbox.checked) {
         checkbox_in.innerHTML = `<img src="/static/images/cloud_full.png" class="like_icon" alt="" />`;
 
@@ -75,7 +74,6 @@ function display_like() {
       let pe = this.parentElement.parentElement
       let div_count=pe.getElementsByClassName('feed_txt')
       let count_id= div_count[0].getAttribute('id')
-      // console.log(count_id)
       let content = div_count.item(0)
       content = content.textContent
 
@@ -86,11 +84,9 @@ function display_like() {
       else{
         c_txt=(parseInt(c_txt)-1).toString()}
       let temp_html = '<b>좋아요 '+c_txt+'개</b>'
-      // console.log(div_count)
       like_c=$("#"+count_id)
       like_c.empty()
       like_c.append(temp_html)
-      // console.log($("#"+count_id))
     });
   }
 }
@@ -99,35 +95,33 @@ display_like();
 
 $(document).ready(function(){
   $('#description').each(function(){
-      //var content = $(this).children('.content');
-      var content = $(this).find('.text');
-      var content_txt = content.text();
-      var content_html = content.html();
-      var content_txt_short = content_txt.substring(0,20)+"...";
-      var btn_more = $('<a href="javascript:void(0)" class="more">더보기</a>');
+    var content = $(this).find('.text');
+    var content_txt = content.text();
+    var content_html = content.html();
+    var content_txt_short = content_txt.substring(0,20)+"...";
+    var btn_more = $('<a href="javascript:void(0)" class="more">더보기</a>');
 
-      $(this).append(btn_more);
-      if(content_txt.length >= 20){
-          content.html(content_txt_short)
-          
+    $(this).append(btn_more);
+    if(content_txt.length >= 20){
+      content.html(content_txt_short)
+        
+    }else{
+      btn_more.hide()
+    }
+    
+    btn_more.click(toggle_content);
+    function toggle_content(){
+      if($(this).hasClass('short')){
+        // 접기 상태
+        $(this).html('더보기');
+        content.html(content_txt_short)
+        $(this).removeClass('short');
       }else{
-          btn_more.hide()
+        // 더보기 상태
+        $(this).html('접기');
+        content.html(content_html);
+        $(this).addClass('short');
       }
-      
-      btn_more.click(toggle_content);
-      function toggle_content(){
-          if($(this).hasClass('short')){
-              // 접기 상태
-              $(this).html('더보기');
-              content.html(content_txt_short)
-              $(this).removeClass('short');
-          }else{
-              // 더보기 상태
-              $(this).html('접기');
-              content.html(content_html);
-              $(this).addClass('short');
-
-          }
-      }
+    }
   });
 });
