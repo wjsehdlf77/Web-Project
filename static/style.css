@@ -4,6 +4,20 @@
   /* font-size: 1rem; */
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+  background: #eeeeee;
+  border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#c2f3ff, #64b3f4);
+  border-radius: 5px;
+}
+
 .background_set {
 
   background-image: url("images/BackgroundImage.jpg");
@@ -444,7 +458,7 @@ span {
   display: flex;
   flex-direction: row;
   min-width: 800px;
-  height: 800px;
+  height: 500px;
   flex-wrap: wrap;
   overflow-y : scroll;
   justify-content: flex-start;

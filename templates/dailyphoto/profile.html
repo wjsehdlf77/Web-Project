@@ -21,24 +21,23 @@
                 <audio autoplay controls loop><source src = "{{person.profile.music.url}}"></audio>
                 {% endif %}
             </div>
-            
 
             <div style="display: flex; flex-direction:column; margin: 40px 80px">
                 <div class="mb-3" style="display: flex; flex-direction: column; ">
                     <div style="font-size: 35px; "> {{ person.profile.nickname }} </div>
                     
                 </div>
-                <div class="mb-3" style="display: flex; flex-direction: column; ">
-                <div style="font-size: 15px;"> {{person.profile.description}}</div>
+                <div class="mb-3" style="display: flex; flex-direction: column; " id="description">
+                <div class="text" style="font-size: 15px;"> {{person.profile.description}}</div>
                 </div>
 
-                <div class="mb-3" style="display: flex; flex-direction: column;">
+                <div class="mb-3"  style="display: flex; flex-direction: column;">
                     <div style="font-size: 15px;"> {{user.email}}</div>
                     </div>
                     <div style = 'display: flex; flex-direction: column; '>
                       <div>
                         <div>
-                          내깐부 : {{ person.followings.all|length }} / 니깐부 : {{ person.followers.all|length }}
+                          팔로잉 : {{ person.followings.all|length }} / 팔로워 : {{ person.followers.all|length }}
                         </div>
                       
                         <div>
