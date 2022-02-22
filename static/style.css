@@ -408,8 +408,8 @@ span {
   /* background-color: #ffffff; */
   background-color: #f8f9fa;
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  justify-content: row;
+  flex-direction:row;
   width: 1250px;
   border-radius: 20px;
   padding: 20px 0px 20px 0px;
@@ -444,7 +444,7 @@ span {
   display: flex;
   flex-direction: row;
   min-width: 800px;
-  height: 800px;
+  height: 600px;
   flex-wrap: wrap;
   overflow-y : scroll;
   justify-content: flex-start;
@@ -584,4 +584,28 @@ div.over {
   margin-top: 16px;
   margin-left: 16px;
   margin-bottom: 22px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+  background: #eeeeee;
+  border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#c2f3ff, #64b3f4);
+  border-radius: 5px;
+}
+
+.text{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 16px;    
+  max-height: 32px;     
+  -webkit-line-clamp: 3; 
+  -webkit-box-orient: vertical;
 }
