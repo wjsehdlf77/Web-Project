@@ -18,6 +18,22 @@
   border-radius: 5px;
 }
 
+.signup_modal {
+  background: white;
+  backdrop-filter: blur(13.5px);
+  -webkit-backdrop-filter: blur(13.5px);
+  border-radius: 5%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  /* top:10%; */
+  margin:0 auto;
+  width: 690px;
+  height: 500px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
 .background_set {
 
   background-image: url("images/BackgroundImage.jpg");
@@ -598,4 +614,9 @@ div.over {
   margin-top: 16px;
   margin-left: 16px;
   margin-bottom: 22px;
-}=
+
+}
+
+.text{
+  
+}
