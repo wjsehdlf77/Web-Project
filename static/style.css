@@ -4,6 +4,20 @@
   /* font-size: 1rem; */
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+::-webkit-scrollbar-track {
+  background: #eeeeee;
+  border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#c2f3ff, #64b3f4);
+  border-radius: 5px;
+}
+
 .background_set {
 
   background-image: url("images/BackgroundImage.jpg");
@@ -584,28 +598,4 @@ div.over {
   margin-top: 16px;
   margin-left: 16px;
   margin-bottom: 22px;
-}
-
-::-webkit-scrollbar {
-  width: 10px;
-}
- 
-::-webkit-scrollbar-track {
-  background: #eeeeee;
-  border-radius: 5px;
-}
- 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(#c2f3ff, #64b3f4);
-  border-radius: 5px;
-}
-
-.text{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  line-height: 16px;    
-  max-height: 32px;     
-  -webkit-line-clamp: 3; 
-  -webkit-box-orient: vertical;
-}
+}=
