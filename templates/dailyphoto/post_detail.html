@@ -1,7 +1,7 @@
 {% include 'base.html' %}
 
 {% block content %}
-<div class="postmodal_overlay">
+<div class="modal_overlay">
   <div class="postmodal_window">
     {% comment %} 사진파트 {% endcomment %}
     <div class="child">
@@ -29,9 +29,8 @@
       / 수정 날짜:{{post.modify_date|date:' Y.m.d'}}
       {% endif %}
       </div>
-
-
     </div>
+    
     {% comment %} 내용 파트 {% endcomment %}
     <div class="child over">
       <span class="material-icons-outlined" style="float:right;" onClick="history.go(-1)">cancel</span>
