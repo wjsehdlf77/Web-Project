@@ -115,27 +115,19 @@ div.over {
 
 /* 아이콘 구현 icon.html */
 .icon {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.5rem;
+  height: 2.5rem;
   margin:1px;
 }
 .icon_upload label {
   border-radius: 5px;
   border: thin;
 }
-/* .icon_upload input {
-  border: thin;
-}:checked {
-  background-color: beige;
-} */
 
 .icon_upload label:hover {
   background-color: lightgray;
   border: thin;
 }
-/* .icon_upload label input:checked {
-  background-color: beige;
-} */
 
 /* like 표시 */
 .like > input {
@@ -147,12 +139,13 @@ div.over {
 }
 
 .like_icon {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 2.5rem;
+  height: 2.5rem;
 }
 
 .feed_txt {
-  font-size: 14px;
+  border:none;
+  /* font-size: 14px; */
 }
 
 
