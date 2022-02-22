@@ -1,6 +1,4 @@
-
 function read_f(e) {
-
   var img=$('#preview_pic')
   if(window.FileReader) {
     var file  = e.target.files[0];
@@ -18,6 +16,4 @@ function read_f(e) {
     }
   }
 }
-
-  // document.getElementById('datePicker').valueAsDate = new Date();
   document.getElementById("id_photo").addEventListener('change', read_f, false);
