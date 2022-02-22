@@ -104,7 +104,7 @@ $(document).ready(function(){
       var content_txt = content.text();
       var content_html = content.html();
       var content_txt_short = content_txt.substring(0,20)+"...";
-      var btn_more = $('<a href="javascript:void(0)" class="more">더보기?</a>');
+      var btn_more = $('<a href="javascript:void(0)" class="more">더보기</a>');
 
       $(this).append(btn_more);
       if(content_txt.length >= 20){
