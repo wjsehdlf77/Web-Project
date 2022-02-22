@@ -407,11 +407,10 @@ span {
   background-color: #f8f9fa;
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  width: 1000px;
+  flex-direction: row;
+  width: 1250px;
   border-radius: 20px;
-  align-items: center;
-  padding: 0px 0px 40px 0px;
+  padding: 20px 0px 20px 0px;
 
 }
 
@@ -435,22 +434,25 @@ span {
   border: 2px solid silver;
   border-radius: 20px;
   width: 900px;
-  align-items: center;
+  padding : 12px ;
+  /* align-items: center; */
 }
 
 .sub_feed_body {
   display: flex;
   flex-direction: row;
-  min-width: 900px;
+  min-width: 800px;
+  height: 800px;
   flex-wrap: wrap;
+  overflow-y : scroll;
   justify-content: flex-start;
 }
 
 .big_feed {
   display: flex;
 
-  width: 300px;
-  height: 300px;
+  width: 280px;
+  height: 280px;
   align-items: center;
   justify-content: center;
   border: 2px soild;
