@@ -30,14 +30,14 @@
   <body>
     {%load static %}{% static "" as baseUrl %}
     {% comment %} opacity:0.5 내비바 투명도 {% endcomment %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top " style="width: 100%; position: fixed;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top " style=" width: 100%; position: fixed; justify-content : space-between;">
 
       {% comment %} 상단 고정 sticky-top {% endcomment %}
-      <div class="container " >
-    
-        <img style="height: 50px; object-fit: contain" src="{{baseUrl}}images/logo.png" />
+      
         <div>
-
+        <img style="height: 50px; object-fit: contain; padding-right:300px;" src="{{baseUrl}}images/logo.png" />
+        </div>
+        <div>
           <form class="form-inline">
             <input size="20" style= "height:30px;"class="form-control" type="text" placeholder="Search Id" id="id_name" onkeyup="if(window.event.keyCode==13){getValueInput()}"/>
             <button class="searchbutton" type="button" onclick="getValueInput()"><span class="material-icons-outlined">
@@ -47,24 +47,25 @@
         </div>
 
         <div>
-          <ul class="navbar-nav ml-auto">
+          <ul class="navbar-nav ml-auto" style = "padding-left:300px;">
+
             <div class="container-fluid">
               <div>
-                <!-- Javascript가 필요없이 data-toggle에 collapse href에 대상 id을 설정합니다. -->
                 <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <span class="material-icons-outlined">calendar_month</span>
+                <span class="material-icons-outlined" style = 'color:#666666;'>calendar_month</span>
                 </a>
               </div>
-              <!-- collapse 대상 태그는 class를 collapse로 설정합니다. -->
               <div class="collapse" id="collapseExample">
-                <form method="GET" action="{% url 'dailyphoto:search' %}">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <form method="GET" action="{% url 'dailyphoto:search' %}" id = "form1">
                   <div id="search" style="margin-left:100px;">
-                    <input name="search" type="date"  />
-                    <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button>
+                    <input name="search"  type="date" id = "date1" />
+                    {% comment %} <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button> {% endcomment %}
                   </div>
                 </form>
               </div>
             </div>
+            
             <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons-outlined">logout</span></a>
             <a class="nav-link" href="{% url 'dailyphoto:index' %}"><span class="material-icons">home</span></a>
             <a class="nav-link" href="{% url 'dailyphoto:post_create' %}"><span class="material-icons-outlined">add_box</span></a>
@@ -77,7 +78,6 @@
             </ul>
           </div>
         
-        </div>
     </nav>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -101,5 +101,11 @@
     }
   }
   </script>
+  <script>
+  $('#date1').change(function(){
+    console.log('Submiting form');                
+    $('#form1').submit();
+  });
+</script>
   </body>
 </html>
