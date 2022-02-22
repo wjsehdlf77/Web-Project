@@ -14,7 +14,11 @@
               <img class="profile_img" src="/static/images/DefualtProfile.jpg" />
               {% endif %}
             </div>
-            <span class="feed_name_txt">{{ post.author.profile.nickname}}</span>
+            <span class="feed_name_txt">
+              <!-- 닉네임 있을 경우 -->
+              {% if post.author.profile.nickname %} {{ post.author.profile.nickname}} 
+              <!-- 닉네임 없을 경우 -->
+              {% else %} {{post.author.username}} {% endif %}</span>
           </div>
           <div class="big_feed_img">
             {% if post.photo %}
@@ -25,11 +29,8 @@
           </div>
           <div class="feed_icon">
             <!-- like -->
-            {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %}
-
-            게시 날짜:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
+            {% block likes %}{% include 'dailyphoto/like.html' %}{% endblock %} 게시 날짜:{{ post.create_date | date:' Y.m.d' }} {% if post.modify_date %}
             <br />수정 날짜:{{ post.modify_date | date:' Y.m.d' }} {% endif %}
-
           </div>
         </div>
       </div>
@@ -61,11 +62,10 @@
             <div class="comment-input overflow" class="clearfix">
               <form action="{% url 'dailyphoto:comment_create' post.id %}" method="post">
                 {% csrf_token %}
-                <input type="text" name="content" maxlength="1000" required="" id="id_content" style="margin: 0 auto;   width: 310px" />
+                <input type="text" name="content" maxlength="1000" required="" id="id_content" style="margin: 0 auto; width: 310px" />
                 <input type="submit" value="댓글달기" style="padding-bottom: 30px" />
-
               </form>
-            </div> 
+            </div>
             <!-- comment input -->
           </div>
           <!-- comment wrap -->
