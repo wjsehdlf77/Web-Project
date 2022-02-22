@@ -14,6 +14,7 @@ from django.db.models import Q
 import pyautogui
 
 # 주소 index 
+@login_required(login_url='common:login')
 def index(request):
   """
   dailyphoto 게시물 출력
@@ -89,7 +90,7 @@ def comment_create(request, post_id):
     else:
       return render(request, 'dailyphoto/post_list.html')
                   
-
+@login_required(login_url='common:login')
 def comment_delete(request, comment_id):
     if request.user.is_authenticated:
         comment = get_object_or_404(models.Comment, pk=comment_id)
@@ -103,7 +104,7 @@ def comment_delete(request, comment_id):
       
 
 # 글 업로드 함수
-# @login_required(login_url='common:login')
+@login_required(login_url='common:login')
 def post_create(request): 
   """
   upload
@@ -147,6 +148,7 @@ def post_create(request):
 
 
 #글 수정
+@login_required(login_url='common:login')
 def post_update(request,post_id):
   if request.method== "POST":
     form = PostForm(request.POST)
@@ -216,6 +218,7 @@ def post_update(request,post_id):
   
 
 #글 삭제
+@login_required(login_url='common:login')
 def post_delete(request,post_id):
   if request.method== "GET":
     print('request method is get.')
@@ -325,7 +328,7 @@ def profile(request, username):
     else:
       return redirect('dailyphoto:index')
 
-
+@login_required(login_url='common:login')
 def modify_profile(request):
     if request.method == 'POST':
       user_change_form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -344,7 +347,7 @@ def modify_profile(request):
             'profile_form': profile_form
         })
 
-
+@login_required(login_url='common:login')
 def follow(request, user_pk):
     if request.user.is_authenticated:
         user = get_user_model()
