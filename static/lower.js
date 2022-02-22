@@ -95,18 +95,6 @@ function display_like() {
   }
 }
 
-function add_search_bar(){
-
-
-  $(this).append(`<form method="GET" action="{% url 'dailyphoto:search' %}">
-  <div id="search" style="margin-left:100px;">
-    <input name="search" type="date"  />
-    <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button>
-  </div>
-</form>`)
-
-}
-
 display_like();
 
 $(document).ready(function(){
@@ -115,11 +103,11 @@ $(document).ready(function(){
       var content = $(this).find('.text');
       var content_txt = content.text();
       var content_html = content.html();
-      var content_txt_short = content_txt.substring(0,20)+"...";
-      var btn_more = $('<a href="javascript:void(0)" class="more">더보기</a>');
+      var content_txt_short = content_txt.substring(0,100)+"...";
+      var btn_more = $('<a href="javascript:void(0)" class="more">더보기?</a>');
 
       $(this).append(btn_more);
-      if(content_txt.length >= 20){
+      if(content_txt.length >= 100){
           content.html(content_txt_short)
           
       }else{
@@ -142,27 +130,4 @@ $(document).ready(function(){
           }
       }
   });
-
-
-  $('#search').addEventListener('click',function(){
-  //   $(this).append(`<form method="GET" action="{% url 'dailyphoto:search' %}">
-  //   <div id="search" style="margin-left:100px;">
-  //     <input name="search" type="date"  />
-  //     <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button>
-  //   </div>
-  // </form>`)
-
-  $(this).html(`<form method="GET" action="{% url 'dailyphoto:search' %}">
-  <div id="search" style="margin-left:100px;">
-    <input name="search" type="date"  />
-    <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button>
-  </div>
-</form>`)
-
-    
-    
-
-
-  })
 });
-
