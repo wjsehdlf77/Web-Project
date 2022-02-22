@@ -52,14 +52,15 @@
             <div class="container-fluid">
               <div>
                 <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                <span class="material-icons-outlined">calendar_month</span>
+                <span class="material-icons-outlined" style = 'color:#666666;'>calendar_month</span>
                 </a>
               </div>
               <div class="collapse" id="collapseExample">
-                <form method="GET" action="{% url 'dailyphoto:search' %}">
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <form method="GET" action="{% url 'dailyphoto:search' %}" id = "form1">
                   <div id="search" style="margin-left:100px;">
-                    <input name="search" type="date"/>
-                    <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button>
+                    <input name="search"  type="date" id = "date1" />
+                    {% comment %} <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button> {% endcomment %}
                   </div>
                 </form>
               </div>
@@ -100,5 +101,11 @@
     }
   }
   </script>
+  <script>
+  $('#date1').change(function(){
+    console.log('Submiting form');                
+    $('#form1').submit();
+  });
+</script>
   </body>
 </html>
