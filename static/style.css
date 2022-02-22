@@ -422,8 +422,8 @@ span {
   /* background-color: #ffffff; */
   background-color: #f8f9fa;
   display: flex;
-  justify-content: center;
-  flex-direction: row;
+  justify-content: row;
+  flex-direction:row;
   width: 1250px;
   border-radius: 20px;
   padding: 20px 0px 20px 0px;
@@ -458,7 +458,7 @@ span {
   display: flex;
   flex-direction: row;
   min-width: 800px;
-  height: 500px;
+  height: 600px;
   flex-wrap: wrap;
   overflow-y : scroll;
   justify-content: flex-start;
@@ -598,4 +598,4 @@ div.over {
   margin-top: 16px;
   margin-left: 16px;
   margin-bottom: 22px;
-}
+}=
