@@ -45,6 +45,19 @@
 
         <div>
           <ul class="navbar-nav ml-auto">
+            <div>
+            <button data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><span class="material-icons-outlined" id="search">서치</span>
+            </button>
+            </div>
+            <div class="collapse">
+            <form method="GET" action="{% url 'dailyphoto:search' %}">
+              <div id="search" style="margin-left:100px;">
+                <input name="search" type="date"  />
+                <button class="btn btn-basic " style="margin-bottom:10px;"type="submit">검색</button>
+              </div>
+            </form>
+          </div>
+
             <a class="nav-link" href="{% url 'common:logout' %}"><span class="material-icons-outlined">logout</span></a>
             <a class="nav-link" href="{% url 'dailyphoto:index' %}"><span class="material-icons">home</span></a>
             <a class="nav-link" href="{% url 'dailyphoto:post_create' %}"><span class="material-icons-outlined">add_box</span></a>
