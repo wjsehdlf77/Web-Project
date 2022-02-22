@@ -11,7 +11,7 @@ from . import models
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
-import pyautogui
+# import pyautogui
 
 # 주소 index 
 @login_required(login_url='common:login')
@@ -26,6 +26,7 @@ def index(request):
   follow_list= user.objects.filter(followers=request.user)
 
   q = Q(author=request.user)
+  #내가 팔로우한 사람들의 어카운트 검색해서 같이 조회되도록 필터에 추가
   if (follow_list.count()>0):
     for my_following in follow_list:
       q.add(Q(author=my_following),q.OR)
