@@ -1,31 +1,28 @@
-
 from django.http  import  HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404,redirect
 from django.contrib.auth import get_user_model
-
-
 from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment, Profile, Like, User
+from .models import Post, Profile, Like
 from . import models
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
-import pyautogui
 
-# 주소 index 
+
+# 게시물페이지
 @login_required(login_url='common:login')
 def index(request):
   """
   dailyphoto 게시물 출력
   """
-
-    # 조회
+  # 조회
   post_list = Post.objects.order_by('-create_date')      
   user = get_user_model()
   follow_list= user.objects.filter(followers=request.user)
 
   q = Q(author=request.user)
+  #내가 팔로우한 사람들의 어카운트 검색해서 같이 조회되도록 필터에 추가
   if (follow_list.count()>0):
     for my_following in follow_list:
       q.add(Q(author=my_following),q.OR)
@@ -36,6 +33,13 @@ def index(request):
 
   context = {'post_list': post_list,  "comment_form" : comment_form}
   return render(request, 'dailyphoto/post_list.html', context)
+
+# post 상세
+def detail(request, id):
+  
+  post  = get_object_or_404(Post, pk=id)
+  context = {'post': post}
+  return render(request, 'dailyphoto/post_detail.html', context)
 
 
 # 검색기능 
@@ -63,22 +67,14 @@ def search(request):
   return render(request, 'dailyphoto/post_list.html', {'post_list':post_list, 'search':search, 'comment_form':comment_form})
 
 
-# post 상세
-def detail(request, id):
-  
-  post  = get_object_or_404(Post, pk=id) # 예외일때 404에러 발생
-  # get_object_or_404 <- 오류 화면 구성
-  context = {'post': post}
-  return render(request, 'dailyphoto/post_detail.html', context)
-  
-
+#댓글 달기
 @login_required(login_url='common:login')
 def comment_create(request, post_id):
   if request.user.is_authenticated:
 
     post = get_object_or_404(models.Post, pk=post_id)
-
     form = CommentForm(request.POST)
+    
     if form.is_valid():
       comment = form.save(commit=False)
       comment.author = request.user
@@ -89,16 +85,16 @@ def comment_create(request, post_id):
 
     else:
       return render(request, 'dailyphoto/post_list.html')
-                  
+
+#댓글 삭제            
 @login_required(login_url='common:login')
 def comment_delete(request, comment_id):
     if request.user.is_authenticated:
         comment = get_object_or_404(models.Comment, pk=comment_id)
         if request.user == comment.author:
             comment.delete()
-
         return redirect(reverse('dailyphoto:index'))
-
+        
     else:
         return render(request, 'dailyphoto/post_list.html')
       
@@ -109,7 +105,6 @@ def post_create(request):
   """
   upload
   """
-
   if request.method== "POST":
     print('request method is post')
     print(request.POST)
@@ -124,14 +119,14 @@ def post_create(request):
       # photo가 입력되었는지 확인하고 넣어줌
       if 'photo' in request.FILES:
         post.photo=request.FILES['photo']
-      else:
-        pass
 
       # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
       icons = request.POST.getlist('icons[]')
       post.icons='&'.join(icons)
+      # author, create_date 지정
       post.author= request.user
       post.create_date=timezone.now()
+      # 세이브
       post.save()
       print('post save made')
       return redirect('dailyphoto:index')
@@ -152,11 +147,9 @@ def post_create(request):
 def post_update(request,post_id):
   if request.method== "POST":
     form = PostForm(request.POST)
-    # print(form)
     context = {'form': form}
     if form.is_valid():
       post = get_object_or_404(models.Post, pk=post_id)
-      # post_before = post
       post_temp = form.save(commit=False)
 
       # title이 입력
@@ -166,8 +159,6 @@ def post_update(request,post_id):
       # photo 입력
       if 'photo' in request.FILES:
         post.photo=request.FILES['photo']
-      else:
-        pass
       
       #content
       post.content=post_temp.content
@@ -175,53 +166,36 @@ def post_update(request,post_id):
       # 리스트로 입력된 icons를 스트링으로 변환해서 필드에 넣어줌
       icons = request.POST.getlist('icons[]')
       post.icons='&'.join(icons)
-
-      #
       post.author= request.user
-      # post.like_count=post_temp.like_count
-      # post.create_date=post_temp.creat_date
       post.modify_date=timezone.now()
-
+      #저장
       post.save()
       print('post update made')
 
       return redirect('dailyphoto:index')
     else:
       print('post update - form is not valid')
-      print(request)
-      print(form)
     
   else:
-    print('request method is get')
+    print('request method is get -view.update')
     post = get_object_or_404(models.Post, pk=post_id)
-    print(post)
-    print(post.content)
     form = PostForm(instance=post)
-    print(form)
     context = {'form': form ,'post':post}
+    
     if form.is_valid():
-      print('get update - form is valid')
       return render(request, 'dailyphoto/update_page.html', context )  
 
     else:
-      print('get update - form is not valid')
-      # form = PostForm(request.POST)
-      # print(form)
-      
-      # form = PostForm(request.GET)
-      # print(form)
+      print('get - form is not valid -view.update')
       context = {'form': form }
   
   return render(request, 'dailyphoto/update_page.html', context )
-
-
-  
 
 #글 삭제
 @login_required(login_url='common:login')
 def post_delete(request,post_id):
   if request.method== "GET":
-    print('request method is get.')
+    print('request method is get. - views.post_delete')
     post = get_object_or_404(models.Post, pk=post_id)
     form = PostForm(request.POST)
     if form.is_valid():
@@ -232,22 +206,19 @@ def post_delete(request,post_id):
   return redirect('dailyphoto:index')
 
 
-#like
+# like
 @login_required(login_url='common:login')
 def like(request):
 
   def liking(post, like,like_count):
     like.post=post
     post.like_count = like_count + 1
-    print(like)
     like.save()
     post.save()
     print('liked')
 
   if request.method=="POST":
     form = LikeForm(request.POST)
-    
-    print(request.body)
     if form.is_valid():
       like=form.save(commit=False)
       like.author= request.user
@@ -269,8 +240,7 @@ def like(request):
     else:
       print('form is not valid')
   else:
-    print('else')
-    print(request)
+    print('else문')
 
   return HttpResponse()
 
@@ -311,7 +281,6 @@ def unlike(request):
 
 #프로필화
 def profile(request, username):
-    # person = get_object_or_404(get_user_model(), username = username )
     user = get_user_model()
     person = user.objects.filter(username=username).first()
     
@@ -328,6 +297,7 @@ def profile(request, username):
     else:
       return redirect('dailyphoto:index')
 
+#프로필수정
 @login_required(login_url='common:login')
 def modify_profile(request):
     if request.method == 'POST':
@@ -347,13 +317,13 @@ def modify_profile(request):
             'profile_form': profile_form
         })
 
+#친구기능
 @login_required(login_url='common:login')
 def follow(request, user_pk):
     if request.user.is_authenticated:
         user = get_user_model()
         person = get_object_or_404(user, pk=user_pk)
         if person != request.user:
-            # if request.user.followings.filter(pk=user_pk).exists():
             if person.followers.filter(pk=request.user.pk).exists():
                 person.followers.remove(request.user)
             else:
