@@ -6,12 +6,12 @@ from django.contrib.auth import get_user_model
 
 
 from .forms import LikeForm, PostForm, CustomUserChangeForm, ProfileForm, CommentForm
-from .models import Post, Comment, Profile, Like, User
+from .models import Post, Profile, Like
 from . import models
 from django.utils import timezone
 from django.urls import reverse
 from django.db.models import Q
-import pyautogui
+
 
 # 주소 index 
 @login_required(login_url='common:login')
