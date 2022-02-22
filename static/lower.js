@@ -103,11 +103,11 @@ $(document).ready(function(){
       var content = $(this).find('.text');
       var content_txt = content.text();
       var content_html = content.html();
-      var content_txt_short = content_txt.substring(0,100)+"...";
+      var content_txt_short = content_txt.substring(0,20)+"...";
       var btn_more = $('<a href="javascript:void(0)" class="more">더보기?</a>');
 
       $(this).append(btn_more);
-      if(content_txt.length >= 100){
+      if(content_txt.length >= 20){
           content.html(content_txt_short)
           
       }else{
