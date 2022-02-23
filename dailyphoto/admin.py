@@ -8,6 +8,4 @@ admin.site.register(Post,PostAdmin)
 admin.site.register(Comment)
 admin.site.register(Like)
 admin.site.register(Profile)
-
 # Register your models here.
-
