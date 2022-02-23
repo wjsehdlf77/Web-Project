@@ -172,7 +172,6 @@ def post_update(request,post_id):
       post.save()
       print('post update made')
 
-
       return redirect('dailyphoto:profile', username = request.user.username)
 
     else:
