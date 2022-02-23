@@ -172,7 +172,9 @@ def post_update(request,post_id):
       post.save()
       print('post update made')
 
-      return redirect('dailyphoto:profile',username=request.user.username)
+
+      return redirect('dailyphoto:profile', username = request.user.username)
+
     else:
       print('post update - form is not valid')
     
@@ -203,7 +205,9 @@ def post_delete(request,post_id):
       post.delete()
     else:
       print('post delete - form is not valid')
-  return redirect('dailyphoto:profile',username=request.user.username)
+
+  return redirect('dailyphoto:profile', username = request.user.username)
+
 
 
 # like
