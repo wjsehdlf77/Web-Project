@@ -34,12 +34,7 @@ def index(request):
   context = {'post_list': post_list,  "comment_form" : comment_form}
   return render(request, 'dailyphoto/post_list.html', context)
 
-# post 상세
-def detail(request, id):
-  
-  post  = get_object_or_404(Post, pk=id)
-  context = {'post': post}
-  return render(request, 'dailyphoto/post_detail.html', context)
+
 
 
 # 검색기능 
@@ -281,6 +276,13 @@ def unlike(request):
     print(request)
 
   return HttpResponse()
+
+# post 상세
+def detail(request, id):
+  
+  post  = get_object_or_404(Post, pk=id)
+  context = {'post': post}
+  return render(request, 'dailyphoto/post_detail.html', context)
 
 #프로필화
 def profile(request, username):
